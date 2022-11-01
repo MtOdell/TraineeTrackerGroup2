@@ -17,12 +17,24 @@ namespace TraineeTrackerTests
     private UserDatasController? _sut;
 
         [Test]
-        public void UserDatasController_CanBe_Constructed()
+        [Category("Happy Path")]
+        public void GivenDataAndUser_WhenConstructorIsCalled_ConstructorIsConstructed()
         {
             var mockService = new Mock <IServiceLayer<UserData>>();
-            //var mockUser = new UserManager<User>();
-            _sut = new UserDatasController(mockService.Object, It.IsAny<UserManager<User>>());
+            var mockUser = new Mock <IUserManager<User>>();
+            _sut = new UserDatasController(mockService.Object, mockUser.Object);
             Assert.That(_sut, Is.InstanceOf<UserDatasController>());
         }
+
+        [Test]
+        [Category("Sad Path")]
+        public void GivenNullDataAndUser_WhenConstructorIsCalled_ConstructorIsConstructed()
+        {
+            var mockService = new Mock<IServiceLayer<UserData>>(null);
+            var mockUser = new Mock<IUserManager<User>>(null);
+            _sut = new UserDatasController(mockService.Object, mockUser.Object);
+            Assert.That(_sut, Is.False);
+        }
+
     }
 }
