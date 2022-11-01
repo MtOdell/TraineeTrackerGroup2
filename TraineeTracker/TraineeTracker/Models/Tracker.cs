@@ -6,9 +6,8 @@ namespace TraineeTracker.Models
     {
         public int ID { get; set; }
 
-        [ForeignKey("Trainee")]
-        public string TraineeID { get; set; }
-        public Trainee Trainee { get; set; }
+        [ForeignKey("UserData")]
+        public int userDataID { get; set; }
         public string Stop { get; set; }
         public string Start { get; set; }
         public string Continue { get; set; }

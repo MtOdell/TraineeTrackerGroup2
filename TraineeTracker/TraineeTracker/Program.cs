@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TraineeTracker.Data;
+using TraineeTracker.Models;
+using TraineeTracker.Service;
 
 namespace TraineeTracker
 {
@@ -16,11 +18,23 @@ namespace TraineeTracker
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<TraineeTrackerContext>();
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<TraineeTrackerContext>();
+
+            builder.Services.AddScoped<IServiceLayer<Tracker>, TrackerService>();
+            builder.Services.AddScoped<IServiceLayer<UserData>, UserDataService>();
+            builder.Services.AddScoped<IUserManager<User>, UserManager>();
+
+
             var app = builder.Build();
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                SeedData.Initialize(services);
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
