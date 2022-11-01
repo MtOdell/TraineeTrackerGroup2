@@ -3,7 +3,7 @@
     public interface IServiceLayer<T> where T : class
     {
         Task<T?> FindAsync(int id);
-        //Task<IEnumerable<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetAllAsync();
         Task RemoveAsync(T entity);
         Task Update(T entity);
         bool Exists(int id);
