@@ -26,9 +26,9 @@ namespace TraineeTracker.Service
             return await _context.TrackerDB.FindAsync(id);
         }
 
-        public async Task<string> GetAllAsync()
+        public async Task<IEnumerable<Tracker>> GetAllAsync()
         {
-            return "Hello";
+            return await _context.TrackerDB.ToListAsync();
         }
 
         public async Task RemoveAsync(Tracker entity)
