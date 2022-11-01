@@ -10,10 +10,8 @@ namespace TraineeTracker.Data
             : base(options)
         {
         }
-
-        public DbSet<Trainee> TraineeDB { get; set; }
-        public DbSet<Trainer> TrainerDB { get; set; }
-        public DbSet<Profile> ProfileDB { get; set; }
+        public DbSet<User> UserDB { get; set; }
+        public DbSet<UserData> UserDataDB { get; set; }
         public DbSet<Tracker> TrackerDB { get; set; }
     }
 }

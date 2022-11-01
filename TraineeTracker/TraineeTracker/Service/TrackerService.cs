@@ -1,4 +1,5 @@
-﻿using TraineeTracker.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using TraineeTracker.Data;
 using TraineeTracker.Models;
 
 namespace TraineeTracker.Service
@@ -28,11 +29,6 @@ namespace TraineeTracker.Service
         public async Task<IEnumerable<Tracker>> GetAllAsync()
         {
             return await _context.TrackerDB.ToListAsync();
-        }
-
-        public Task<Tracker?> GetAsync(int id)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task RemoveAsync(Tracker entity)
