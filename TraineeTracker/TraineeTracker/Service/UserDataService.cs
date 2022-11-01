@@ -31,6 +31,11 @@ namespace TraineeTracker.Service
             return await _context.UserDataDB.ToListAsync();
         }
 
+        public bool IsNull()
+        {
+            return _context.UserDataDB == null;
+        }
+
         public async Task RemoveAsync(UserData entity)
         {
             _context.UserDataDB.Remove(entity);
