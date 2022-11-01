@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,18 +12,33 @@ using TraineeTracker.Models;
 
 namespace TraineeTracker.Controllers
 {
+    [Authorize]
     public class UserDatasController : Controller
     {
         private readonly TraineeTrackerContext _context;
+        private UserManager<User> _userManager;
 
-        public UserDatasController(TraineeTrackerContext context)
+        public UserDatasController(TraineeTrackerContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: UserDatas
+        [Authorize(Roles ="Trainee, Trainer")]
         public async Task<IActionResult> Index()
         {
+            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (HttpContext.User.IsInRole("Trainee"))
+            {
+
+            }
+            else if(HttpContext.User.IsInRole("Trainer"))
+            {
+                return View(await _context.UserDataDB.ToListAsync());
+            }
+
               return View(await _context.UserDataDB.ToListAsync());
         }
 
