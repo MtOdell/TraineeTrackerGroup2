@@ -26,10 +26,15 @@ namespace TraineeTracker
 
             builder.Services.AddScoped<IServiceLayer<Tracker>, TrackerService>();
             builder.Services.AddScoped<IServiceLayer<UserData>, UserDataService>();
+            builder.Services.AddScoped<IUserManager<User>, UserManager>();
 
-            
 
             var app = builder.Build();
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                SeedData.Initialize(services);
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

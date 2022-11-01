@@ -9,18 +9,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TraineeTracker.Data;
 using TraineeTracker.Models;
+using TraineeTracker.Service;
 
 namespace TraineeTracker.Controllers
 {
     //[Authorize]
     public class UserDatasController : Controller
     {
-        private readonly TraineeTrackerContext _context;
-        private UserManager<User> _userManager;
+        private readonly IServiceLayer<UserData> _service;
+        private IUserManager<User> _userManager;
 
-        public UserDatasController(TraineeTrackerContext context, UserManager<User> userManager)
+        public UserDatasController(IServiceLayer<UserData> service, IUserManager<User> userManager)
         {
-            _context = context;
+            _service = service;
             _userManager = userManager;
         }
 
@@ -36,22 +37,22 @@ namespace TraineeTracker.Controllers
             }
             else if(HttpContext.User.IsInRole("Trainer"))
             {
-                return View(await _context.UserDataDB.ToListAsync());
+                return View(await _service.GetAllAsync());
             }
 
-              return View(await _context.UserDataDB.ToListAsync());
+              return View(await _service.GetAllAsync());
         }
 
         // GET: UserDatas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.UserDataDB == null)
+            if (id == null || _service.IsNull())
             {
                 return NotFound();
             }
 
-            var userData = await _context.UserDataDB
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var userData = await _service.FindAsync((int)id); 
+
             if (userData == null)
             {
                 return NotFound();
@@ -75,8 +76,7 @@ namespace TraineeTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(userData);
-                await _context.SaveChangesAsync();
+                await _service.AddAsync(userData);
                 return RedirectToAction(nameof(Index));
             }
             return View(userData);
@@ -85,12 +85,12 @@ namespace TraineeTracker.Controllers
         // GET: UserDatas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.UserDataDB == null)
+            if (id == null || _service.IsNull())
             {
                 return NotFound();
             }
 
-            var userData = await _context.UserDataDB.FindAsync(id);
+            var userData = await _service.FindAsync((int)id);
             if (userData == null)
             {
                 return NotFound();
@@ -114,12 +114,11 @@ namespace TraineeTracker.Controllers
             {
                 try
                 {
-                    _context.Update(userData);
-                    await _context.SaveChangesAsync();
+                    await _service.Update(userData);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserDataExists(userData.ID))
+                    if (!_service.Exists(userData.ID))
                     {
                         return NotFound();
                     }
@@ -136,13 +135,12 @@ namespace TraineeTracker.Controllers
         // GET: UserDatas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.UserDataDB == null)
+            if (id == null || _service.IsNull())
             {
                 return NotFound();
             }
 
-            var userData = await _context.UserDataDB
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var userData = await _service.FindAsync((int)id);
             if (userData == null)
             {
                 return NotFound();
@@ -156,23 +154,17 @@ namespace TraineeTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.UserDataDB == null)
+            if (_service.IsNull())
             {
                 return Problem("Entity set 'TraineeTrackerContext.UserDataDB'  is null.");
             }
-            var userData = await _context.UserDataDB.FindAsync(id);
+            var userData = await _service.FindAsync(id);
             if (userData != null)
             {
-                _context.UserDataDB.Remove(userData);
+                await _service.RemoveAsync(userData);
             }
-            
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserDataExists(int id)
-        {
-          return _context.UserDataDB.Any(e => e.ID == id);
-        }
     }
 }

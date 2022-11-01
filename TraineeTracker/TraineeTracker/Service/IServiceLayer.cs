@@ -9,5 +9,6 @@
         bool Exists(int id);
         Task SaveChangesAsync();
         Task AddAsync(T entity);
+        bool IsNull();
     }
 }
