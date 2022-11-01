@@ -12,7 +12,7 @@ using TraineeTracker.Models;
 
 namespace TraineeTracker.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class UserDatasController : Controller
     {
         private readonly TraineeTrackerContext _context;
@@ -25,7 +25,7 @@ namespace TraineeTracker.Controllers
         }
 
         // GET: UserDatas
-        [Authorize(Roles ="Trainee, Trainer")]
+        //[Authorize(Roles ="Trainee, Trainer")]
         public async Task<IActionResult> Index()
         {
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);
