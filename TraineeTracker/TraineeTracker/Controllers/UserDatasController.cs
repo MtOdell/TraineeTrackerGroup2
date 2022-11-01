@@ -17,9 +17,9 @@ namespace TraineeTracker.Controllers
     public class UserDatasController : Controller
     {
         private readonly IServiceLayer<UserData> _service;
-        private UserManager<User> _userManager;
+        private IUserManager<User> _userManager;
 
-        public UserDatasController(IServiceLayer<UserData> service, UserManager<User> userManager)
+        public UserDatasController(IServiceLayer<UserData> service, IUserManager<User> userManager)
         {
             _service = service;
             _userManager = userManager;
