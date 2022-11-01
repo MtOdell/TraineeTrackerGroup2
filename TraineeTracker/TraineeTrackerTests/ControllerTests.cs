@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Moq;
 using TraineeTracker.Controllers;
 using TraineeTracker.Data;
@@ -18,9 +19,10 @@ namespace TraineeTrackerTests
         [Test]
         public void UserDatasController_CanBe_Constructed()
         {
-        var mockService = new Mock<TraineeTrackerContext>(null);
-        _sut = new UserDatasController(mockService.Object);
-        Assert.That(_sut, Is.InstanceOf<UserDatasController>());
+            var mockService = new Mock <IServiceLayer<UserData>>();
+            //var mockUser = new UserManager<User>();
+            _sut = new UserDatasController(mockService.Object, It.IsAny<UserManager<User>>());
+            Assert.That(_sut, Is.InstanceOf<UserDatasController>());
         }
     }
 }
