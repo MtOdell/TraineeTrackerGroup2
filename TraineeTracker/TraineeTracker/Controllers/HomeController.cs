@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using TraineeTracker.Models;
+using TraineeTracker.Service;
 
 namespace TraineeTracker.Controllers
 {
