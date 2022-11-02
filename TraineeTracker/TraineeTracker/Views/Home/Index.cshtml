@@ -1,8 +1,104 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
+
+<div class="center">
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <h1 class="display-4">W</h1> 
+        <h1 class="display-4">e</h1>
+        <h1 class="display-4">l</h1>
+        <h1 class="display-4">c</h1>
+        <h1 class="display-4">o</h1>
+        <h1 class="display-4">m</h1>
+        <h1 class="display-4">e</h1>
+        <h3 class="display-4">&nbsp;</h3>
+        <h1 class="display-5">@User.Identity?.Name</h1>
+        <h1 class="display-4">,</h1> <br />
+
+        <h3 class="display-4">t</h3>
+        <h3 class="display-4">o</h3>
+        <h3 class="display-4">&nbsp;</h3>
+        <h3 class="display-4">y</h3>
+        <h3 class="display-4">o</h3>
+        <h3 class="display-4">u</h3>
+        <h3 class="display-4">r</h3>
+        <h3 class="display-4">&nbsp;</h3>
+        <h3 class="display-4">T</h3>
+        <h3 class="display-4">r</h3>
+        <h3 class="display-4">a</h3>
+        <h3 class="display-4">i</h3>
+        <h3 class="display-4">n</h3>
+        <h3 class="display-4">e</h3>
+        <h3 class="display-4">e</h3>
+        <h3 class="display-4">&nbsp;</h3>
+        <h3 class="display-4">T</h3>
+        <h3 class="display-4">r</h3>
+        <h3 class="display-4">a</h3>
+        <h3 class="display-4">c</h3>
+        <h3 class="display-4">k</h3>
+        <h3 class="display-4">e</h3>
+        <h3 class="display-4">r</h3>
+        <h3 class="display-4">.</h3>
+        <h3 class="display-4">.</h3>
+        <h3 class="display-4">.</h3>
+    }
+    else {
+        <h1 class="display-4">P</h1>
+        <h1 class="display-4">l</h1>
+        <h1 class="display-4">e</h1>
+        <h1 class="display-4">a</h1>
+        <h1 class="display-4">s</h1>
+        <h1 class="display-4">e</h1>
+        <h3 class="display-4">&nbsp;</h3>
+        <h1 class="display-4">S</h1>
+        <h1 class="display-4">i</h1>
+        <h1 class="display-4">g</h1>
+        <h1 class="display-4">n</h1>
+        <h1 class="display-4">-</h1>
+        <h1 class="display-4">i</h1>
+        <h1 class="display-4">n</h1>
+        <h1 class="display-4">,</h1> <br />
+
+        <h3 class="display-4">t</h3>
+        <h3 class="display-4">o</h3>
+        <h3 class="display-4">&nbsp;</h3>
+        <h3 class="display-4">a</h3>
+        <h3 class="display-4">c</h3>
+        <h3 class="display-4">c</h3>
+        <h3 class="display-4">e</h3>
+        <h3 class="display-4">s</h3>
+        <h3 class="display-4">s</h3>
+        <h3 class="display-4">&nbsp;</h3>
+        <h3 class="display-4">y</h3>
+        <h3 class="display-4">o</h3>
+        <h3 class="display-4">u</h3>
+        <h3 class="display-4">r</h3>
+        <h3 class="display-4">&nbsp;</h3>
+        <h3 class="display-4">T</h3>
+        <h3 class="display-4">r</h3>
+        <h3 class="display-4">a</h3>
+        <h3 class="display-4">i</h3>
+        <h3 class="display-4">n</h3>
+        <h3 class="display-4">e</h3>
+        <h3 class="display-4">e</h3>
+        <h3 class="display-4">&nbsp;</h3>
+        <h3 class="display-4">T</h3>
+        <h3 class="display-4">r</h3>
+        <h3 class="display-4">a</h3>
+        <h3 class="display-4">c</h3>
+        <h3 class="display-4">k</h3>
+        <h3 class="display-4">e</h3>
+        <h3 class="display-4">r</h3>
+        <h3 class="display-4">.</h3>
+        <h3 class="display-4">.</h3>
+        <h3 class="display-4">.</h3>
+    }
+</div>
 </div>

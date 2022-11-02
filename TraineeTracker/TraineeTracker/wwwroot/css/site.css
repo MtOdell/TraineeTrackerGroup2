@@ -16,3 +16,53 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.row {
+    text-align: center;
+}
+
+h1 {
+    display: inline;
+}
+h3 {
+    display: inline;
+}
+
+label {
+    color:black;
+}
+
+.form-control {
+    margin-bottom: 5px;
+}
+
+.btn{
+    margin-bottom: 5px;
+}
+
+.display-4:hover {
+    cursor: default;
+    color: #e33661;
+}
+
+.display-5 {
+    color: #e33661;
+}
+
+.display-5:hover {
+    cursor: default;
+    color: white;
+}
+
+.btn {
+    width: 265px;
+}

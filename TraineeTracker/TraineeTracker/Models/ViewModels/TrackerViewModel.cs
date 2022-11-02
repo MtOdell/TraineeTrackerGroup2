@@ -1,13 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using static TraineeTracker.Models.SkillsEnum;
+﻿using static TraineeTracker.Models.SkillsEnum;
 
-namespace TraineeTracker.Models
+namespace TraineeTracker.Models.ViewModels
 {
-    public class Tracker
+    public class TrackerViewModel
     {
         public int ID { get; init; }
-
-        [ForeignKey("UserData")]
         public int UserDataId { get; init; }
         public int Week { get; init; }
         public string Stop { get; set; } = "N/A";

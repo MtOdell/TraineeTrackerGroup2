@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TraineeTracker.Data;
 
@@ -11,9 +12,10 @@ using TraineeTracker.Data;
 namespace TraineeTracker.Data.Migrations
 {
     [DbContext(typeof(TraineeTrackerContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221102104635_Levels")]
+    partial class Levels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -261,9 +263,6 @@ namespace TraineeTracker.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("UserDataId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Week")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
