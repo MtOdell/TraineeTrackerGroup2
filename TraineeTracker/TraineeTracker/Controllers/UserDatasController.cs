@@ -32,14 +32,14 @@ namespace TraineeTracker.Controllers
         [Authorize(Roles ="Trainee, Trainer")]
         public async Task<IActionResult> Index()
         {
-            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            var currentUser = await _userManager.GetUserAsync();
 
-            if (HttpContext.User.IsInRole("Trainee"))
+            if (_userManager.IsInRole("Trainee"))
             {
                 var userData = (await _service.GetAllAsync()).Where(x => x.UserID == currentUser.Id);
                 return View(userData);
             }
-            else if(HttpContext.User.IsInRole("Trainer"))
+            else if(_userManager.IsInRole("Trainer"))
             {
                 var userDatas = (await _service.GetAllAsync()).Where(x => x.Roles == UserData.Level.Trainee);
                 return View(userDatas);

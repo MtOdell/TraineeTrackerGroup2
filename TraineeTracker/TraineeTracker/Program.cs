@@ -24,6 +24,7 @@ namespace TraineeTracker
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<TraineeTrackerContext>();
 
+            builder.Services.AddHttpContextAccessor();
             builder.Services.AddScoped<IServiceLayer<Tracker>, TrackerService>();
             builder.Services.AddScoped<IServiceLayer<UserData>, UserDataService>();
             builder.Services.AddScoped<IUserManager<User>, UserManager>();
