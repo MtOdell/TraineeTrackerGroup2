@@ -15,12 +15,13 @@ namespace TraineeTracker.Controllers.API
     [ApiController]
     public class UserDatasController : ControllerBase
     {
-        private readonly UserDataService _service;
-        private readonly TrackerService _trackerService;
+        private readonly IServiceLayer<UserData> _service;
+        private readonly IServiceLayer<Tracker> _trackerService;
 
-        public UserDatasController(UserDataService service)
+        public UserDatasController(IServiceLayer<UserData> service, IServiceLayer<Tracker> trackerService)
         {
             _service = service;
+            _trackerService = trackerService;
         }
 
         // GET: api/UserDatas

@@ -15,9 +15,9 @@ namespace TraineeTracker.Controllers.API
     [ApiController]
     public class TrackersController : ControllerBase
     {
-        private readonly TrackerService _service;
+        private readonly IServiceLayer<Tracker> _service;
 
-        public TrackersController(TrackerService service)
+        public TrackersController(IServiceLayer<Tracker> service)
         {
             _service = service;
         }
