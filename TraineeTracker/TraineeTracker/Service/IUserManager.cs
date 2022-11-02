@@ -4,6 +4,6 @@ namespace TraineeTracker.Service
 {
     public interface IUserManager<TUser>
     {
-        Task<TUser> GetUserAsync(ClaimsPrincipal principal);
+        Task<TUser> GetUserAsync();
     }
 }

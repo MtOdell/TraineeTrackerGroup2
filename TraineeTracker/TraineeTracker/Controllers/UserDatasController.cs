@@ -30,7 +30,7 @@ namespace TraineeTracker.Controllers
         [Authorize(Roles ="Trainee, Trainer")]
         public async Task<IActionResult> Index()
         {
-            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            var currentUser = await _userManager.GetUserAsync();
 
             if (HttpContext.User.IsInRole("Trainee"))
             {
