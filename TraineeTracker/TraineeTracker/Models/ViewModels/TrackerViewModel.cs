@@ -1,5 +1,5 @@
-﻿namespace TraineeTracker.Models.ViewModels
-{
+﻿using static TraineeTracker.Models.SkillsEnum;
+using static TraineeTracker.Models.Tracker;
     public class TrackerViewModel
     {
         public int UserDataId { get; set; }
@@ -8,7 +8,6 @@
         public string Start { get; set; } = "";
         public string Continue { get; set; } = "";
         public string Comments { get; set; } = "";
-        public int TechnicalSkills { get; set; } = 0;
-        public int ConsultantSkills { get; set; } = 0;
+        public SkillsRank TechnicalSkills { get; set; }
+        public SkillsRank ConsultantSkills { get; set; }
     }
-}
