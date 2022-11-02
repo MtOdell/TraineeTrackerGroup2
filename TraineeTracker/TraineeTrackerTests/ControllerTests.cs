@@ -9,6 +9,7 @@ using TraineeTracker.Data;
 using TraineeTracker.Models;
 using TraineeTracker.Service;
 using System.Security.Claims;
+using System.Collections;
 
 namespace TraineeTrackerTests
 {
@@ -22,7 +23,7 @@ namespace TraineeTrackerTests
     private UserDatasController? _sut;
 
         [Test]
-        [Category("Happy Path")]
+        [Category("Constructor")]
         public void GivenDataAndUser_WhenConstructorIsCalled_ConstructorIsConstructed()
         {
             var mockService = new Mock <IServiceLayer<UserData>>();
@@ -30,33 +31,51 @@ namespace TraineeTrackerTests
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
             Assert.That(_sut, Is.InstanceOf<UserDatasController>());
         }
-
+        [Ignore("return view")]
         [Test]
-        [Category("Sad Path")]
-        public void GivenUserData_WhenIndexIsCalledAsTrainee_ReturnsViewOfAllUserData()
+        [Category("Trainee Path")]
+        public void GivenTrainee_WhenIndexIsCalledAsTrainee_ReturnsViewForTrainee()
         {
-            
             var mockService = new Mock<IServiceLayer<UserData>>();
             var mockUser = new Mock<IUserManager<User>>();
-            //var fackPrinciple = new Mock<IPrincipal>();
-            
-            // Setup fack data
-             //var cool = fackPrinciple.Setup(e => e.IsInRole("Trainee")).Returns(true);
-
-            mockUser.Setup(x => x.GetUserAsync()).Returns(Task.FromResult(new User()));
-            // Assign to current thread principle
-            //Thread.CurrentPrincipal = fackPrinciple.Object;
-
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
-
+            
+            var user = mockUser.Setup(x => x.GetUserAsync()).Returns(Task.FromResult(new User()));
+            
             var result = _sut.Index().Result;
 
-            //Assert.That(cool, Is.EqualTo(result));
+            Assert.That(result, Is.EqualTo(user));
+        }
+        [Test]
+        [Category("Trainer Path")]
+        public void GivenTrainer_WhenIndexIsCalledAsTrainer_ItIsNotNull()
+        {
+            var mockService = new Mock<IServiceLayer<UserData>>();
+            var mockUser = new Mock<IUserManager<User>>();
+    
+            _sut = new UserDatasController(mockService.Object, mockUser.Object);
+
             
-            //var principal = new Mock<IPrincipal>();
-            //principal.Setup(p => p.IsInRole("Trainee")).Returns(true);
-            ////principal.SetupGet(x => x.Identity.Name).Returns(It.IsAny<string>);
-            //_sut.SetupGet(x => x.HttpContext.User).Returns(principal.Object);
+            var user = mockUser.Setup(x => x.IsInRole("Trainer")).Returns(true);
+            
+            Assert.That(user, Is.Not.False);
+            Assert.That(user, Is.Not.Null);
+
+            // ------------------------------------
+            
+            //var viewer = _sut.View(mockService.Setup(x => x.GetAllAsync().Result));
+            
+        }
+        [Test]
+        [Category("GetAllAsync")]
+        public void x()
+        {
+            var mockService = new Mock<IServiceLayer<UserData>>();
+            var mockUser = new Mock<IUserManager<User>>();
+            var mockUserData = mockService.Setup(x => x.GetAllAsync().Result).Returns(It.IsAny<IEnumerable<UserData>>());
+            _sut = new UserDatasController(mockService.Object, mockUser.Object);
+
+            Assert.That(mockUserData, Is.Not.Null);
         }
 
     }
