@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -20,13 +21,11 @@ namespace TraineeTracker.Controllers
     {
         private readonly IServiceLayer<UserData> _service;
         private IUserManager<User> _userManager;
-        private IServiceLayer<Tracker> _trackerService;
 
-        public UserDatasController(IServiceLayer<UserData> service, IUserManager<User> userManager, IServiceLayer<Tracker> trackerService)
+        public UserDatasController(IServiceLayer<UserData> service, IUserManager<User> userManager)
         {
             _service = service;
             _userManager = userManager;
-            _trackerService = trackerService;
         }
 
         // GET: UserDatas
@@ -124,8 +123,9 @@ namespace TraineeTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserID,ID,FirstName,LastName,Title,Education,Experience,Activity,Biography,Skills")] UserDataViewModel userDataViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("ID, FirstName,LastName,Title,Education,Experience,Activity,Biography,Skills")] UserDataViewModel userDataViewModel)
         {
+            var userData = await _service.FindAsync(id);
             if (id != userDataViewModel.ID)
             {
                 return NotFound();
@@ -133,25 +133,20 @@ namespace TraineeTracker.Controllers
 
             if (ModelState.IsValid)
             {
-                //To Review
-                //var userData = Utils.ViewModelToUserData(userDataViewModel);
-                var userData = new UserData
-                {
-                    ID= userDataViewModel.ID,
-                    FirstName= userDataViewModel.FirstName,
-                    LastName= userDataViewModel.LastName,
-                    Title= userDataViewModel.Title,
-                    Education  = userDataViewModel.Education,
-                    Experience = userDataViewModel.Experience,
-                    Activity = userDataViewModel.Activity,
-                    Biography = userDataViewModel.Biography,
-                    Skills = userDataViewModel.Skills,
-                    Roles = (UserData.Level)userDataViewModel.Roles,
-                    Trackers = userDataViewModel.Trackers
-                };
+              
                 try
                 {
-                    await _service.Update(userData);
+                    //To Review
+                    //var userData = Utils.ViewModelToUserData(userDataViewModel);
+                    userData.FirstName = userDataViewModel.FirstName;
+                    userData.LastName = userDataViewModel.LastName;
+                    userData.Title = userDataViewModel.Title;
+                    userData.Education = userDataViewModel.Education;
+                    userData.Experience = userDataViewModel.Experience;
+                    userData.Activity = userDataViewModel.Activity;
+                    userData.Biography = userDataViewModel.Biography;
+                    userData.Skills = userDataViewModel.Skills;
+                    await _service.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {

@@ -22,9 +22,7 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
 	</ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TraineeTrackerAPI\TraineeTrackerAPI.csproj" />
     <ProjectReference Include="..\TraineeTracker\TraineeTracker.csproj" />
   </ItemGroup>
-  <ItemGroup />
 
 </Project>

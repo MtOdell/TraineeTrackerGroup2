@@ -16,8 +16,7 @@ namespace TraineeTracker.Controllers
                 Experience = userData.Experience,
                 Activity = userData.Activity,
                 Biography = userData.Biography,
-                Skills = userData.Skills ,
-                Trackers = userData.Trackers
+                Skills = userData.Skills
             };
         
         public static UserData ViewModelToUserData(UserDataViewModel userDataViewModel) =>
@@ -33,13 +32,14 @@ namespace TraineeTracker.Controllers
                 Activity = userDataViewModel.Activity,
                 Biography = userDataViewModel.Biography,
                 Skills = userDataViewModel.Skills,
-                Roles = (UserData.Level)userDataViewModel.Roles,
-                Trackers = userDataViewModel.Trackers
-                
+
             };
+    };
+
         public static TrackerViewModel TrackerToViewModel(Tracker tracker) =>
             new TrackerViewModel()
             {
+                ID = tracker.ID,
                 UserDataId = tracker.UserDataId,
                 Week = tracker.Week,
                 Stop = tracker.Stop,
