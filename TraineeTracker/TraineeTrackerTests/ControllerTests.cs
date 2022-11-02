@@ -38,20 +38,20 @@ namespace TraineeTrackerTests
             
             var mockService = new Mock<IServiceLayer<UserData>>();
             var mockUser = new Mock<IUserManager<User>>();
-            var fackPrinciple = new Mock<IPrincipal>();
+            //var fackPrinciple = new Mock<IPrincipal>();
             
             // Setup fack data
              //var cool = fackPrinciple.Setup(e => e.IsInRole("Trainee")).Returns(true);
 
-            mockUser.Setup(x => x.GetUserAsync(It.IsAny<ClaimsPrincipal>())).Returns(Task.FromResult(new User()));
+            mockUser.Setup(x => x.GetUserAsync()).Returns(Task.FromResult(new User()));
             // Assign to current thread principle
             //Thread.CurrentPrincipal = fackPrinciple.Object;
 
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
-            //var result = _sut.Index().Result;
+            var result = _sut.Index().Result;
 
-            Assert.That(cool, Is.EqualTo(result));
+            //Assert.That(cool, Is.EqualTo(result));
             
             //var principal = new Mock<IPrincipal>();
             //principal.Setup(p => p.IsInRole("Trainee")).Returns(true);
