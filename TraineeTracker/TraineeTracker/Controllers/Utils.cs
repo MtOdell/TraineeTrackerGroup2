@@ -19,5 +19,17 @@ namespace TraineeTracker.Controllers
                 Skills = userData.Skills ,
                 Trackers = userData.Trackers
     };
+        public static TrackerViewModel TrackerToViewModel(Tracker tracker) =>
+            new TrackerViewModel()
+            {
+                UserDataId = tracker.UserDataId,
+                Week = tracker.Week,
+                Stop = tracker.Stop,
+                Start = tracker.Start,
+                Continue = tracker.Continue,
+                Comments = tracker.Comments,
+                TechnicalSkills = tracker.TechnicalSkills,
+                ConsultantSkills = tracker.ConsultantSkills
+            };
     }
 }
