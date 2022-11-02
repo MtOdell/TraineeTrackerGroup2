@@ -19,5 +19,10 @@ namespace TraineeTracker.Service
         {
             return _userManager.GetUserAsync(_httpContextAccessor.HttpContext!.User);   
         }
+
+        public bool IsInRole(string role)
+        {
+            return _httpContextAccessor.HttpContext!.User.IsInRole(role);
+        }
     }
 }
