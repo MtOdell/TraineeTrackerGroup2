@@ -26,11 +26,27 @@ body {
     transform: translate(-50%, -50%);
 }
 
+.row {
+    text-align: center;
+}
+
 h1 {
     display: inline;
 }
 h3 {
     display: inline;
+}
+
+label {
+    color:black;
+}
+
+.form-control {
+    margin-bottom: 5px;
+}
+
+.btn{
+    margin-bottom: 5px;
 }
 
 .display-4:hover {

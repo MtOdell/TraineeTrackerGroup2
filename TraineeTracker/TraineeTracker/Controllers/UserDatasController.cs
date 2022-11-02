@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TraineeTracker.Data;
 using TraineeTracker.Models;
+using TraineeTracker.Models.ViewModels;
 using TraineeTracker.Service;
 
 namespace TraineeTracker.Controllers
@@ -19,13 +21,11 @@ namespace TraineeTracker.Controllers
     {
         private readonly IServiceLayer<UserData> _service;
         private IUserManager<User> _userManager;
-        private IServiceLayer<Tracker> _trackerService;
 
-        public UserDatasController(IServiceLayer<UserData> service, IUserManager<User> userManager, IServiceLayer<Tracker> trackerService)
+        public UserDatasController(IServiceLayer<UserData> service, IUserManager<User> userManager)
         {
             _service = service;
             _userManager = userManager;
-            _trackerService = trackerService;
         }
 
         // GET: UserDatas
@@ -36,13 +36,23 @@ namespace TraineeTracker.Controllers
 
             if (_userManager.IsInRole("Trainee"))
             {
-                var userData = (await _service.GetAllAsync()).Where(x => x.UserID == currentUser.Id);
-                return View(userData);
+                var userData = (await _service.GetAllAsync()).Where(x => x.UserID == currentUser.Id).FirstOrDefault();
+                var userViewModel = new List<UserDataViewModel>();
+                userViewModel.Add(Utils.UserDataToViewModel(userData));
+
+                return View(userViewModel);
             }
             else if(_userManager.IsInRole("Trainer"))
             {
                 var userDatas = (await _service.GetAllAsync()).Where(x => x.Roles == UserData.Level.Trainee);
-                return View(userDatas);
+                var userViewModel = new List<UserDataViewModel>();
+
+                foreach(var userData in userDatas)
+                {
+                    userViewModel.Add(Utils.UserDataToViewModel(userData));
+                }
+
+                return View(userViewModel);
             }
 
             return NoContent();
@@ -63,52 +73,32 @@ namespace TraineeTracker.Controllers
                 return NotFound();
             }
 
-            return View(userData);
-        }
-        // GET: UserDatas/Tracker/5
-        public async Task<IActionResult> Tracker(int? id)
-        {
-            return View((await _trackerService.GetAllAsync()).Where(x => x.UserDataId == id));
-        }
-        // GET: UserDatas/Tracker/5/Details/5
-        public async Task<IActionResult> TrackerDetails(int? id)
-        {
-            if (id == null || _service.IsNull())
-            {
-                return NotFound();
-            }
+            var userDataViewModel = Utils.UserDataToViewModel(userData);
 
-            var trackerData = await _trackerService.FindAsync((int)id);
-
-            if (trackerData == null)
-            {
-                return NotFound();
-            }
-
-            return View(trackerData);
+            return View(userDataViewModel);
         }
 
 
-        // GET: UserDatas/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        //// GET: UserDatas/Create
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: UserDatas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserID,ID,FirstName,LastName,Title,Education,Experience,Activity,Biography,Skills")] UserData userData)
-        {
-            if (ModelState.IsValid)
-            {
-                await _service.AddAsync(userData);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(userData);
-        }
+        //// POST: UserDatas/Create
+        //// To protect from overposting attacks, enable the specific properties you want to bind to.
+        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("UserID,ID,FirstName,LastName,Title,Education,Experience,Activity,Biography,Skills")] UserData userData)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        await _service.AddAsync(userData);
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(userData);
+        //}
 
         // GET: UserDatas/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -123,7 +113,9 @@ namespace TraineeTracker.Controllers
             {
                 return NotFound();
             }
-            return View(userData);
+
+            var userDataViewModel = Utils.UserDataToViewModel(userData);
+            return View(userDataViewModel);
         }
 
         // POST: UserDatas/Edit/5
@@ -131,9 +123,10 @@ namespace TraineeTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserID,ID,FirstName,LastName,Title,Education,Experience,Activity,Biography,Skills")] UserData userData)
+        public async Task<IActionResult> Edit(int id, [Bind("ID, FirstName,LastName,Title,Education,Experience,Activity,Biography,Skills")] UserDataViewModel userDataViewModel)
         {
-            if (id != userData.ID)
+            var userData = await _service.FindAsync(id);
+            if (id != userDataViewModel.ID)
             {
                 return NotFound();
             }
@@ -142,7 +135,15 @@ namespace TraineeTracker.Controllers
             {
                 try
                 {
-                    await _service.Update(userData);
+                    userData.FirstName = userDataViewModel.FirstName;
+                    userData.LastName = userDataViewModel.LastName;
+                    userData.Title = userDataViewModel.Title;
+                    userData.Education = userDataViewModel.Education;
+                    userData.Experience = userDataViewModel.Experience;
+                    userData.Activity = userDataViewModel.Activity;
+                    userData.Biography = userDataViewModel.Biography;
+                    userData.Skills = userDataViewModel.Skills;
+                    await _service.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -157,7 +158,7 @@ namespace TraineeTracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(userData);
+            return View(userDataViewModel);
         }
 
         // GET: UserDatas/Delete/5
@@ -173,8 +174,8 @@ namespace TraineeTracker.Controllers
             {
                 return NotFound();
             }
-
-            return View(userData);
+            var userDataViewModel = Utils.UserDataToViewModel(userData);
+            return View(userDataViewModel);
         }
 
         // POST: UserDatas/Delete/5

@@ -5,8 +5,6 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraineeTracker", "TraineeTracker\TraineeTracker.csproj", "{9F8A94BA-FF0E-4675-9FC7-3D85A38E8A90}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraineeTrackerAPI", "TraineeTrackerAPI\TraineeTrackerAPI.csproj", "{4E6E4B16-8E92-4D9B-B4B3-EA231982BAE1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraineeTrackerTests", "TraineeTrackerTests\TraineeTrackerTests.csproj", "{E2EED35C-21C8-480E-BBE0-FEDB69522F24}"
 EndProject
 Global

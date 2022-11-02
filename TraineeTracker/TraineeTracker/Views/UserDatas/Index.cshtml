@@ -1,43 +1,28 @@
-﻿@model IEnumerable<TraineeTracker.Models.UserData>
+﻿@model IEnumerable<TraineeTracker.Models.ViewModels.UserDataViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    if(User.IsInRole("Trainer")){
+        ViewData["Title"] = "Manage Trainees";
+    }
+    else if (User.IsInRole("Trainee"))
+    {
+        ViewData["Title"] = "Manage User";
+    }
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<div class="row">
+<h1>@ViewData["Title"]</h1>
+<table class="table" style="color:white;">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Education)
+                @Html.DisplayName("First Name")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Experience)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Activity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Biography)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Skills)
+                @Html.DisplayName("Last Name")
             </th>
             <th></th>
         </tr>
@@ -46,7 +31,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.UserID)
+                @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
@@ -55,29 +40,16 @@
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Education)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Experience)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Activity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Biography)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Skills)
-            </td>
-            <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-controller="Trackers" asp-action="Index" asp-route-id="@item.ID">Trackers</a>
+                @if (User.IsInRole("Trainer"))
+                {
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                }
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>

@@ -9,40 +9,48 @@ using Microsoft.EntityFrameworkCore;
 using NuGet.DependencyResolver;
 using TraineeTracker.Data;
 using TraineeTracker.Models;
+using TraineeTracker.Models.ViewModels;
+using TraineeTracker.Service;
 
 namespace TraineeTracker.Controllers
 {
     public class TrackersController : Controller
     {
-        private readonly TraineeTrackerContext _context;
+        private readonly IServiceLayer<Tracker> _service;
 
-        public TrackersController(TraineeTrackerContext context)
+        public TrackersController(IServiceLayer<Tracker> service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: Trackers
         public async Task<IActionResult> Index(int? id)
         {
-              return View((await _context.TrackerDB.ToListAsync()).Where(x => x.UserDataId == id));
+            var trackerDatas = (await _service.GetAllAsync()).Where(x => x.UserDataId == id);
+            var trackerViewModel = new List<TrackerViewModel>();
+            foreach(var trackerData in trackerDatas)
+            {
+                trackerViewModel.Add(Utils.TrackerToViewModel(trackerData));
+            }
+              return View(trackerViewModel);
         }
 
         // GET: Trackers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.TrackerDB == null)
+            if (id == null || _service.IsNull())
             {
                 return NotFound();
             }
 
-            var tracker = await _context.TrackerDB
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var tracker = await _service.FindAsync((int)id);
             if (tracker == null)
             {
                 return NotFound();
             }
+            var trackerViewModel = Utils.TrackerToViewModel(tracker);
 
-            return View(tracker);
+            return View(trackerViewModel);
         }
 
         // GET: Trackers/Create
@@ -60,8 +68,7 @@ namespace TraineeTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tracker);
-                await _context.SaveChangesAsync();
+                await _service.AddAsync(tracker);
                 return RedirectToAction(nameof(Index));
             }
             return View(tracker);
@@ -70,17 +77,18 @@ namespace TraineeTracker.Controllers
         // GET: Trackers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.TrackerDB == null)
+            if (id == null || _service.IsNull())
             {
                 return NotFound();
             }
 
-            var tracker = await _context.TrackerDB.FindAsync(id);
+            var tracker = await _service.FindAsync((int)id);
             if (tracker == null)
             {
                 return NotFound();
             }
-            return View(tracker);
+            var trackerViewModel = Utils.TrackerToViewModel(tracker);
+            return View(trackerViewModel);
         }
 
         // POST: Trackers/Edit/5
@@ -88,9 +96,10 @@ namespace TraineeTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,UserDataId,Stop,Start,Continue,Comments,TechnicalSkills,ConsultantSkills")] Tracker tracker)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Stop,Start,Continue,Comments,TechnicalSkills,ConsultantSkills")] TrackerViewModel trackerViewModel)
         {
-            if (id != tracker.ID)
+            var trackers = await _service.FindAsync(id);
+            if (id != trackers.ID)
             {
                 return NotFound();
             }
@@ -99,12 +108,15 @@ namespace TraineeTracker.Controllers
             {
                 try
                 {
-                    _context.Update(tracker);
-                    await _context.SaveChangesAsync();
+                    trackers.Stop = trackerViewModel.Stop;
+                    trackers.Start = trackerViewModel.Start;
+                    trackers.Continue = trackerViewModel.Continue;
+                    trackers.Comments = trackerViewModel.Comments;
+                    await _service.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TrackerExists(tracker.ID))
+                    if (!_service.Exists(trackers.ID))
                     {
                         return NotFound();
                     }
@@ -113,27 +125,27 @@ namespace TraineeTracker.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index),new { id = trackers.UserDataId });
             }
-            return View(tracker);
+            return View(trackerViewModel);
         }
 
         // GET: Trackers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.TrackerDB == null)
+            if (id == null || _service.IsNull())
             {
                 return NotFound();
             }
 
-            var tracker = await _context.TrackerDB
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var tracker = await _service.FindAsync((int)id);
             if (tracker == null)
             {
                 return NotFound();
             }
+            var trackerViewModel = Utils.TrackerToViewModel(tracker);
 
-            return View(tracker);
+            return View(trackerViewModel);
         }
 
         // POST: Trackers/Delete/5
@@ -141,23 +153,19 @@ namespace TraineeTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.TrackerDB == null)
+            if (_service.IsNull())
             {
                 return Problem("Entity set 'TraineeTrackerContext.TrackerDB'  is null.");
             }
-            var tracker = await _context.TrackerDB.FindAsync(id);
+            var tracker = await _service.FindAsync(id);
+            var idToGo = tracker.UserDataId;
             if (tracker != null)
             {
-                _context.TrackerDB.Remove(tracker);
+                await _service.RemoveAsync(tracker);
             }
             
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new {id = idToGo});
         }
 
-        private bool TrackerExists(int id)
-        {
-          return _context.TrackerDB.Any(e => e.ID == id);
-        }
     }
 }
