@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TraineeTracker.Models.UserData>
+﻿@model IEnumerable<TraineeTracker.Models.ViewModels.UserDataViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,9 +12,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserID)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
@@ -46,9 +43,6 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.UserID)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
@@ -76,6 +70,7 @@
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-controller="Trackers" asp-action="Index" asp-route-id="@item.ID">Trackers</a>
             </td>
         </tr>
 }
