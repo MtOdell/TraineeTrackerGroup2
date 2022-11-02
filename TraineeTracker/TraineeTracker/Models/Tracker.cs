@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using static TraineeTracker.Models.SkillsEnum;
 
 namespace TraineeTracker.Models
 {
@@ -13,7 +14,7 @@ namespace TraineeTracker.Models
         public string Start { get; set; } = "";
         public string Continue { get; set; } = "";
         public string Comments { get; set; } = "";
-        public int TechnicalSkills { get; set; } = 0;
-        public int ConsultantSkills { get; set; } = 0;
+        public SkillsRank TechnicalSkills { get; set; }
+        public SkillsRank ConsultantSkills { get; set; }
     }
 }

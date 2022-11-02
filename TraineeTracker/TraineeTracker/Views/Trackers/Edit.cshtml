@@ -1,4 +1,5 @@
-﻿@model TraineeTracker.Models.Tracker
+﻿@using static TraineeTracker.Models.SkillsEnum
+@model TraineeTracker.Models.ViewModels.TrackerViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -34,12 +35,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="TechnicalSkills" class="control-label"></label>
-                <input asp-for="TechnicalSkills" class="form-control" />
+                @Html.DropDownListFor(skill => skill.TechnicalSkills, new SelectList(Enum.GetValues(typeof(SkillsRank))),"Select Rank")
                 <span asp-validation-for="TechnicalSkills" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ConsultantSkills" class="control-label"></label>
-                <input asp-for="ConsultantSkills" class="form-control" />
+                @Html.DropDownListFor(skill => skill.ConsultantSkills, new SelectList(Enum.GetValues(typeof(SkillsRank))),"Select Rank")
                 <span asp-validation-for="ConsultantSkills" class="text-danger"></span>
             </div>
             <div class="form-group">
