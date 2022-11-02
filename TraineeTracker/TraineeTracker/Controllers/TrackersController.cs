@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using NuGet.DependencyResolver;
 using TraineeTracker.Data;
 using TraineeTracker.Models;
+using TraineeTracker.Models.ViewModels;
 using TraineeTracker.Service;
 
 namespace TraineeTracker.Controllers
@@ -25,7 +26,13 @@ namespace TraineeTracker.Controllers
         // GET: Trackers
         public async Task<IActionResult> Index(int? id)
         {
-              return View((await _service.GetAllAsync()).Where(x => x.UserDataId == id));
+            var trackerDatas = (await _service.GetAllAsync()).Where(x => x.UserDataId == id);
+            var trackerViewModel = new List<TrackerViewModel>();
+            foreach(var trackerData in trackerDatas)
+            {
+                trackerViewModel.Add(Utils.TrackerToViewModel(trackerData));
+            }
+              return View(trackerViewModel);
         }
 
         // GET: Trackers/Details/5
@@ -41,8 +48,9 @@ namespace TraineeTracker.Controllers
             {
                 return NotFound();
             }
+            var trackerViewModel = Utils.TrackerToViewModel(tracker);
 
-            return View(tracker);
+            return View(trackerViewModel);
         }
 
         // GET: Trackers/Create
@@ -79,7 +87,8 @@ namespace TraineeTracker.Controllers
             {
                 return NotFound();
             }
-            return View(tracker);
+            var trackerViewModel = Utils.TrackerToViewModel(tracker);
+            return View(trackerViewModel);
         }
 
         // POST: Trackers/Edit/5
@@ -87,9 +96,10 @@ namespace TraineeTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,UserDataId,Stop,Start,Continue,Comments,TechnicalSkills,ConsultantSkills")] Tracker tracker)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Stop,Start,Continue,Comments,TechnicalSkills,ConsultantSkills")] TrackerViewModel trackerViewModel)
         {
-            if (id != tracker.ID)
+            var trackers = await _service.FindAsync(id);
+            if (id != trackers.ID)
             {
                 return NotFound();
             }
@@ -98,11 +108,15 @@ namespace TraineeTracker.Controllers
             {
                 try
                 {
-                    await _service.Update(tracker);
+                    trackers.Stop = trackerViewModel.Stop;
+                    trackers.Start = trackerViewModel.Start;
+                    trackers.Continue = trackerViewModel.Continue;
+                    trackers.Comments = trackerViewModel.Comments;
+                    await _service.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!_service.Exists(tracker.ID))
+                    if (!_service.Exists(trackers.ID))
                     {
                         return NotFound();
                     }
@@ -111,9 +125,9 @@ namespace TraineeTracker.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index),new { id = trackers.UserDataId });
             }
-            return View(tracker);
+            return View(trackerViewModel);
         }
 
         // GET: Trackers/Delete/5
@@ -129,8 +143,9 @@ namespace TraineeTracker.Controllers
             {
                 return NotFound();
             }
+            var trackerViewModel = Utils.TrackerToViewModel(tracker);
 
-            return View(tracker);
+            return View(trackerViewModel);
         }
 
         // POST: Trackers/Delete/5
@@ -143,12 +158,13 @@ namespace TraineeTracker.Controllers
                 return Problem("Entity set 'TraineeTrackerContext.TrackerDB'  is null.");
             }
             var tracker = await _service.FindAsync(id);
+            var idToGo = tracker.UserDataId;
             if (tracker != null)
             {
                 await _service.RemoveAsync(tracker);
             }
             
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new {id = idToGo});
         }
 
     }
