@@ -14,7 +14,7 @@ namespace TraineeTracker.Data
 
             context.Database.EnsureCreated();
 
-            if (context.UserDB.Any() || context.TrackerDB.Any() || context.UserDataDB.Any()) return;
+            if (context.Users.Any() || context.TrackerDB.Any()) return;
 
             var trainer = new IdentityRole { Name = "Trainer", NormalizedName = "Trainer" };
             var trainee = new IdentityRole { Name = "Trainee", NormalizedName = "Trainee" };
@@ -49,47 +49,28 @@ namespace TraineeTracker.Data
                     RoleId = roleStore.GetRoleIdAsync(trainer).GetAwaiter().GetResult()
                 }
             };
-             
+
             context.UserRoles.AddRange(userRoles);
             context.SaveChanges();
 
-            UserData userDataPhil = new UserData()
+            Tracker[] tracker = new Tracker[]
             {
-                FirstName = "Phil",
-                LastName = "Phil",
-                Activity = "C#",
-                UserID = userManager.GetUserIdAsync(phil).GetAwaiter().GetResult(),
-                Roles = UserData.Level.Trainee
+                new Tracker
+                {
+                    TechnicalSkills = 3
+                },
+                new Tracker
+                {
+                    TechnicalSkills= 2
+                },
+                new Tracker
+                {
+                     TechnicalSkills= 2
+                }
             };
-            UserData userDataPeter = new UserData()
-            {
-                FirstName = "Peter",
-                LastName = "Bellaby",
-                Activity = "C#",
-                UserID = userManager.GetUserIdAsync(peter).GetAwaiter().GetResult(),
-                Roles = UserData.Level.Trainee
-            };
-            UserData userDataNish = new UserData()
-            {
-                FirstName = "Nish",
-                LastName = "Mandela",
-                Activity = "C#",
-                UserID = userManager.GetUserIdAsync(nish).GetAwaiter().GetResult(),
-                Roles = UserData.Level.Trainer
-            };
-            userDataPhil.Trackers.Add(new Tracker() { Stop = "Being funny", Week = 1 });
-            userDataPhil.Trackers.Add(new Tracker() { Stop = "Playing Bobble League", Week = 2 });
-            
-            phil.UserData = userDataPhil;
 
-            userDataPeter.Trackers.Add(new Tracker() { Start = "Being funny", Week = 1 });
-            peter.UserData = userDataPeter;
-            
-            nish.UserData = userDataNish;
 
-            context.UserDataDB.Add(userDataPhil);
-            context.UserDataDB.Add(userDataPeter);
-            context.UserDataDB.Add(userDataNish);
+            context.TrackerDB.AddRange(tracker);
             context.SaveChanges();
         }
     }
