@@ -1,4 +1,4 @@
-# Trainee Tracker Group2 
+# Trainee Tracker Group 2 
 
 [![Coverage Status](https://coveralls.io/repos/github/MtOdell/TraineeTrackerGroup2/badge.svg?branch=main)](https://coveralls.io/github/MtOdell/TraineeTrackerGroup2?branch=main)
 
