@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.EntityFrameworkCore;
+using NuGet.DependencyResolver;
 using TraineeTracker.Data;
 using TraineeTracker.Models;
 
@@ -21,9 +22,16 @@ namespace TraineeTracker.Controllers
         }
 
         // GET: Trackers
-        public async Task<IActionResult> Index(int userID)
+        public async Task<IActionResult> Index(int? id)
         {
-              return View((await _context.TrackerDB.ToListAsync()).Where(x => x.UserDataId == userID));
+              return View((await _context.TrackerDB.ToListAsync()).Where(x => x.UserDataId == id));
+        }
+
+        // GET: TrackersList
+        public async Task<IActionResult> TrackerList(int? id)
+        {
+            var trackerData = (await _context.TrackerDB.ToListAsync()).Where(x => x.UserDataId == id);
+            return View(trackerData);
         }
 
         // GET: Trackers/Details/5
