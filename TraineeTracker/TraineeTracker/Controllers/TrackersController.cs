@@ -88,7 +88,7 @@ namespace TraineeTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,UserDataId,Stop,Start,Continue,Comments,TechnicalSkills,ConsultantSkills")] Tracker tracker)
+        public async Task<IActionResult> Edit(int id, [Bind("Stop,Start,Continue,Comments,TechnicalSkills,ConsultantSkills")] Tracker tracker)
         {
             if (id != tracker.ID)
             {
