@@ -99,10 +99,10 @@ namespace TraineeTracker.Controllers
             {
                 try
                 {
-                    tracker.Stop = trackers.Stop;
-                    tracker.Start = trackers.Start;
-                    tracker.Continue = trackers.Continue;
-                    tracker.Comments = trackers.Comments;
+                    trackers.Stop = tracker.Stop;
+                    trackers.Start = tracker.Start;
+                    trackers.Continue = tracker.Continue;
+                    trackers.Comments = tracker.Comments;
                     await _service.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -116,7 +116,7 @@ namespace TraineeTracker.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index),new { id = tracker.UserDataId });
+                return RedirectToAction(nameof(Index),new { id = trackers.UserDataId });
             }
             return View(tracker);
         }
