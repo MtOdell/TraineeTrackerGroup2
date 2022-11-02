@@ -136,8 +136,7 @@ namespace TraineeTracker.Controllers
               
                 try
                 {
-                    //To Review
-                    //var userData = Utils.ViewModelToUserData(userDataViewModel);
+                    
                     userData.FirstName = userDataViewModel.FirstName;
                     userData.LastName = userDataViewModel.LastName;
                     userData.Title = userDataViewModel.Title;

@@ -85,12 +85,20 @@ namespace TraineeTracker.Controllers.API
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUserData(int id, UserDataViewModel userDataViewModel)
         {
+            var userData = await _service.FindAsync(id);
             if (id != userDataViewModel.ID)
             {
                 return BadRequest();
             }
 
-            var userData = Utils.ViewModelToUserData(userDataViewModel);
+            userData.FirstName = userDataViewModel.FirstName;
+            userData.LastName = userDataViewModel.LastName;
+            userData.Title = userDataViewModel.Title;
+            userData.Education = userDataViewModel.Education;
+            userData.Experience = userDataViewModel.Experience;
+            userData.Activity = userDataViewModel.Activity;
+            userData.Biography = userDataViewModel.Biography;
+            userData.Skills = userDataViewModel.Skills;
 
             //should remove savechances from update method
             //because save chances is here inside try

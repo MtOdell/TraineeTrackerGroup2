@@ -31,13 +31,26 @@ namespace TraineeTracker.Controllers
                 Experience = userDataViewModel.Experience,
                 Activity = userDataViewModel.Activity,
                 Biography = userDataViewModel.Biography,
-                Skills = userDataViewModel.Skills,
+                Skills = userDataViewModel.Skills
 
             };
-    };
+    
 
         public static TrackerViewModel TrackerToViewModel(Tracker tracker) =>
             new TrackerViewModel()
+            {
+                ID = tracker.ID,
+                UserDataId = tracker.UserDataId,
+                Week = tracker.Week,
+                Stop = tracker.Stop,
+                Start = tracker.Start,
+                Continue = tracker.Continue,
+                Comments = tracker.Comments,
+                TechnicalSkills = tracker.TechnicalSkills,
+                ConsultantSkills = tracker.ConsultantSkills
+            };
+        public static Tracker ViewModelToTracker(TrackerViewModel tracker) =>
+            new Tracker()
             {
                 ID = tracker.ID,
                 UserDataId = tracker.UserDataId,
