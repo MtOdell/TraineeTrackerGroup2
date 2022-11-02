@@ -58,21 +58,24 @@ namespace TraineeTracker.Data
                 FirstName = "Phil",
                 LastName = "Phil",
                 Activity = "C#",
-                UserID = userManager.GetUserIdAsync(phil).GetAwaiter().GetResult()
+                UserID = userManager.GetUserIdAsync(phil).GetAwaiter().GetResult(),
+                Roles = UserData.Level.Trainee
             };
             UserData userDataPeter = new UserData()
             {
                 FirstName = "Peter",
                 LastName = "Bellaby",
                 Activity = "C#",
-                UserID = userManager.GetUserIdAsync(peter).GetAwaiter().GetResult()
+                UserID = userManager.GetUserIdAsync(peter).GetAwaiter().GetResult(),
+                Roles = UserData.Level.Trainee
             };
             UserData userDataNish = new UserData()
             {
                 FirstName = "Nish",
                 LastName = "Mandela",
                 Activity = "C#",
-                UserID = userManager.GetUserIdAsync(nish).GetAwaiter().GetResult()
+                UserID = userManager.GetUserIdAsync(nish).GetAwaiter().GetResult(),
+                Roles = UserData.Level.Trainer
             };
             phil.UserData = userDataPhil;
             peter.UserData = userDataPeter;

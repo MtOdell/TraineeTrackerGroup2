@@ -39,7 +39,8 @@ namespace TraineeTracker.Controllers
             }
             else if(HttpContext.User.IsInRole("Trainer"))
             {
-                return View(await _service.GetAllAsync());
+                var userDatas = (await _service.GetAllAsync()).Where(x => x.Roles == UserData.Level.Trainee);
+                return View(userDatas);
             }
 
             return NoContent();
