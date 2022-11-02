@@ -6,6 +6,6 @@ namespace TraineeTracker.Models
 {
     public class User : IdentityUser
     {
-        public UserData UserData { get; set; }
+        public UserData UserData { get; set; } = new();
     }
 }
