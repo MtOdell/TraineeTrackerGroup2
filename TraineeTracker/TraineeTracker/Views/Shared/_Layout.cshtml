@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="~/TraineeTracker.styles.css" asp-append-version="true" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
-<body>
+<body style="background-color: #111212; color:white;">
     <header>
-        <nav class="navbar navbar-dark bg-success">
+        <nav class="navbar navbar-dark shadow-sm" style="background-color: #5390D9;">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Sparta Trainee Tracker</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
@@ -19,7 +19,7 @@
                 </button>
                 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
                     <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Options</h5>
+                        <partial name="_GreetingPartial" />
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
@@ -33,8 +33,8 @@
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                             </li>
-                        </ul>
                         <partial name="_LoginPartial" />
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
+        <div class="container" style="color:white;">
             &copy; 2022 - TraineeTracker - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
