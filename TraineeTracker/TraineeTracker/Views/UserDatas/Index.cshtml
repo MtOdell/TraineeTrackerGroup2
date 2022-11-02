@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TraineeTracker.Models.UserData>
+﻿@model IEnumerable<TraineeTracker.Models.ViewModels.UserDataViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,9 +12,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserID)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
@@ -45,9 +42,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserID)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>

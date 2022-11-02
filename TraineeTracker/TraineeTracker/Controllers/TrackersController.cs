@@ -9,34 +9,34 @@ using Microsoft.EntityFrameworkCore;
 using NuGet.DependencyResolver;
 using TraineeTracker.Data;
 using TraineeTracker.Models;
+using TraineeTracker.Service;
 
 namespace TraineeTracker.Controllers
 {
     public class TrackersController : Controller
     {
-        private readonly TraineeTrackerContext _context;
+        private readonly IServiceLayer<Tracker> _service;
 
-        public TrackersController(TraineeTrackerContext context)
+        public TrackersController(IServiceLayer<Tracker> service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: Trackers
         public async Task<IActionResult> Index(int? id)
         {
-              return View((await _context.TrackerDB.ToListAsync()).Where(x => x.UserDataId == id));
+              return View((await _service.GetAllAsync()).Where(x => x.UserDataId == id));
         }
 
         // GET: Trackers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.TrackerDB == null)
+            if (id == null || _service.IsNull())
             {
                 return NotFound();
             }
 
-            var tracker = await _context.TrackerDB
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var tracker = await _service.FindAsync((int)id);
             if (tracker == null)
             {
                 return NotFound();
@@ -60,8 +60,7 @@ namespace TraineeTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tracker);
-                await _context.SaveChangesAsync();
+                await _service.AddAsync(tracker);
                 return RedirectToAction(nameof(Index));
             }
             return View(tracker);
@@ -70,12 +69,12 @@ namespace TraineeTracker.Controllers
         // GET: Trackers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.TrackerDB == null)
+            if (id == null || _service.IsNull())
             {
                 return NotFound();
             }
 
-            var tracker = await _context.TrackerDB.FindAsync(id);
+            var tracker = await _service.FindAsync((int)id);
             if (tracker == null)
             {
                 return NotFound();
@@ -99,12 +98,11 @@ namespace TraineeTracker.Controllers
             {
                 try
                 {
-                    _context.Update(tracker);
-                    await _context.SaveChangesAsync();
+                    await _service.Update(tracker);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TrackerExists(tracker.ID))
+                    if (!_service.Exists(tracker.ID))
                     {
                         return NotFound();
                     }
@@ -121,13 +119,12 @@ namespace TraineeTracker.Controllers
         // GET: Trackers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.TrackerDB == null)
+            if (id == null || _service.IsNull())
             {
                 return NotFound();
             }
 
-            var tracker = await _context.TrackerDB
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var tracker = await _service.FindAsync((int)id);
             if (tracker == null)
             {
                 return NotFound();
@@ -141,23 +138,18 @@ namespace TraineeTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.TrackerDB == null)
+            if (_service.IsNull())
             {
                 return Problem("Entity set 'TraineeTrackerContext.TrackerDB'  is null.");
             }
-            var tracker = await _context.TrackerDB.FindAsync(id);
+            var tracker = await _service.FindAsync(id);
             if (tracker != null)
             {
-                _context.TrackerDB.Remove(tracker);
+                await _service.RemoveAsync(tracker);
             }
             
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TrackerExists(int id)
-        {
-          return _context.TrackerDB.Any(e => e.ID == id);
-        }
     }
 }
