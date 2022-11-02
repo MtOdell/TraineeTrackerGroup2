@@ -21,6 +21,7 @@ namespace TraineeTracker.Controllers
         public static TrackerViewModel TrackerToViewModel(Tracker tracker) =>
             new TrackerViewModel()
             {
+                ID = tracker.ID,
                 UserDataId = tracker.UserDataId,
                 Week = tracker.Week,
                 Stop = tracker.Stop,

@@ -1,7 +1,10 @@
 ﻿using static TraineeTracker.Models.SkillsEnum;
-using static TraineeTracker.Models.Tracker;
+
+namespace TraineeTracker.Models.ViewModels
+{
     public class TrackerViewModel
     {
+        public int ID { get; set; }
         public int UserDataId { get; set; }
         public int Week { get; set; }
         public string Stop { get; set; } = "";
@@ -11,3 +14,4 @@ using static TraineeTracker.Models.Tracker;
         public SkillsRank TechnicalSkills { get; set; }
         public SkillsRank ConsultantSkills { get; set; }
     }
+}
