@@ -62,8 +62,8 @@ namespace TraineeTracker.Controllers
 
             return View(userData);
         }
-        // GET: UserDatas/Tracker/5
-        public async Task<IActionResult> Tracker(int? id)
+        // GET: UserDatas/Tracker/5/1
+        public async Task<IActionResult> Tracker(int? id, int week)
         {
             if (id == null || _service.IsNull())
             {
@@ -76,8 +76,15 @@ namespace TraineeTracker.Controllers
             {
                 return NotFound();
             }
-
-            return View(userData);
+            else if (week == 0)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var trackers = userData.Trackers[week - 1];
+                return View(trackers);
+            }
         }
 
 
