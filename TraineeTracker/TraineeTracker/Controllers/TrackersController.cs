@@ -27,13 +27,6 @@ namespace TraineeTracker.Controllers
               return View((await _context.TrackerDB.ToListAsync()).Where(x => x.UserDataId == id));
         }
 
-        // GET: TrackersList
-        public async Task<IActionResult> TrackerList(int? id)
-        {
-            var trackerData = (await _context.TrackerDB.ToListAsync()).Where(x => x.UserDataId == id);
-            return View(trackerData);
-        }
-
         // GET: Trackers/Details/5
         public async Task<IActionResult> Details(int? id)
         {

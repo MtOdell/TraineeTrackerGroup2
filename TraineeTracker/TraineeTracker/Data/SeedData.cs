@@ -77,9 +77,12 @@ namespace TraineeTracker.Data
                 UserID = userManager.GetUserIdAsync(nish).GetAwaiter().GetResult(),
                 Roles = UserData.Level.Trainer
             };
-            userDataPhil.Trackers.Add(new Tracker() { Stop = "Being funny" });
+            userDataPhil.Trackers.Add(new Tracker() { Stop = "Being funny", Week = 1 });
+            userDataPhil.Trackers.Add(new Tracker() { Stop = "Playing Bobble League", Week = 2 });
+            
             phil.UserData = userDataPhil;
-            userDataPeter.Trackers.Add(new Tracker() { Start = "Being funny" });
+
+            userDataPeter.Trackers.Add(new Tracker() { Start = "Being funny", Week = 1 });
             peter.UserData = userDataPeter;
             
             nish.UserData = userDataNish;
