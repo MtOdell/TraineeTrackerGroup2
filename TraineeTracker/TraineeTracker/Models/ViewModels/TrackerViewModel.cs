@@ -2,7 +2,7 @@
 {
     public class TrackerViewModel
     {
-        public int UserDataId { get; set; } 
+        public int UserDataId { get; set; }
         public int Week { get; set; }
         public string Stop { get; set; } = "";
         public string Start { get; set; } = "";
