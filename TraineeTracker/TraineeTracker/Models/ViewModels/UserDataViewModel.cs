@@ -17,7 +17,5 @@
         public string Activity { get; set; }
         public string Biography { get; set; }
         public string Skills { get; set; }
-        public Level Roles { get; set; }
-        public List<Tracker> Trackers { get; set; }
     }
 }
