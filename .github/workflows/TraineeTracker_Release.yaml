@@ -5,7 +5,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./NorthwindAPI/
+    working-directory: ./TraineeTracker/
 
 jobs:
   tests:
@@ -20,7 +20,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Publish
-      run: dotnet publish ./NorthwindAPI/NorthwindAPI.csproj -c Release -o ./output
+      run: dotnet publish ./TraineeTracker/TraineeTracker.csproj -c Release -o ./output
     - name: Package
       run: zip -r ./release.zip ./output/*
     - uses: "marvinpinto/action-automatic-releases@latest"
