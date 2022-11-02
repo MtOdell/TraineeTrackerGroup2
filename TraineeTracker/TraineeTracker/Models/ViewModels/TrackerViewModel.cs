@@ -1,12 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace TraineeTracker.Models
+﻿namespace TraineeTracker.Models.ViewModels
 {
-    public class Tracker
+    public class TrackerViewModel
     {
-        public int ID { get; set; }
-
-        [ForeignKey("UserData")]
         public int UserDataId { get; set; }
         public int Week { get; set; }
         public string Stop { get; set; } = "";

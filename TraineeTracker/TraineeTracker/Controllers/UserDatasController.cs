@@ -19,27 +19,30 @@ namespace TraineeTracker.Controllers
     {
         private readonly IServiceLayer<UserData> _service;
         private IUserManager<User> _userManager;
+        private IServiceLayer<Tracker> _trackerService;
 
-        public UserDatasController(IServiceLayer<UserData> service, IUserManager<User> userManager)
+        public UserDatasController(IServiceLayer<UserData> service, IUserManager<User> userManager, IServiceLayer<Tracker> trackerService)
         {
             _service = service;
             _userManager = userManager;
+            _trackerService = trackerService;
         }
 
         // GET: UserDatas
         [Authorize(Roles ="Trainee, Trainer")]
         public async Task<IActionResult> Index()
         {
-            var currentUser = await _userManager.GetUserAsync(HttpContext.User);
+            var currentUser = await _userManager.GetUserAsync();
 
-            if (HttpContext.User.IsInRole("Trainee"))
+            if (_userManager.IsInRole("Trainee"))
             {
                 var userData = (await _service.GetAllAsync()).Where(x => x.UserID == currentUser.Id);
                 return View(userData);
             }
-            else if(HttpContext.User.IsInRole("Trainer"))
+            else if(_userManager.IsInRole("Trainer"))
             {
-                return View(await _service.GetAllAsync());
+                var userDatas = (await _service.GetAllAsync()).Where(x => x.Roles == UserData.Level.Trainee);
+                return View(userDatas);
             }
 
             return NoContent();
@@ -65,19 +68,24 @@ namespace TraineeTracker.Controllers
         // GET: UserDatas/Tracker/5
         public async Task<IActionResult> Tracker(int? id)
         {
+            return View((await _trackerService.GetAllAsync()).Where(x => x.UserDataId == id));
+        }
+        // GET: UserDatas/Tracker/5/Details/5
+        public async Task<IActionResult> TrackerDetails(int? id)
+        {
             if (id == null || _service.IsNull())
             {
                 return NotFound();
             }
 
-            var userData = await _service.FindAsync((int)id);
+            var trackerData = await _trackerService.FindAsync((int)id);
 
-            if (userData == null)
+            if (trackerData == null)
             {
                 return NotFound();
             }
 
-            return View(userData);
+            return View(trackerData);
         }
 
 
