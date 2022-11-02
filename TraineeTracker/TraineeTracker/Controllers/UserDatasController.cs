@@ -65,8 +65,8 @@ namespace TraineeTracker.Controllers
 
             return View(userData);
         }
-        // GET: UserDatas/Tracker/5
-        public async Task<IActionResult> Tracker(int? id)
+        // GET: UserDatas/Tracker/5/1
+        public async Task<IActionResult> Tracker(int? id, int week)
         {
             return View((await _trackerService.GetAllAsync()).Where(x => x.UserDataId == id));
         }
