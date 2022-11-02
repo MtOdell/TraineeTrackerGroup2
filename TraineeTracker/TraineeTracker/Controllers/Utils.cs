@@ -18,7 +18,25 @@ namespace TraineeTracker.Controllers
                 Biography = userData.Biography,
                 Skills = userData.Skills ,
                 Trackers = userData.Trackers
-    };
+            };
+        
+        public static UserData ViewModelToUserData(UserDataViewModel userDataViewModel) =>
+            new UserData()
+            {
+                
+                ID= userDataViewModel.ID,
+                FirstName= userDataViewModel.FirstName,
+                LastName= userDataViewModel.LastName,
+                Title= userDataViewModel.Title,
+                Education  = userDataViewModel.Education,
+                Experience = userDataViewModel.Experience,
+                Activity = userDataViewModel.Activity,
+                Biography = userDataViewModel.Biography,
+                Skills = userDataViewModel.Skills,
+                Roles = (UserData.Level)userDataViewModel.Roles,
+                Trackers = userDataViewModel.Trackers
+                
+            };
         public static TrackerViewModel TrackerToViewModel(Tracker tracker) =>
             new TrackerViewModel()
             {

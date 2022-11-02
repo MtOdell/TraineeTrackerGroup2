@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TraineeTracker.Data;
 using TraineeTracker.Models;
+using TraineeTracker.Models.ViewModels;
 using TraineeTracker.Service;
 
 namespace TraineeTracker.Controllers.API
@@ -26,50 +27,70 @@ namespace TraineeTracker.Controllers.API
 
         // GET: api/UserDatas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserData>>> GetAll()
+        public async Task<ActionResult<IEnumerable<UserDataViewModel>>> GetAll()
         {
             var userDatas = await _service.GetAllAsync();
-            return Ok(userDatas);
+            var userDatasModel = userDatas.Select(ud => Utils.UserDataToViewModel(ud));
+            
+            return Ok(userDatasModel);
         }
 
+        // GET: api/UserDatas/
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<UserDataViewModel>>> GetUserData([FromQuery] SearchCriteria search)
+        {
+            var allUsers = await _service.GetAllAsync();
+            var users = allUsers.Where(u => u.FirstName.Contains(search.Name) && u.LastName.Contains(search.Name) && u.Activity.Contains(search.Activity));
+            if (users == null)
+            {
+                return NotFound();
+            }
+            var userDatasModel = users.Select(ud => Utils.UserDataToViewModel(ud));
+
+            return Ok(userDatasModel);
+        }
+       
+        
         // GET: api/UserDatas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserData>> GetUserData(int id)
+        public async Task<ActionResult<UserDataViewModel>> GetUserData(int id)
         {
             var userData = await _service.FindAsync(id);
-
             if (userData == null)
             {
                 return NotFound();
             }
 
-            return userData;
+            return Utils.UserDataToViewModel(userData);
         }
         // GET: api/UserDatas/id/trackers
         [HttpGet("{id}/trackers")]
-        public async Task<ActionResult<IEnumerable<Tracker>>> GetUserTrackers(int id)
+        public async Task<ActionResult<IEnumerable<TrackerViewModel>>> GetUserTrackers(int id)
         {
             
             var allTrackers = await _trackerService.GetAllAsync();
-            var userTrackers = allTrackers.Where(t => t.UserDataId == id);
 
-            if (userTrackers == null)
+            if (allTrackers == null)
             {
                 return NotFound();
             }
+            var userTrackers = allTrackers.Where(t => t.UserDataId == id);
+            var userTrackerModel = userTrackers.Select(t => Utils.TrackerToViewModel(t));
 
-            return Ok(userTrackers);
+            return Ok(userTrackerModel);
         }
 
         // PUT: api/UserDatas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUserData(int id, UserData userData)
+        public async Task<IActionResult> UpdateUserData(int id, UserDataViewModel userDataViewModel)
         {
-            if (id != userData.ID)
+            if (id != userDataViewModel.ID)
             {
                 return BadRequest();
             }
+
+            var userData = Utils.ViewModelToUserData(userDataViewModel);
 
             //should remove savechances from update method
             //because save chances is here inside try
@@ -124,5 +145,12 @@ namespace TraineeTracker.Controllers.API
         {
             return _service.Exists(id);
         }
+    }
+
+    public class SearchCriteria
+    {
+        public string Name { get; set; } = "";
+
+        public string Activity { get; set; } = "";
     }
 }
