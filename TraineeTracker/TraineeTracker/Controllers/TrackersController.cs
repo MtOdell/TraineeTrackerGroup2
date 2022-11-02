@@ -87,8 +87,9 @@ namespace TraineeTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Stop,Start,Continue,Comments,TechnicalSkills,ConsultantSkills")] Tracker tracker)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Stop,Start,Continue,Comments,TechnicalSkills,ConsultantSkills")] Tracker tracker)
         {
+            var trackers = await _service.FindAsync(id);
             if (id != tracker.ID)
             {
                 return NotFound();
@@ -98,7 +99,11 @@ namespace TraineeTracker.Controllers
             {
                 try
                 {
-                    await _service.Update(tracker);
+                    tracker.Stop = trackers.Stop;
+                    tracker.Start = trackers.Start;
+                    tracker.Continue = trackers.Continue;
+                    tracker.Comments = trackers.Comments;
+                    await _service.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -111,7 +116,7 @@ namespace TraineeTracker.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index),new { id = tracker.UserDataId });
             }
             return View(tracker);
         }
