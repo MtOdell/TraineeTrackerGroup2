@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <h5><a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, @User.Identity?.Name</a></h5>
+}
+else
+{
+    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Options</h5>
+}
