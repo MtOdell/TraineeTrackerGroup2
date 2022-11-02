@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +14,7 @@ using TraineeTracker.Service;
 
 namespace TraineeTracker.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class UserDatasController : Controller
     {
         private readonly IServiceLayer<UserData> _service;
@@ -26,21 +27,22 @@ namespace TraineeTracker.Controllers
         }
 
         // GET: UserDatas
-        //[Authorize(Roles ="Trainee, Trainer")]
+        [Authorize(Roles ="Trainee, Trainer")]
         public async Task<IActionResult> Index()
         {
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);
 
             if (HttpContext.User.IsInRole("Trainee"))
             {
-
+                var userData = (await _service.GetAllAsync()).Where(x => x.UserID == currentUser.Id);
+                return View(userData);
             }
             else if(HttpContext.User.IsInRole("Trainer"))
             {
                 return View(await _service.GetAllAsync());
             }
 
-              return View(await _service.GetAllAsync());
+            return NoContent();
         }
 
         // GET: UserDatas/Details/5
@@ -60,6 +62,24 @@ namespace TraineeTracker.Controllers
 
             return View(userData);
         }
+        // GET: UserDatas/Tracker/5
+        public async Task<IActionResult> Tracker(int? id)
+        {
+            if (id == null || _service.IsNull())
+            {
+                return NotFound();
+            }
+
+            var userData = await _service.FindAsync((int)id);
+
+            if (userData == null)
+            {
+                return NotFound();
+            }
+
+            return View(userData);
+        }
+
 
         // GET: UserDatas/Create
         public IActionResult Create()
