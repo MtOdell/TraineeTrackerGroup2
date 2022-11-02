@@ -5,6 +5,13 @@ namespace TraineeTracker.Models
 {
     public class UserData
     {
+        public enum Level
+        {
+            Trainee,
+            Trainer,
+            Admin
+        }
+
         [ForeignKey("User")]
         public string UserID { get; set; }
         public int ID { get; set; }
@@ -16,6 +23,9 @@ namespace TraineeTracker.Models
         public string? Activity { get; set; } = "";
         public string? Biography { get; set; } = "";
         public string? Skills { get; set; } = "";
-        public List<Tracker> Trackers { get; set; } = new List<Tracker>();
+
+        public Level Roles { get; set; } = Level.Trainee;
+
+        public List<Tracker>? Trackers { get; set; } = new List<Tracker>();
     }
 }
