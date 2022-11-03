@@ -40,7 +40,7 @@ namespace TraineeTracker.Controllers.API
         public async Task<ActionResult<IEnumerable<UserDataViewModel>>> GetUserData([FromQuery] SearchCriteria search)
         {
             var allUsers = await _service.GetAllAsync();
-            var users = allUsers.Where(u => u.FirstName.Contains(search.Name) && u.LastName.Contains(search.Name) && u.Activity.Contains(search.Activity));
+            var users = allUsers.Where(u => (u.FirstName.Contains(search.Name) || u.LastName.Contains(search.Name)) && u.Activity.Contains(search.Activity));
             if (users == null)
             {
                 return NotFound();
