@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TraineeTracker.Data;
 using TraineeTracker.Models;
 using TraineeTracker.Models.ViewModels;
+using TraineeTracker.Security.Authorization;
 using TraineeTracker.Service;
 
 namespace TraineeTracker.Controllers.API
 {
     [Route("api/UserDatas")]
+    [Produces("application/json")]
     [ApiController]
     public class UserDatasController : ControllerBase
     {
@@ -26,7 +29,9 @@ namespace TraineeTracker.Controllers.API
         }
 
         // GET: api/UserDatas
+        
         [HttpGet]
+        [Authorize(Roles = "Admin, Trainer")]
         public async Task<ActionResult<IEnumerable<UserDataViewModel>>> GetAll()
         {
             var userDatas = await _service.GetAllAsync();
@@ -37,6 +42,7 @@ namespace TraineeTracker.Controllers.API
 
         // GET: api/UserDatas/
         [HttpGet("search")]
+        [Authorize(Roles = "Admin, Trainer")]
         public async Task<ActionResult<IEnumerable<UserDataViewModel>>> GetUserData([FromQuery] SearchCriteria search)
         {
             var allUsers = await _service.GetAllAsync();
@@ -53,6 +59,7 @@ namespace TraineeTracker.Controllers.API
         
         // GET: api/UserDatas/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin, Trainer")]
         public async Task<ActionResult<UserDataViewModel>> GetUserData(int id)
         {
             var userData = await _service.FindAsync(id);
@@ -65,6 +72,7 @@ namespace TraineeTracker.Controllers.API
         }
         // GET: api/UserDatas/id/trackers
         [HttpGet("{id}/trackers")]
+        [Authorize(Roles = "Admin, Trainer")]
         public async Task<ActionResult<IEnumerable<TrackerViewModel>>> GetUserTrackers(int id)
         {
             
@@ -83,6 +91,7 @@ namespace TraineeTracker.Controllers.API
         // PUT: api/UserDatas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "Trainee")]
         public async Task<IActionResult> UpdateUserData(int id, UserDataViewModel userDataViewModel)
         {
             var userData = await _service.FindAsync(id);
@@ -127,6 +136,7 @@ namespace TraineeTracker.Controllers.API
         // POST: api/UserDatas
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Admin, Trainer")]
         public async Task<ActionResult<UserData>> PostUserData(UserData userData)
         {
             await _service.AddAsync(userData);
@@ -135,7 +145,9 @@ namespace TraineeTracker.Controllers.API
         }
 
         // DELETE: api/UserDatas/5
+
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin, Trainer")]
         public async Task<IActionResult> DeleteUserData(int id)
         {
             var userData = await _service.FindAsync(id);

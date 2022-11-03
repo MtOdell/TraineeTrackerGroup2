@@ -1,8 +1,16 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using TraineeTracker.Data;
 using TraineeTracker.Models;
+using TraineeTracker.Security.Authentication;
+using TraineeTracker.Security.Authorization;
 using TraineeTracker.Service;
+using Microsoft.AspNetCore.Builder;
+using TraineeTracker.Swagger;
 
 namespace TraineeTracker
 {
@@ -29,6 +37,33 @@ namespace TraineeTracker
             builder.Services.AddScoped<IServiceLayer<UserData>, UserDataService>();
             builder.Services.AddScoped<IUserManager<User>, UserManager>();
 
+            builder.Services.AddAuthentication(options => 
+            { 
+                options.DefaultAuthenticateScheme = ApiKeyAuthenticationOptions.DefaultScheme;
+                options.DefaultChallengeScheme = ApiKeyAuthenticationOptions.DefaultScheme;
+            }).AddApiKeySupport(options => { });
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy(Policies.OnlyTrainee, policy => policy.Requirements.Add(new OnlyTraineesRequirement()));
+                options.AddPolicy(Policies.OnlyTrainer, policy => policy.Requirements.Add(new OnlyTrainersRequirement()));
+                options.AddPolicy(Policies.OnlyAdmin, policy => policy.Requirements.Add(new OnlyAdminRequirement()));
+            });
+
+            builder.Services.AddSingleton<IAuthorizationHandler, OnlyTraineesAuthorizationHandler>();
+            builder.Services.AddSingleton<IAuthorizationHandler, OnlyTrainersAuthorizationHandler>();
+            builder.Services.AddSingleton<IAuthorizationHandler, OnlyAdminAuthorizationHandler>();
+
+            builder.Services.AddSingleton<IGetApiKeyQuery, InMemoryGetApiKeyQuery>();
+
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+                });
+
+            builder.Services.ConfigureSwaggerFeature();
 
             var app = builder.Build();
             using (var scope = app.Services.CreateScope())
@@ -41,6 +76,7 @@ namespace TraineeTracker
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
+                
             }
             else
             {
@@ -57,6 +93,11 @@ namespace TraineeTracker
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Trainee Tracker");
+            });
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
