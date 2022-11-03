@@ -45,7 +45,7 @@
                 <a asp-controller="Trackers" asp-action="Index" asp-route-id="@item.ID">Trackers</a>
                 @if (User.IsInRole("Trainer"))
                 {
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    <lable>|</lable> <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                 }
             </td>
         </tr>

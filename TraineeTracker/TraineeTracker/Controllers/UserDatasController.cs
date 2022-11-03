@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using TraineeTracker.Data;
 using TraineeTracker.Models;
 using TraineeTracker.Models.ViewModels;
@@ -28,6 +29,43 @@ namespace TraineeTracker.Controllers
             _userManager = userManager;
         }
 
+        private async Task<List<UserDataViewModel>> GetTraineeView(string traineeId)
+        {
+            var userViewModel = new List<UserDataViewModel>();
+            var userData = (await _service.GetAllAsync()).Where(x => x.UserID == traineeId).FirstOrDefault();
+            if (userData is not null)
+                userViewModel.Add(Utils.UserDataToViewModel(userData));
+            return userViewModel;
+        }
+        private async Task<List<UserDataViewModel>> GetTrainerView()
+        {
+            var userViewModel = new List<UserDataViewModel>();
+            var userDatas = (await _service.GetAllAsync()).Where(x => x.Roles == UserData.Level.Trainee);
+            foreach(var userData in userDatas)
+            {
+                userViewModel.Add(Utils.UserDataToViewModel(userData));
+            }
+            return userViewModel;
+        }
+        public async Task<IActionResult> AttemptGetUserDataViewModel(int? id)
+        {
+            if (id == null || _service.IsNull())
+            {
+                return NotFound();
+            }
+
+            var userData = await _service.FindAsync((int)id);
+
+            if (userData == null)
+            {
+                return NotFound();
+            }
+
+            var userDataViewModel = Utils.UserDataToViewModel(userData);
+
+            return View(userDataViewModel);
+        }
+
         // GET: UserDatas
         [Authorize(Roles ="Trainee, Trainer")]
         public async Task<IActionResult> Index()
@@ -36,86 +74,37 @@ namespace TraineeTracker.Controllers
 
             if (_userManager.IsInRole("Trainee"))
             {
-                var userData = (await _service.GetAllAsync()).Where(x => x.UserID == currentUser.Id).FirstOrDefault();
-                var userViewModel = new List<UserDataViewModel>();
-                userViewModel.Add(Utils.UserDataToViewModel(userData));
-
-                return View(userViewModel);
+                return View(await GetTraineeView(currentUser.Id));
             }
             else if(_userManager.IsInRole("Trainer"))
             {
-                var userDatas = (await _service.GetAllAsync()).Where(x => x.Roles == UserData.Level.Trainee);
-                var userViewModel = new List<UserDataViewModel>();
-
-                foreach(var userData in userDatas)
-                {
-                    userViewModel.Add(Utils.UserDataToViewModel(userData));
-                }
-
-                return View(userViewModel);
+                return View(await GetTrainerView());
             }
 
             return NoContent();
         }
 
         // GET: UserDatas/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id) => await AttemptGetUserDataViewModel(id);
+        public async Task<IActionResult> Edit(int? id) => await AttemptGetUserDataViewModel(id);
+        // GET: UserDatas/Delete/5
+        public async Task<IActionResult> Delete(int? id) => await AttemptGetUserDataViewModel(id);
+        
+        // POST: UserDatas/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (id == null || _service.IsNull())
+            if (_service.IsNull())
             {
-                return NotFound();
+                return Problem("Entity set 'TraineeTrackerContext.UserDataDB'  is null.");
             }
-
-            var userData = await _service.FindAsync((int)id); 
-
-            if (userData == null)
+            var userData = await _service.FindAsync(id);
+            if (userData != null)
             {
-                return NotFound();
+                await _service.RemoveAsync(userData);
             }
-
-            var userDataViewModel = Utils.UserDataToViewModel(userData);
-
-            return View(userDataViewModel);
-        }
-
-
-        //// GET: UserDatas/Create
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: UserDatas/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to.
-        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("UserID,ID,FirstName,LastName,Title,Education,Experience,Activity,Biography,Skills")] UserData userData)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        await _service.AddAsync(userData);
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(userData);
-        //}
-
-        // GET: UserDatas/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _service.IsNull())
-            {
-                return NotFound();
-            }
-
-            var userData = await _service.FindAsync((int)id);
-            if (userData == null)
-            {
-                return NotFound();
-            }
-
-            var userDataViewModel = Utils.UserDataToViewModel(userData);
-            return View(userDataViewModel);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: UserDatas/Edit/5
@@ -134,7 +123,7 @@ namespace TraineeTracker.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {
+                {  
                     userData.FirstName = userDataViewModel.FirstName;
                     userData.LastName = userDataViewModel.LastName;
                     userData.Title = userDataViewModel.Title;
@@ -159,40 +148,6 @@ namespace TraineeTracker.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(userDataViewModel);
-        }
-
-        // GET: UserDatas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _service.IsNull())
-            {
-                return NotFound();
-            }
-
-            var userData = await _service.FindAsync((int)id);
-            if (userData == null)
-            {
-                return NotFound();
-            }
-            var userDataViewModel = Utils.UserDataToViewModel(userData);
-            return View(userDataViewModel);
-        }
-
-        // POST: UserDatas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_service.IsNull())
-            {
-                return Problem("Entity set 'TraineeTrackerContext.UserDataDB'  is null.");
-            }
-            var userData = await _service.FindAsync(id);
-            if (userData != null)
-            {
-                await _service.RemoveAsync(userData);
-            }
-            return RedirectToAction(nameof(Index));
         }
 
     }
