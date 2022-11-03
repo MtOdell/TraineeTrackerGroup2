@@ -1,11 +1,14 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 using TraineeTracker.Data;
 using TraineeTracker.Models;
 using TraineeTracker.Service;
 
 namespace TraineeTracker
 {
+    [ExcludeFromCodeCoverage]
+
     public class Program
     {
         public static void Main(string[] args)

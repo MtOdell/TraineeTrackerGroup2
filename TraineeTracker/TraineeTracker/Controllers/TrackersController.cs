@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
@@ -14,6 +15,7 @@ using TraineeTracker.Service;
 
 namespace TraineeTracker.Controllers
 {
+    [Authorize]
     public class TrackersController : Controller
     {
         private readonly IServiceLayer<Tracker> _service;
@@ -22,7 +24,7 @@ namespace TraineeTracker.Controllers
         {
             _service = service;
         }
-
+        [Authorize(Roles = "Trainee, Trainer, Admin")]
         // GET: Trackers
         public async Task<IActionResult> Index(int? id)
         {
@@ -32,10 +34,12 @@ namespace TraineeTracker.Controllers
             {
                 trackerViewModel.Add(Utils.TrackerToViewModel(trackerData));
             }
+
               return View(trackerViewModel);
         }
 
         // GET: Trackers/Details/5
+        [Authorize(Roles = "Trainee, Trainer, Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _service.IsNull())
@@ -62,6 +66,7 @@ namespace TraineeTracker.Controllers
         // POST: Trackers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Trainee, Trainer, Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,UserDataId,Stop,Start,Continue,Comments,TechnicalSkills,ConsultantSkills")] Tracker tracker)
@@ -73,7 +78,7 @@ namespace TraineeTracker.Controllers
             }
             return View(tracker);
         }
-
+        [Authorize(Roles = "Trainee, Trainer, Admin")]
         // GET: Trackers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -94,6 +99,7 @@ namespace TraineeTracker.Controllers
         // POST: Trackers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Trainee, Trainer, Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Stop,Start,Continue,Comments,TechnicalSkills,ConsultantSkills")] TrackerViewModel trackerViewModel)
@@ -111,7 +117,10 @@ namespace TraineeTracker.Controllers
                     trackers.Stop = trackerViewModel.Stop;
                     trackers.Start = trackerViewModel.Start;
                     trackers.Continue = trackerViewModel.Continue;
-                    trackers.Comments = trackerViewModel.Comments;
+                    trackers.Comments = trackerViewModel.Comments ?? "";
+                    trackers.ConsultantSkills = trackerViewModel.ConsultantSkills;
+                    trackers.TechnicalSkills = trackerViewModel.TechnicalSkills;
+
                     await _service.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -129,6 +138,7 @@ namespace TraineeTracker.Controllers
             }
             return View(trackerViewModel);
         }
+        [Authorize(Roles = "Trainer, Admin")]
 
         // GET: Trackers/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -149,6 +159,7 @@ namespace TraineeTracker.Controllers
         }
 
         // POST: Trackers/Delete/5
+        [Authorize(Roles = "Trainer, Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
