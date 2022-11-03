@@ -52,6 +52,7 @@ namespace TraineeTracker.Controllers
             }
             return userViewModel;
         }
+
         public async Task<IActionResult> AttemptGetUserDataViewModel(int? id)
         {
             var currentUser = await _userManager.GetUserAsync();
