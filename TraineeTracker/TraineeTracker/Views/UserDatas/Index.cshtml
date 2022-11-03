@@ -28,7 +28,18 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @if(User.IsInRole("Trainer")){
+        
+            <form asp-action="Index" >     
+                <div class="d-flex flex-row w-50 my-4 p-0">
+                    <input type="text" name="SearchString" class="form-control mx-2" id="SearchString" placeholder="Trainee's name">
+                    <button type="submit" value="Filter" class="btn btn-primary mb-2">Search</button>
+                </div>
+            </form>
+        
+    }
+    @foreach (var item in Model) {
+        
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)

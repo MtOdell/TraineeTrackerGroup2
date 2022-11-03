@@ -30,7 +30,7 @@ namespace TraineeTracker.Controllers
 
         // GET: UserDatas
         [Authorize(Roles ="Trainee, Trainer")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             var currentUser = await _userManager.GetUserAsync();
 
@@ -45,6 +45,11 @@ namespace TraineeTracker.Controllers
             else if(_userManager.IsInRole("Trainer"))
             {
                 var userDatas = (await _service.GetAllAsync()).Where(x => x.Roles == UserData.Level.Trainee);
+
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    userDatas = userDatas.Where(user => user.FirstName.Contains(searchString) || user.LastName.Contains(searchString));
+                }
                 var userViewModel = new List<UserDataViewModel>();
 
                 foreach(var userData in userDatas)
