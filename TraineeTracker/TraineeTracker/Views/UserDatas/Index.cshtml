@@ -1,13 +1,16 @@
 ﻿@model IEnumerable<TraineeTracker.Models.ViewModels.UserDataViewModel>
 
 @{
-    if (User.IsInRole("Trainer"))
+    if (User.IsInRole("Admin")){
+        ViewData["Title"] = "Users";
+    }
+    else if (User.IsInRole("Trainer"))
     {
-        ViewData["Title"] = "Manage Trainees";
+        ViewData["Title"] = "View Trainees";
     }
     else if (User.IsInRole("Trainee"))
     {
-        ViewData["Title"] = "Manage User";
+        ViewData["Title"] = "User Portal";
     }
 }
 
