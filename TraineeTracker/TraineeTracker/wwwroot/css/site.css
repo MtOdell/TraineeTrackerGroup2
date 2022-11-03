@@ -78,6 +78,9 @@ label {
     color:white;
     float:left;
 }
-.now {
-    float;
+
+.dropdown {
+    width: 100%;
+    height: 38px;
+    border-radius: 5px;
 }

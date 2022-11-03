@@ -64,29 +64,34 @@
     }
     <br /> <br />
 
-    <table class="table" style="color:white;">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Modify</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <th scope="row"><h5 style="display:inline;">@Html.DisplayNameFor(modelItem => item.Week) @Html.DisplayFor(modelItem => item.Week)</h5></th>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Edit</button></a>
-                        <a asp-action="Details" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Details</button></a>
-                        <a asp-action="Delete" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Delete</button></a>
-                    </td>
-                </tr>
-            }
-    </table>
-
-</div>
-<div class="center row">
-    <div id="piechart" style="width: 400px; height: 300px; display:inline;"></div>
-    <div id="piechart_two" style="width: 400px; height: 300px; display:inline;"></div>
+    <div style="width: 100%; float left;">
+        <div style="float: left; display: inline;">
+            <table class="table" style="color:white; width: 700px;">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Modify</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row"><h5 style="display:inline;">@Html.DisplayNameFor(modelItem => item.Week) @Html.DisplayFor(modelItem => item.Week)</h5></th>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Edit</button></a>
+                                <a asp-action="Details" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Details</button></a>
+                                @if (User.IsInRole("Trainer") || User.IsInRole("Admin")){
+                                    <a asp-action="Delete" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Delete</button></a>
+                                }
+                            </td>
+                        </tr>
+                    }
+            </table>
+        </div>
+        <div style="float: right;">
+            <div id="piechart" style="width: 400px; height: 300px;"></div>
+            <div id="piechart_two" style="width: 400px; height: 300px;"></div>
+        </div>
+    </div>
 </div>
