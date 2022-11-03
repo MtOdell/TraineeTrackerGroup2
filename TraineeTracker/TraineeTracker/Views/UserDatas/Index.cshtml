@@ -45,7 +45,7 @@
                     </td>
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Edit</button></a>
-                        <a asp-action="Details" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Details</button></a>
+                        <a asp-action="Details" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Profile</button></a>
                         <a asp-controller="Trackers" asp-action="Index" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Trackers</button></a>
                         @if (User.IsInRole("Trainer"))
                         {
