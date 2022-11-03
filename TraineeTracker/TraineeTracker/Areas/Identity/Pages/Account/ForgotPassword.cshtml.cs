@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ using TraineeTracker.Models;
 
 namespace TraineeTracker.Areas.Identity.Pages.Account
 {
+    [ExcludeFromCodeCoverage]
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<User> _userManager;
