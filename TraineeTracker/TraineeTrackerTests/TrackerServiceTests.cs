@@ -29,8 +29,8 @@ public class TrackerServiceTests
             Start = "nothing",
             Continue = "moving",
             Comments = "controversial",
-            TechnicalSkills = 4,
-            ConsultantSkills = 4,
+            //TechnicalSkills = 4,
+            //ConsultantSkills = 4,
         });
     }
 }
