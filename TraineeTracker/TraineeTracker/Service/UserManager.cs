@@ -10,7 +10,7 @@ namespace TraineeTracker.Service
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public UserManager(IHttpContextAccessor httpContextAccessor, UserManager<User> userManager)
-        {
+        {   
             _userManager = userManager; 
             _httpContextAccessor = httpContextAccessor;
         }
@@ -23,6 +23,19 @@ namespace TraineeTracker.Service
         public bool IsInRole(string role)
         {
             return _httpContextAccessor.HttpContext!.User.IsInRole(role);
+        }
+
+        public async Task ChangeRole(User user, string role)
+        {
+            var roleToDelete = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
+            await _userManager.AddToRoleAsync(user, role);
+            await _userManager.RemoveFromRoleAsync(user, roleToDelete);
+            var letssee = await _userManager.IsInRoleAsync(user, roleToDelete);
+        }
+
+        public async Task<User> GetUserByIdAsync(string id)
+        {
+            return await _userManager.FindByIdAsync(id);
         }
     }
 }

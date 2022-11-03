@@ -21,9 +21,11 @@ namespace TraineeTracker.Data
 
             var trainer = new IdentityRole { Name = "Trainer", NormalizedName = "Trainer" };
             var trainee = new IdentityRole { Name = "Trainee", NormalizedName = "Trainee" };
+            var admin = new IdentityRole { Name = "Admin", NormalizedName = "Admin" };
 
             roleStore.CreateAsync(trainer).GetAwaiter().GetResult();
             roleStore.CreateAsync(trainee).GetAwaiter().GetResult();
+            roleStore.CreateAsync(admin).GetAwaiter().GetResult();
 
             var phil = new User { UserName = "Phil@SpartaGlobal.com", Email = "Phil@SpartaGlobal.com", EmailConfirmed = true };
             var peter = new User { UserName = "Peter@SpartaGlobal.com", Email = "Peter@SpartaGlobal.com", EmailConfirmed = true };
@@ -60,7 +62,7 @@ namespace TraineeTracker.Data
                  new IdentityUserRole<string>
                 {
                     UserId = userManager.GetUserIdAsync(serg).GetAwaiter().GetResult(),
-                    RoleId = roleStore.GetRoleIdAsync(trainee).GetAwaiter().GetResult()
+                    RoleId = roleStore.GetRoleIdAsync(admin).GetAwaiter().GetResult()
                 },
                 new IdentityUserRole<string>
                 {
@@ -108,7 +110,7 @@ namespace TraineeTracker.Data
                 LastName = "P",
                 Activity = "C#",
                 UserID = userManager.GetUserIdAsync(serg).GetAwaiter().GetResult(),
-                Roles = UserData.Level.Trainee
+                Roles = UserData.Level.Admin
             };
             UserData userDataAdam = new UserData()
             {
@@ -121,9 +123,9 @@ namespace TraineeTracker.Data
             UserData userDataLewis = new UserData()
             {
                 FirstName = "Lewis",
-                LastName = "Mandela",
+                LastName = "Kellet",
                 Activity = "C#",
-                UserID = userManager.GetUserIdAsync(nish).GetAwaiter().GetResult(),
+                UserID = userManager.GetUserIdAsync(lewis).GetAwaiter().GetResult(),
                 Roles = UserData.Level.Trainer
             };
             userDataPhil.Trackers.Add(new Tracker() { Stop = "Being funny", Week = 1 });
@@ -134,23 +136,19 @@ namespace TraineeTracker.Data
             userDataPeter.Trackers.Add(new Tracker() { Start = "Being funny", Week = 1  });
             peter.UserData = userDataPeter;
 
-            userDataSerg.Trackers.Add(new Tracker() { Start = "Being funny", Week = 1 });
-            serg.UserData = userDataSerg;
-
             userDataAdam.Trackers.Add(new Tracker() { Start = "Being funny", Week = 1 });
             adam.UserData = userDataAdam;
 
             userDataSerg.Trackers.Add(new Tracker() { Stop = "playing bobble league", Week = 2 });
             serg.UserData = userDataSerg;
 
-            lewis.UserData = userDataSerg; 
+            lewis.UserData = userDataLewis; 
             nish.UserData = userDataNish;
 
            
             context.UserDataDB.Add(userDataPhil);
             context.UserDataDB.Add(userDataPeter);
             context.UserDataDB.Add(userDataNish);
-            context.UserDataDB.Add(userDataSerg);
             context.UserDataDB.Add(userDataLewis);
             context.UserDataDB.Add(userDataAdam);
             context.SaveChanges();
