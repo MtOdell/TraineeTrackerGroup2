@@ -23,12 +23,12 @@ namespace TraineeTracker.Service
 
         public async Task<UserData?> FindAsync(int id)
         {
-            return await _context.UserDataDB.Include(ud => ud.Trackers).Where(ud => ud.ID == id).FirstOrDefaultAsync();
+            return await _context.UserDataDB.FindAsync(id);
         }
 
         public async Task<IEnumerable<UserData>> GetAllAsync()
         {
-            return await _context.UserDataDB.Include(ud => ud.Trackers).ToListAsync();
+            return await _context.UserDataDB.ToListAsync();
         }
 
         public bool IsNull()
