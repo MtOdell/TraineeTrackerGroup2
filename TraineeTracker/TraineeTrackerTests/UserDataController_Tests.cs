@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Moq;
 using TraineeTracker.Controllers;
 using TraineeTracker.Data;
@@ -29,7 +30,7 @@ namespace TraineeTrackerTests
         }
 
         [Test]
-        [Category("Trainer Path")]
+        [Category("Index Path")]
         [Category("Happy Path")]
         public void WhenIndexIsCalledAs_Trainer_ReturnsExpected()
         {
@@ -55,7 +56,7 @@ namespace TraineeTrackerTests
         }
 
         [Test]
-        [Category("Trainee Path")]
+        [Category("Index Path")]
         [Category("Happy Path")]
         public void WhenIndexIsCalledAs_Trainee_ReturnsExpected()
         {
@@ -81,7 +82,7 @@ namespace TraineeTrackerTests
         }
 
         [Test]
-        [Category("Trainee Path")]
+        [Category("Index Path")]
         [Category("Sad Path")]
         public void WhenIndexIsCalledAs_NonExistantRole_ReturnsExpected()
         {
@@ -225,7 +226,6 @@ namespace TraineeTrackerTests
         {
             var mockService = new Mock<IServiceLayer<UserData>>();
             var mockUser = new Mock<IUserManager<User>>();
-            //mockService.Setup(x => x.FindAsync(It.IsAny<int>()));
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
             var result = ((NotFoundResult)_sut.Delete(null).Result);
@@ -313,6 +313,102 @@ namespace TraineeTrackerTests
             var result = _sut.DeleteConfirmed(1).Result;
 
             mockService.Verify(x => x.RemoveAsync(It.IsAny<UserData>()), Times.Once);
+            Assert.That(result, Is.InstanceOf<RedirectToActionResult>());
+        }
+
+
+        [Test]
+        [Category("Edit/Post Path")]
+        [Category("Sad Path")]
+        public void WhenPostEditIsCalledWith_MismatchedId_ReturnsExpected()
+        {
+            var mockService = new Mock<IServiceLayer<UserData>>();
+            var mockUser = new Mock<IUserManager<User>>();
+            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new UserData() { FirstName = "TEST" })!);
+            _sut = new UserDatasController(mockService.Object, mockUser.Object);
+
+            var result = _sut.Edit(0, new UserDataViewModel() { ID = 100 }).Result;
+
+            mockService.Verify(x => x.FindAsync(It.IsAny<int>()), Times.Once);
+            Assert.That(result, Is.InstanceOf<NotFoundResult>());
+        }
+
+
+        [Test]
+        [Category("Edit/Post Path")]
+        [Category("Sad Path")]
+        public void WhenPostEditIsCalledWith_InvalidModelState_ReturnsExpected()
+        {
+            var mockService = new Mock<IServiceLayer<UserData>>();
+            var mockUser = new Mock<IUserManager<User>>();
+            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new UserData() { FirstName = "TEST" })!);
+            _sut = new UserDatasController(mockService.Object, mockUser.Object);
+            _sut.ModelState.AddModelError("", "");
+
+            var result = _sut.Edit(0, new UserDataViewModel() { ID = 0 }).Result;
+
+            mockService.Verify(x => x.FindAsync(It.IsAny<int>()), Times.Once);
+            Assert.That(result, Is.InstanceOf<ViewResult>());
+        }
+
+
+        [Test]
+        [Category("Edit/Post Path")]
+        [Category("Sad Path")]
+        public void WhenPostEditIsCalledWith_ValidData_SaveChangesThrows_And_ReturnsExpected()
+        {
+            var mockService = new Mock<IServiceLayer<UserData>>();
+            var mockUser = new Mock<IUserManager<User>>();
+            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new UserData() { FirstName = "TEST" })!);
+            mockService.Setup(x => x.Exists(It.IsAny<int>())).Returns(false);
+            mockService.Setup(x => x.SaveChangesAsync()).Throws<DbUpdateConcurrencyException>();
+
+            _sut = new UserDatasController(mockService.Object, mockUser.Object);
+
+            var result = _sut.Edit(0, new UserDataViewModel() { ID = 0 }).Result;
+
+            mockService.Verify(x => x.FindAsync(It.IsAny<int>()), Times.Once);
+            mockService.Verify(x => x.Exists(It.IsAny<int>()), Times.Once);
+            mockService.Verify(x => x.SaveChangesAsync(), Times.Once);
+            Assert.That(result, Is.InstanceOf<NotFoundResult>());
+        }
+
+        [Test]
+        [Category("Edit/Post Path")]
+        [Category("Sad Path")]
+        public void WhenPostEditIsCalledWith_ValidData_SaveChangesThrows_Then_Catch_Throws()
+        {
+            var mockService = new Mock<IServiceLayer<UserData>>();
+            var mockUser = new Mock<IUserManager<User>>();
+            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new UserData() { FirstName = "TEST" })!);
+            mockService.Setup(x => x.Exists(It.IsAny<int>())).Returns(true);
+            mockService.Setup(x => x.SaveChangesAsync()).Throws<DbUpdateConcurrencyException>();
+
+            _sut = new UserDatasController(mockService.Object, mockUser.Object);
+
+            Assert.Throws<DbUpdateConcurrencyException>(() => { _sut.Edit(0, new UserDataViewModel() { ID = 0 }).GetAwaiter().GetResult(); });
+
+            mockService.Verify(x => x.FindAsync(It.IsAny<int>()), Times.Once);
+            mockService.Verify(x => x.Exists(It.IsAny<int>()), Times.Once);
+            mockService.Verify(x => x.SaveChangesAsync(), Times.Once);
+        }
+        
+        [Test]
+        [Category("Edit/Post Path")]
+        [Category("Happy Path")]
+        public void WhenPostEditIsCalledWith_ValidData_ReturnsExpected()
+        {
+            var mockService = new Mock<IServiceLayer<UserData>>();
+            var mockUser = new Mock<IUserManager<User>>();
+            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new UserData() { FirstName = "TEST" })!);
+            mockService.Setup(x => x.SaveChangesAsync());
+
+            _sut = new UserDatasController(mockService.Object, mockUser.Object);
+
+            var result = _sut.Edit(0, new UserDataViewModel() { ID = 0 }).Result;
+
+            mockService.Verify(x => x.FindAsync(It.IsAny<int>()), Times.Once);
+            mockService.Verify(x => x.SaveChangesAsync(), Times.Once);
             Assert.That(result, Is.InstanceOf<RedirectToActionResult>());
         }
     }

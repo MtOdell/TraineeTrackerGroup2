@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Moq;
 using System.Xml.Linq;
 using TraineeTracker.Controllers;
@@ -30,7 +31,7 @@ namespace TraineeTrackerTests
         }
 
         [Test]
-        [Category("Trainer Path")]
+        [Category("Index Path")]
         [Category("Happy Path")]
         public void WhenIndexIsCalledAs_Trainer_ReturnsExpected()
         {
@@ -51,7 +52,7 @@ namespace TraineeTrackerTests
         }
 
         [Test]
-        [Category("Trainee Path")]
+        [Category("Index Path")]
         [Category("Happy Path")]
         public void WhenIndexIsCalledAs_Trainee_ReturnsExpected()
         {
@@ -142,7 +143,7 @@ namespace TraineeTrackerTests
         }
 
         [Test]
-        [Category("Details Path")]
+        [Category("Create Path")]
         [Category("Happy Path")]
         public void WhenCreateIsCalled_ReturnsExpected()
         {
@@ -158,7 +159,7 @@ namespace TraineeTrackerTests
         }
 
         [Test]
-        [Category("Details Path")]
+        [Category("Create Path")]
         [Category("Sad Path")]
         public void WhenCreateIsCalled_WithInvalidModel_ReturnsExpected()
         {
@@ -327,5 +328,103 @@ namespace TraineeTrackerTests
             mockService.Verify(x => x.RemoveAsync(It.IsAny<Tracker>()), Times.Once);
             Assert.That(result, Is.InstanceOf<RedirectToActionResult>());
         }
+
+
+        [Test]
+        [Category("Edit/Post Path")]
+        [Category("Sad Path")]
+        public void WhenPostEditIsCalledWith_MismatchedId_ReturnsExpected()
+        {
+            var mockService = new Mock<IServiceLayer<Tracker>>();
+
+            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new Tracker() { ID=124, Comments = "TEST" })!);
+            _sut = new TrackersController(mockService.Object);
+
+            var result = _sut.Edit(0, new TrackerViewModel() { ID = 100 }).Result;
+
+            mockService.Verify(x => x.FindAsync(It.IsAny<int>()), Times.Once);
+            Assert.That(result, Is.InstanceOf<NotFoundResult>());
+        }
+
+
+        [Test]
+        [Category("Edit/Post Path")]
+        [Category("Sad Path")]
+        public void WhenPostEditIsCalledWith_InvalidModelState_ReturnsExpected()
+        {
+            var mockService = new Mock<IServiceLayer<Tracker>>();
+
+            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new Tracker() { Comments = "TEST" })!);
+            _sut = new TrackersController(mockService.Object);
+            _sut.ModelState.AddModelError("", "");
+
+            var result = _sut.Edit(0, new TrackerViewModel() { ID = 0 }).Result;
+
+            mockService.Verify(x => x.FindAsync(It.IsAny<int>()), Times.Once);
+            Assert.That(result, Is.InstanceOf<ViewResult>());
+        }
+
+
+        [Test]
+        [Category("Edit/Post Path")]
+        [Category("Sad Path")]
+        public void WhenPostEditIsCalledWith_ValidData_SaveChangesThrows_And_ReturnsExpected()
+        {
+            var mockService = new Mock<IServiceLayer<Tracker>>();
+
+            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new Tracker() { Comments = "TEST" })!);
+            mockService.Setup(x => x.Exists(It.IsAny<int>())).Returns(false);
+            mockService.Setup(x => x.SaveChangesAsync()).Throws<DbUpdateConcurrencyException>();
+
+            _sut = new TrackersController(mockService.Object);
+
+            var result = _sut.Edit(0, new TrackerViewModel() { ID = 0 }).Result;
+
+            mockService.Verify(x => x.FindAsync(It.IsAny<int>()), Times.Once);
+            mockService.Verify(x => x.Exists(It.IsAny<int>()), Times.Once);
+            mockService.Verify(x => x.SaveChangesAsync(), Times.Once);
+            Assert.That(result, Is.InstanceOf<NotFoundResult>());
+        }
+
+        [Test]
+        [Category("Edit/Post Path")]
+        [Category("Sad Path")]
+        public void WhenPostEditIsCalledWith_ValidData_SaveChangesThrows_Then_Catch_Throws()
+        {
+            var mockService = new Mock<IServiceLayer<Tracker>>();
+
+            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new Tracker() { Comments = "TEST" })!);
+            mockService.Setup(x => x.Exists(It.IsAny<int>())).Returns(true);
+            mockService.Setup(x => x.SaveChangesAsync()).Throws<DbUpdateConcurrencyException>();
+
+            _sut = new TrackersController(mockService.Object);
+
+            Assert.Throws<DbUpdateConcurrencyException>(() => { _sut.Edit(0, new TrackerViewModel() { ID = 0 }).GetAwaiter().GetResult(); });
+
+            mockService.Verify(x => x.FindAsync(It.IsAny<int>()), Times.Once);
+            mockService.Verify(x => x.Exists(It.IsAny<int>()), Times.Once);
+            mockService.Verify(x => x.SaveChangesAsync(), Times.Once);
+        }
+
+        [Test]
+        [Category("Edit/Post Path")]
+        [Category("Happy Path")]
+        public void WhenPostEditIsCalledWith_ValidData_ReturnsExpected()
+        {
+            var mockService = new Mock<IServiceLayer<Tracker>>();
+
+            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new Tracker() { Comments = "TEST" })!);
+            mockService.Setup(x => x.SaveChangesAsync());
+
+            _sut = new TrackersController(mockService.Object);
+
+            var result = _sut.Edit(0, new TrackerViewModel() { ID = 0 }).Result;
+
+            mockService.Verify(x => x.FindAsync(It.IsAny<int>()), Times.Once);
+            mockService.Verify(x => x.SaveChangesAsync(), Times.Once);
+            Assert.That(result, Is.InstanceOf<RedirectToActionResult>());
+        }
+
+
     }
 }
