@@ -123,7 +123,7 @@ namespace TraineeTracker.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {
+                {  
                     userData.FirstName = userDataViewModel.FirstName;
                     userData.LastName = userDataViewModel.LastName;
                     userData.Title = userDataViewModel.Title;
