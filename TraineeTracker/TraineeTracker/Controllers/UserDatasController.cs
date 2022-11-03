@@ -37,16 +37,22 @@ namespace TraineeTracker.Controllers
                 userViewModel.Add(Utils.UserDataToViewModel(userData));
             return userViewModel;
         }
-        private async Task<List<UserDataViewModel>> GetTrainerView()
+        private async Task<List<UserDataViewModel>> GetTrainerView(string searchString)
         {
             var userViewModel = new List<UserDataViewModel>();
             var userDatas = (await _service.GetAllAsync()).Where(x => x.Roles == UserData.Level.Trainee);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                userDatas = userDatas.Where(user => user.FirstName.Contains(searchString) || user.LastName.Contains(searchString));
+            }
             foreach(var userData in userDatas)
             {
                 userViewModel.Add(Utils.UserDataToViewModel(userData));
             }
             return userViewModel;
         }
+
         public async Task<IActionResult> AttemptGetUserDataViewModel(int? id)
         {
             var currentUser = await _userManager.GetUserAsync();
@@ -71,7 +77,7 @@ namespace TraineeTracker.Controllers
 
         // GET: UserDatas
         [Authorize(Roles ="Trainee, Trainer, Admin")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             var currentUser = await _userManager.GetUserAsync();
 
@@ -92,7 +98,7 @@ namespace TraineeTracker.Controllers
             }
             else if(_userManager.IsInRole("Trainer"))
             {
-                return View(await GetTrainerView());
+                return View(await GetTrainerView(searchString));
             }
 
             return NoContent();

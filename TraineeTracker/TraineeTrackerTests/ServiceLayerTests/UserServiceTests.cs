@@ -7,8 +7,9 @@ using TraineeTracker.Service;
 using TraineeTracker.Models;
 using Microsoft.EntityFrameworkCore;
 using TraineeTracker.Data;
+using Microsoft.Extensions.Options;
 
-namespace TraineeTrackerTests;
+namespace TraineeTrackerTests.ServiceLayerTests;
 
 public class UserServiceTests
 {
@@ -21,21 +22,21 @@ public class UserServiceTests
             .UseInMemoryDatabase(databaseName: "aspnet-TraineeTracker").Options;
         _context = new TraineeTrackerContext(options);
         _sut = new UserDataService(_context);
-        _sut.AddAsync(new UserData 
+        _sut.AddAsync(new UserData
         {
-            FirstName = "Name One", 
-            LastName = "Name Two", 
-            Title = "A Title", 
-            Education = "Illiterate", 
-            Experience = "Not Much", 
-            Activity = "C#", 
-            Biography = "Cheeseburgers OOOoooOOOooOoOoooOo", 
+            FirstName = "Name One",
+            LastName = "Name Two",
+            Title = "A Title",
+            Education = "Illiterate",
+            Experience = "Not Much",
+            Activity = "C#",
+            Biography = "Cheeseburgers OOOoooOOOooOoOoooOo",
             ID = 1,
             UserID = "xyz"
         });
     }
     [Test]
-    public void GivenValidID_FindReturnsCorrectUser()
+    public void GivenValidID_FindReturnsCorrectUserData()
     {
         var result = _sut.FindAsync(1).Result;
         Assert.That(result, Is.Not.Null);
@@ -43,7 +44,7 @@ public class UserServiceTests
         Assert.That(result.FirstName, Is.EqualTo("Name One"));
     }
     [Test]
-    public void GetAllAsync_ReturnsIEnumerableType()
+    public void GetAllAsync_ReturnsListOfUserDatas()
     {
         var result = _sut.GetAllAsync().Result;
         Assert.That(result, Is.Not.Null);
@@ -77,9 +78,38 @@ public class UserServiceTests
         Assert.That(result, Is.True);
     }
     [Test]
-    public void IsNull_ReturnsTrue_IfUserDataIsNull()
+    public void Exists_ReturnsFalse_WhenUserDataDoesNotExist()
+    {
+        var result = _sut.Exists(2);
+        Assert.That(result, Is.False);
+    }
+
+    [Test]
+    public void IsNull_ReturnsFalse_IfUserDataIsNotNull()
     {
         var result = _sut.IsNull();
         Assert.That(result, Is.False);
+    }
+
+    [Test]
+    public async Task SaveChanges_SavesChanges()
+    {
+        _context.UserDataDB.Add(new UserData { UserID = "abc", ID = 3 });
+        _sut.SaveChangesAsync();
+        var data = _context.UserDataDB.Find(3);
+        Assert.That(data.UserID, Is.EqualTo("abc"));
+        await _sut.RemoveAsync(data);
+    }
+
+    [Test]
+    public async Task Update_UpdatesUserData()
+    {
+        await _sut.AddAsync(new UserData { UserID = "abc", ID = 2 });
+        var userData = _sut.FindAsync(2).Result;
+        userData.UserID = "def";
+        await _sut.Update(userData);
+        var result = _sut.FindAsync(2).Result;        
+        Assert.That(result.UserID, Is.EqualTo("def"));
+        await _sut.RemoveAsync(result);
     }
 }

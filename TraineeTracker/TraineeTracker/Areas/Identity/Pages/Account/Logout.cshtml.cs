@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,6 +14,7 @@ using TraineeTracker.Models;
 
 namespace TraineeTracker.Areas.Identity.Pages.Account
 {
+    [ExcludeFromCodeCoverage]
     public class LogoutModel : PageModel
     {
         private readonly SignInManager<User> _signInManager;

@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
 using TraineeTracker.Models;
 
 namespace TraineeTracker.Data
 {
     public class TraineeTrackerContext : IdentityDbContext
     {
+        [ExcludeFromCodeCoverage]
+
         public TraineeTrackerContext(DbContextOptions<TraineeTrackerContext> options)
             : base(options)
         {

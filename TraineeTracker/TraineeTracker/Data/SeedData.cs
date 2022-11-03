@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using TraineeTracker.Models;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TraineeTracker.Data
 {
     public class SeedData
     {
+        [ExcludeFromCodeCoverage]
+
         public static void Initialize(IServiceProvider serviceProvider)
         {
             TraineeTrackerContext context = serviceProvider.GetRequiredService<TraineeTrackerContext>();
@@ -130,7 +133,7 @@ namespace TraineeTracker.Data
             
             phil.UserData = userDataPhil;
 
-            userDataPeter.Trackers.Add(new Tracker() { Start = "Being funny", Week = 1 });
+            userDataPeter.Trackers.Add(new Tracker() { Start = "Being funny", Week = 1  });
             peter.UserData = userDataPeter;
 
             userDataAdam.Trackers.Add(new Tracker() { Start = "Being funny", Week = 1 });
