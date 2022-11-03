@@ -15,9 +15,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using TraineeTracker.Models;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TraineeTracker.Areas.Identity.Pages.Account
 {
+    [ExcludeFromCodeCoverage]
     public class LoginModel : PageModel
     {
         private readonly SignInManager<User> _signInManager;
