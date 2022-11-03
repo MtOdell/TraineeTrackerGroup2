@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<TraineeTracker.Models.ViewModels.UserDataViewModel>
 
 @{
-    if(User.IsInRole("Trainer")){
+    if (User.IsInRole("Trainer"))
+    {
         ViewData["Title"] = "Manage Trainees";
     }
     else if (User.IsInRole("Trainee"))
@@ -11,45 +12,48 @@
 }
 
 <div class="row">
-<h1>@ViewData["Title"]</h1>
-<table class="table" style="color:white;">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayName("First Name")
-            </th>
-            <th>
-                @Html.DisplayName("Last Name")
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-controller="Trackers" asp-action="Index" asp-route-id="@item.ID">Trackers</a>
-                @if (User.IsInRole("Trainer"))
-                {
-                    <lable>|</lable> <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                }
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <h1>@ViewData["Title"]</h1>
+    <table class="table" style="color:white;">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayName("First Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Last Name")
+                </th>
+                <th>
+                    @Html.DisplayName("Modify")
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Edit</button></a>
+                        <a asp-action="Details" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Details</button></a>
+                        <a asp-controller="Trackers" asp-action="Index" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Trackers</button></a>
+                        @if (User.IsInRole("Trainer"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Delete</button></a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

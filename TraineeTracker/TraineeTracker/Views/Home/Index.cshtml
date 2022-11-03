@@ -7,7 +7,7 @@
 }
 
 
-<div class="center">
+<div class="center" style="width:100%;">
 <div class="text-center">
     @if (SignInManager.IsSignedIn(User))
     {
@@ -19,7 +19,7 @@
         <h1 class="display-4">m</h1>
         <h1 class="display-4">e</h1>
         <h3 class="display-4">&nbsp;</h3>
-        <h1 class="display-5">@User.Identity?.Name</h1>
+        <h1 class="display-5"><a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" style="display:inline;">@User.Identity?.Name</a></h1>
         <h1 class="display-4">,</h1> <br />
 
         <h3 class="display-4">t</h3>
@@ -57,13 +57,7 @@
         <h1 class="display-4">s</h1>
         <h1 class="display-4">e</h1>
         <h3 class="display-4">&nbsp;</h3>
-        <h1 class="display-4">S</h1>
-        <h1 class="display-4">i</h1>
-        <h1 class="display-4">g</h1>
-        <h1 class="display-4">n</h1>
-        <h1 class="display-4">-</h1>
-        <h1 class="display-4">i</h1>
-        <h1 class="display-4">n</h1>
+        <h1 class="display-5"><a class="nav-link" asp-area="Identity" asp-page="/Account/Login" title="Manage" style="display:inline;">Sign-in</a></h1>
         <h1 class="display-4">,</h1> <br />
 
         <h3 class="display-4">t</h3>
