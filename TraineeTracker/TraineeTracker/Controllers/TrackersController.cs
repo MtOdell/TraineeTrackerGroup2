@@ -111,7 +111,10 @@ namespace TraineeTracker.Controllers
                     trackers.Stop = trackerViewModel.Stop;
                     trackers.Start = trackerViewModel.Start;
                     trackers.Continue = trackerViewModel.Continue;
-                    trackers.Comments = trackerViewModel.Comments;
+                    trackers.Comments = trackerViewModel.Comments ?? "";
+                    trackers.ConsultantSkills = trackerViewModel.ConsultantSkills;
+                    trackers.TechnicalSkills = trackerViewModel.TechnicalSkills;
+
                     await _service.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
