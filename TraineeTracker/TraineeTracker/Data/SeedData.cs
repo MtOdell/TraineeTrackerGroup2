@@ -128,7 +128,7 @@ namespace TraineeTracker.Data
             
             phil.UserData = userDataPhil;
 
-            userDataPeter.Trackers.Add(new Tracker() { Start = "Being funny", Week = 1 });
+            userDataPeter.Trackers.Add(new Tracker() { Start = "Being funny", Week = 1  });
             peter.UserData = userDataPeter;
 
             userDataSerg.Trackers.Add(new Tracker() { Start = "Being funny", Week = 1 });

@@ -49,6 +49,7 @@ namespace TraineeTracker.Controllers
         }
         public async Task<IActionResult> AttemptGetUserDataViewModel(int? id)
         {
+            var currentUser = await _userManager.GetUserAsync();
             if (id == null || _service.IsNull())
             {
                 return NotFound();
@@ -63,14 +64,27 @@ namespace TraineeTracker.Controllers
 
             var userDataViewModel = Utils.UserDataToViewModel(userData);
 
+            if(_userManager.IsInRole("Trainer") || _userManager.IsInRole("Admin") || currentUser.Id == userData.UserID)
             return View(userDataViewModel);
+            else return NoContent();
         }
 
         // GET: UserDatas
-        [Authorize(Roles ="Trainee, Trainer")]
+        [Authorize(Roles ="Trainee, Trainer, Admin")]
         public async Task<IActionResult> Index()
         {
             var currentUser = await _userManager.GetUserAsync();
+
+            if (_userManager.IsInRole("Admin"))
+            {
+                var userViewModel = new List<UserDataViewModel>();
+                var userDatas = (await _service.GetAllAsync()).Where(x => x.Roles != UserData.Level.Admin);
+                foreach (var userData in userDatas)
+                {
+                    userViewModel.Add(Utils.UserDataToViewModel(userData));
+                }
+                return View(userViewModel);
+            }
 
             if (_userManager.IsInRole("Trainee"))
             {
@@ -85,12 +99,17 @@ namespace TraineeTracker.Controllers
         }
 
         // GET: UserDatas/Details/5
+        [Authorize(Roles = "Trainee, Trainer, Admin")]
         public async Task<IActionResult> Details(int? id) => await AttemptGetUserDataViewModel(id);
+        
+        [Authorize(Roles = "Trainee, Trainer, Admin")]
         public async Task<IActionResult> Edit(int? id) => await AttemptGetUserDataViewModel(id);
         // GET: UserDatas/Delete/5
+        [Authorize(Roles = "Trainer, Admin")]
         public async Task<IActionResult> Delete(int? id) => await AttemptGetUserDataViewModel(id);
-        
+
         // POST: UserDatas/Delete/5
+        [Authorize(Roles = "Trainer, Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -110,6 +129,7 @@ namespace TraineeTracker.Controllers
         // POST: UserDatas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Trainee, Trainer, Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID, FirstName,LastName,Title,Education,Experience,Activity,Biography,Skills")] UserDataViewModel userDataViewModel)
