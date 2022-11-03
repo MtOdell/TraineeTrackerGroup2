@@ -44,7 +44,7 @@ namespace TraineeTrackerTests
 
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
-            var result = ((ViewResult)_sut.Index().Result).Model;
+            var result = ((ViewResult)_sut.Index(It.IsAny<string>()).Result).Model;
             List<UserDataViewModel> list = (List<UserDataViewModel>)result!;
 
             mockUser.Verify(x => x.IsInRole("Trainer"), Times.Once);
@@ -70,7 +70,7 @@ namespace TraineeTrackerTests
 
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
-            var result = ((ViewResult)_sut.Index().Result).Model;
+            var result = ((ViewResult)_sut.Index(It.IsAny<string>()).Result).Model;
             List<UserDataViewModel> list = (List<UserDataViewModel>)result!;
 
             mockUser.Verify(x => x.IsInRole("Trainee"), Times.Once);
@@ -91,7 +91,7 @@ namespace TraineeTrackerTests
             mockUser.Setup(x => x.IsInRole(It.IsAny<string>())).Returns(false);
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
-            var result = ((NoContentResult)_sut.Index().Result);
+            var result = ((NoContentResult)_sut.Index(It.IsAny<string>()).Result);
             
             mockUser.Verify(x => x.IsInRole(It.IsAny<string>()), Times.Exactly(3));
 
