@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Internal;
 using NuGet.DependencyResolver;
 using TraineeTracker.Data;
 using TraineeTracker.Models;
@@ -111,7 +112,10 @@ namespace TraineeTracker.Controllers
                     trackers.Stop = trackerViewModel.Stop;
                     trackers.Start = trackerViewModel.Start;
                     trackers.Continue = trackerViewModel.Continue;
-                    trackers.Comments = trackerViewModel.Comments;
+                    trackers.Comments = trackerViewModel.Comments ?? "";
+                    trackers.ConsultantSkills = trackerViewModel.ConsultantSkills;
+                    trackers.TechnicalSkills = trackerViewModel.TechnicalSkills;
+
                     await _service.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
