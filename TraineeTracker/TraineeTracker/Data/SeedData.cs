@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using TraineeTracker.Models;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TraineeTracker.Data
 {
     public class SeedData
     {
+        [ExcludeFromCodeCoverage]
+
         public static void Initialize(IServiceProvider serviceProvider)
         {
             TraineeTrackerContext context = serviceProvider.GetRequiredService<TraineeTrackerContext>();

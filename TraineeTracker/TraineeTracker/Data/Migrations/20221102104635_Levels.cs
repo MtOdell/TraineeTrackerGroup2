@@ -1,9 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System.Diagnostics.CodeAnalysis;
 
 #nullable disable
 
 namespace TraineeTracker.Data.Migrations
 {
+    [ExcludeFromCodeCoverage]
+
     public partial class Levels : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
