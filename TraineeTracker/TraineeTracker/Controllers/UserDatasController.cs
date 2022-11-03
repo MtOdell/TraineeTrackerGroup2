@@ -132,7 +132,7 @@ namespace TraineeTracker.Controllers
         [Authorize(Roles = "Trainee, Trainer, Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID, FirstName,LastName,Title,Education,Experience,Activity,Biography,Skills")] UserDataViewModel userDataViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("ID, FirstName,LastName,Title,Education,Experience,Activity,Biography,Skills, Roles")] UserDataViewModel userDataViewModel)
         {
             var userData = await _service.FindAsync(id);
             if (id != userDataViewModel.ID)
@@ -152,6 +152,11 @@ namespace TraineeTracker.Controllers
                     userData.Activity = userDataViewModel.Activity;
                     userData.Biography = userDataViewModel.Biography;
                     userData.Skills = userDataViewModel.Skills;
+                    if (_userManager.IsInRole("Admin"))
+                    {
+                        await _userManager.ChangeRole(await _userManager.GetUserByIdAsync(userData.UserID), userDataViewModel.Roles.ToString());
+                        userData.Roles = userDataViewModel.Roles;
+                    }
                     await _service.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
