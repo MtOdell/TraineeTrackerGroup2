@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
 using TraineeTracker.Models;
 
 namespace TraineeTracker.Service
 {
+    [ExcludeFromCodeCoverage]
     public class UserManager : IUserManager<User>
     {
         private readonly UserManager<User> _userManager;

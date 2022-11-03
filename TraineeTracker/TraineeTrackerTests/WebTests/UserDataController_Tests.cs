@@ -11,7 +11,7 @@ using TraineeTracker.Models.ViewModels;
 using TraineeTracker.Service;
 
 
-namespace TraineeTrackerTests
+namespace TraineeTrackerTests.WebTests
 {
     public class UserDataController_Tests
     {
@@ -40,7 +40,7 @@ namespace TraineeTrackerTests
             mockUser.Setup(x => x.IsInRole("Trainer")).Returns(true);
             mockUser.Setup(x => x.GetUserAsync()).Returns(Task.FromResult(new User() { Id = "AAA" }));
             mockService.Setup(x => x.GetAllAsync())
-                .Returns(Task.FromResult(((IEnumerable<UserData>)new List<UserData>() { new UserData() { UserID = "AAA", Activity = "ABCD" } })));
+                .Returns(Task.FromResult((IEnumerable<UserData>)new List<UserData>() { new UserData() { UserID = "AAA", Activity = "ABCD" } }));
 
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
@@ -66,7 +66,7 @@ namespace TraineeTrackerTests
             mockUser.Setup(x => x.IsInRole("Trainee")).Returns(true);
             mockUser.Setup(x => x.GetUserAsync()).Returns(Task.FromResult(new User() { Id = "AAA" }));
             mockService.Setup(x => x.GetAllAsync())
-                .Returns(Task.FromResult(((IEnumerable<UserData>)new List<UserData>() { new UserData() { UserID = "AAA", Activity = "ABCD" } })));
+                .Returns(Task.FromResult((IEnumerable<UserData>)new List<UserData>() { new UserData() { UserID = "AAA", Activity = "ABCD" } }));
 
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
@@ -91,8 +91,8 @@ namespace TraineeTrackerTests
             mockUser.Setup(x => x.IsInRole(It.IsAny<string>())).Returns(false);
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
-            var result = ((NoContentResult)_sut.Index(It.IsAny<string>()).Result);
-            
+            var result = (NoContentResult)_sut.Index(It.IsAny<string>()).Result;
+
             mockUser.Verify(x => x.IsInRole(It.IsAny<string>()), Times.Exactly(3));
 
             Assert.That(result, Is.Not.Null);
@@ -108,7 +108,7 @@ namespace TraineeTrackerTests
             //mockService.Setup(x => x.FindAsync(It.IsAny<int>()));
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
-            var result = ((NotFoundResult)_sut.Details(null).Result);
+            var result = (NotFoundResult)_sut.Details(null).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -122,7 +122,7 @@ namespace TraineeTrackerTests
             mockService.Setup(x => x.IsNull()).Returns(true);
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
-            var result = ((NotFoundResult)_sut.Details(null).Result);
+            var result = (NotFoundResult)_sut.Details(null).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -136,7 +136,7 @@ namespace TraineeTrackerTests
             mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult((UserData)null!)!);
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
-            var result = ((NotFoundResult)_sut.Details(1).Result);
+            var result = (NotFoundResult)_sut.Details(1).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -147,7 +147,7 @@ namespace TraineeTrackerTests
         {
             var mockService = new Mock<IServiceLayer<UserData>>();
             var mockUser = new Mock<IUserManager<User>>();
-            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new UserData() { FirstName="TEST"})!);
+            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new UserData() { FirstName = "TEST" })!);
             mockUser.Setup(x => x.IsInRole(It.IsAny<string>())).Returns(true);
             mockUser.Setup(x => x.IsInRole(It.IsAny<string>())).Returns(true);
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
@@ -171,7 +171,7 @@ namespace TraineeTrackerTests
             //mockService.Setup(x => x.FindAsync(It.IsAny<int>()));
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
-            var result = ((NotFoundResult)_sut.Edit(null).Result);
+            var result = (NotFoundResult)_sut.Edit(null).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -185,7 +185,7 @@ namespace TraineeTrackerTests
             mockService.Setup(x => x.IsNull()).Returns(true);
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
-            var result = ((NotFoundResult)_sut.Edit(null).Result);
+            var result = (NotFoundResult)_sut.Edit(null).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -199,7 +199,7 @@ namespace TraineeTrackerTests
             mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult((UserData)null!)!);
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
-            var result = ((NotFoundResult)_sut.Edit(1).Result);
+            var result = (NotFoundResult)_sut.Edit(1).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -231,7 +231,7 @@ namespace TraineeTrackerTests
             var mockUser = new Mock<IUserManager<User>>();
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
-            var result = ((NotFoundResult)_sut.Delete(null).Result);
+            var result = (NotFoundResult)_sut.Delete(null).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -245,7 +245,7 @@ namespace TraineeTrackerTests
             mockService.Setup(x => x.IsNull()).Returns(true);
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
-            var result = ((NotFoundResult)_sut.Delete(null).Result);
+            var result = (NotFoundResult)_sut.Delete(null).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -259,7 +259,7 @@ namespace TraineeTrackerTests
             mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult((UserData)null!)!);
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
-            var result = ((NotFoundResult)_sut.Delete(1).Result);
+            var result = (NotFoundResult)_sut.Delete(1).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -271,7 +271,7 @@ namespace TraineeTrackerTests
             var mockService = new Mock<IServiceLayer<UserData>>();
             var mockUser = new Mock<IUserManager<User>>();
             mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new UserData() { FirstName = "TEST" })!);
-            mockUser.Setup(x => x.GetUserAsync()).Returns(Task.FromResult(new User() ));
+            mockUser.Setup(x => x.GetUserAsync()).Returns(Task.FromResult(new User()));
             mockUser.Setup(x => x.IsInRole(It.IsAny<string>())).Returns(true);
 
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
@@ -296,7 +296,7 @@ namespace TraineeTrackerTests
 
             var errorString = "Entity set 'TraineeTrackerContext.UserDataDB'  is null.";
 
-            var result = ((ObjectResult)_sut.DeleteConfirmed(1).Result);
+            var result = (ObjectResult)_sut.DeleteConfirmed(1).Result;
             var expected = new ObjectResult(new ProblemDetails { Detail = errorString });
 
             Assert.That(result, Is.InstanceOf<ObjectResult>());
@@ -398,7 +398,7 @@ namespace TraineeTrackerTests
             mockService.Verify(x => x.Exists(It.IsAny<int>()), Times.Once);
             mockService.Verify(x => x.SaveChangesAsync(), Times.Once);
         }
-        
+
         [Test]
         [Category("AttemptGetUserDataViewModel Path")]
         [Category("Sad Path")]
@@ -406,8 +406,8 @@ namespace TraineeTrackerTests
         {
             var mockService = new Mock<IServiceLayer<UserData>>();
             var mockUser = new Mock<IUserManager<User>>();
-            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new UserData() { ID=1,FirstName = "TEST" })!);
-            mockUser.Setup(x => x.GetUserAsync()).Returns(Task.FromResult(new User() { Id="a"}));
+            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new UserData() { ID = 1, FirstName = "TEST" })!);
+            mockUser.Setup(x => x.GetUserAsync()).Returns(Task.FromResult(new User() { Id = "a" }));
 
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
