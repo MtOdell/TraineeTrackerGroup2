@@ -12,9 +12,9 @@ using TraineeTracker.Models.ViewModels;
 using TraineeTracker.Service;
 
 
-namespace TraineeTrackerTests
+namespace TraineeTrackerTests.WebTests
 {
-    public class TrackersController_Tests
+    public class TrackersApiController_Tests
     {
         private TrackersController? _sut;
 
@@ -24,7 +24,7 @@ namespace TraineeTrackerTests
         public void WhenConstructorIsCalled_ObjectIsConstructed()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
-            
+
             _sut = new TrackersController(mockService.Object);
             Assert.That(_sut, Is.Not.Null);
             Assert.That(_sut, Is.InstanceOf<TrackersController>());
@@ -38,7 +38,7 @@ namespace TraineeTrackerTests
             var mockService = new Mock<IServiceLayer<Tracker>>();
 
             mockService.Setup(x => x.GetAllAsync())
-                .Returns(Task.FromResult(((IEnumerable<Tracker>)new List<Tracker>() { new Tracker() { Comments = "ABCD" } })));
+                .Returns(Task.FromResult((IEnumerable<Tracker>)new List<Tracker>() { new Tracker() { Comments = "ABCD" } }));
 
             _sut = new TrackersController(mockService.Object);
 
@@ -57,9 +57,9 @@ namespace TraineeTrackerTests
         public void WhenIndexIsCalledAs_Trainee_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
-            
+
             mockService.Setup(x => x.GetAllAsync())
-                .Returns(Task.FromResult(((IEnumerable<Tracker>)new List<Tracker>() { new Tracker() { Comments = "ABCD" } })));
+                .Returns(Task.FromResult((IEnumerable<Tracker>)new List<Tracker>() { new Tracker() { Comments = "ABCD" } }));
 
             _sut = new TrackersController(mockService.Object);
 
@@ -78,11 +78,11 @@ namespace TraineeTrackerTests
         public void WhenDetailsIsCalledWith_InvalidId_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
-            
+
             //mockService.Setup(x => x.FindAsync(It.IsAny<int>()));
             _sut = new TrackersController(mockService.Object);
 
-            var result = ((NotFoundResult)_sut.Details(null).Result);
+            var result = (NotFoundResult)_sut.Details(null).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -92,11 +92,11 @@ namespace TraineeTrackerTests
         public void WhenDetailsIsCalledWith_NullService_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
-            
+
             mockService.Setup(x => x.IsNull()).Returns(true);
             _sut = new TrackersController(mockService.Object);
 
-            var result = ((NotFoundResult)_sut.Details(null).Result);
+            var result = (NotFoundResult)_sut.Details(null).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -106,11 +106,11 @@ namespace TraineeTrackerTests
         public void WhenDetailsIsCalledWith_NoTracker_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
-            
+
             mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult((Tracker)null!)!);
             _sut = new TrackersController(mockService.Object);
 
-            var result = ((NotFoundResult)_sut.Details(1).Result);
+            var result = (NotFoundResult)_sut.Details(1).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -120,8 +120,8 @@ namespace TraineeTrackerTests
         public void WhenDetailsIsCalledWith_ValidData_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
-            
-            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new Tracker() { Comments="TEST"})!);
+
+            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new Tracker() { Comments = "TEST" })!);
             _sut = new TrackersController(mockService.Object);
 
             var result = (TrackerViewModel)((ViewResult)_sut.Details(1).Result).Model!;
@@ -181,11 +181,11 @@ namespace TraineeTrackerTests
         public void WhenEditIsCalledWith_InvalidId_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
-            
+
             //mockService.Setup(x => x.FindAsync(It.IsAny<int>()));
             _sut = new TrackersController(mockService.Object);
 
-            var result = ((NotFoundResult)_sut.Edit(null).Result);
+            var result = (NotFoundResult)_sut.Edit(null).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -195,11 +195,11 @@ namespace TraineeTrackerTests
         public void WhenEditIsCalledWith_NullService_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
-            
+
             mockService.Setup(x => x.IsNull()).Returns(true);
             _sut = new TrackersController(mockService.Object);
 
-            var result = ((NotFoundResult)_sut.Edit(null).Result);
+            var result = (NotFoundResult)_sut.Edit(null).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -209,11 +209,11 @@ namespace TraineeTrackerTests
         public void WhenEditIsCalledWith_NoTracker_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
-            
+
             mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult((Tracker)null!)!);
             _sut = new TrackersController(mockService.Object);
 
-            var result = ((NotFoundResult)_sut.Edit(1).Result);
+            var result = (NotFoundResult)_sut.Edit(1).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -223,7 +223,7 @@ namespace TraineeTrackerTests
         public void WhenEditIsCalledWith_ValidData_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
-            
+
             mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new Tracker() { Comments = "TEST" })!);
             _sut = new TrackersController(mockService.Object);
 
@@ -239,11 +239,11 @@ namespace TraineeTrackerTests
         public void WhenDeleteIsCalledWith_InvalidId_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
-            
+
             //mockService.Setup(x => x.FindAsync(It.IsAny<int>()));
             _sut = new TrackersController(mockService.Object);
 
-            var result = ((NotFoundResult)_sut.Delete(null).Result);
+            var result = (NotFoundResult)_sut.Delete(null).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -253,11 +253,11 @@ namespace TraineeTrackerTests
         public void WhenDeleteIsCalledWith_NullService_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
-            
+
             mockService.Setup(x => x.IsNull()).Returns(true);
             _sut = new TrackersController(mockService.Object);
 
-            var result = ((NotFoundResult)_sut.Delete(null).Result);
+            var result = (NotFoundResult)_sut.Delete(null).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -267,11 +267,11 @@ namespace TraineeTrackerTests
         public void WhenDeleteIsCalledWith_NoTracker_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
-            
+
             mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult((Tracker)null!)!);
             _sut = new TrackersController(mockService.Object);
 
-            var result = ((NotFoundResult)_sut.Delete(1).Result);
+            var result = (NotFoundResult)_sut.Delete(1).Result;
             Assert.That(result, Is.Not.Null);
         }
 
@@ -281,7 +281,7 @@ namespace TraineeTrackerTests
         public void WhenDeleteIsCalledWith_ValidData_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
-            
+
             mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new Tracker() { Comments = "TEST" })!);
             _sut = new TrackersController(mockService.Object);
 
@@ -297,13 +297,13 @@ namespace TraineeTrackerTests
         public void WhenDeleteConfirmedIsCalledWith_NullService_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
-            
+
             mockService.Setup(x => x.IsNull()).Returns(true);
             _sut = new TrackersController(mockService.Object);
 
             var errorString = "Entity set 'TraineeTrackerContext.TrackerDB'  is null.";
 
-            var result = ((ObjectResult)_sut.DeleteConfirmed(1).Result);
+            var result = (ObjectResult)_sut.DeleteConfirmed(1).Result;
             var expected = new ObjectResult(new ProblemDetails { Detail = errorString });
 
             Assert.That(result, Is.InstanceOf<ObjectResult>());
@@ -316,7 +316,7 @@ namespace TraineeTrackerTests
         public void WhenDeleteConfirmedIsCalledWith_ValidUserId_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
-            
+
             mockService.Setup(x => x.IsNull()).Returns(false);
             mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new Tracker() { Comments = "TEST" })!);
             mockService.Setup(x => x.RemoveAsync(It.IsAny<Tracker>()));
@@ -337,7 +337,7 @@ namespace TraineeTrackerTests
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
 
-            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new Tracker() { ID=124, Comments = "TEST" })!);
+            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new Tracker() { ID = 124, Comments = "TEST" })!);
             _sut = new TrackersController(mockService.Object);
 
             var result = _sut.Edit(0, new TrackerViewModel() { ID = 100 }).Result;
