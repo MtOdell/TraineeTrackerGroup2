@@ -5,11 +5,13 @@
     ViewData["Title"] = "Create";
 }
 
-<div class="center">
-    <div class="row">
-        <h1>Create Tracker</h1>
-        <hr />
-        <form asp-action="Edit">
+<h1>Create</h1>
+
+<h4>Tracker</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
@@ -18,12 +20,12 @@
                 <span asp-validation-for="Stop" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Start" class="control-label">Start:</label>
+                <label asp-for="Start" class="control-label"></label>
                 <input asp-for="Start" class="form-control" />
                 <span asp-validation-for="Start" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Continue" class="control-label">Continue:</label>
+                <label asp-for="Continue" class="control-label"></label>
                 <input asp-for="Continue" class="form-control" />
                 <span asp-validation-for="Continue" class="text-danger"></span>
             </div>
@@ -42,9 +44,8 @@
                 @Html.DropDownListFor(skill => skill.ConsultantSkills, new SelectList(Enum.GetValues(typeof(SkillsRank))),"Select Rank", new { @class = "dropdown" })
                 <span asp-validation-for="ConsultantSkills" class="text-danger"></span>
             </div>
-            <div>
-                <input type="submit" value="Create" class="btn btn-lg btn-light" style="margin-top: 20px; width:49%; float: left;" />
-                <a asp-controller="UserDatas" asp-action="Index"><input type="button" value="Back" class="btn btn-lg btn-light" style="margin-top: 20px; width:49%; float: right;" /></a>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -55,5 +56,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
