@@ -32,11 +32,13 @@ namespace TraineeTracker
             builder.Services.AddScoped<IServiceLayer<UserData>, UserDataService>();
             builder.Services.AddScoped<IUserManager<User>, UserManager>();
 
-
             var app = builder.Build();
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
+                var dbContext = scope.ServiceProvider.GetService<TraineeTrackerContext>();
+                if (dbContext != null)
+                    dbContext.Database.Migrate();
                 SeedData.Initialize(services);
             }
 

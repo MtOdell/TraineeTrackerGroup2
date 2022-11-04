@@ -62,8 +62,17 @@
             }
 
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-lg btn-light" style="margin-top: 20px; width: 49%; float: left;" />
-                <a asp-controller="UserDatas" asp-action="Index"><input type="button" value="Back" class="btn btn-lg btn-light" style="margin-top: 20px; width:49%; float: right;" /></a>
+                @{
+                    if (Model.FirstName.Length > 0 && Model.LastName.Length > 0)
+                    {
+                        <input type="submit" value="Save" class="btn btn-lg btn-light" style="margin-top: 20px; width: 49%; float: left;" />
+                        <a asp-controller="UserDatas" asp-action="Index"><input type="button" value="Back" class="btn btn-lg btn-light" style="margin-top: 20px; width:49%; float: right;" /></a>
+                    }
+                    else {
+                        <input type="submit" value="Save" class="btn btn-lg btn-light" style="margin-top: 20px; width: 100%;" />
+
+                    }
+                }
             </div>
         </form>
     </div>
