@@ -41,10 +41,6 @@ namespace TraineeTracker.Controllers
         {
             var userViewModel = new List<UserDataViewModel>();
             var userDatas = (await _service.GetAllAsync()).Where(x => x.Roles == UserData.Level.Trainee);
-            var userRoles = new List<string>();
-            userRoles.Add("Trainee");
-            userRoles.Add("Trainer");
-            ViewBag.userRole = new SelectList(userRoles);
 
             if (!String.IsNullOrEmpty(searchString))
             {
