@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,12 +10,14 @@ using NuGet.DependencyResolver;
 using TraineeTracker.Data;
 using TraineeTracker.Models;
 using TraineeTracker.Models.ViewModels;
+using TraineeTracker.Security.Authorization;
 using TraineeTracker.Service;
 
 namespace TraineeTracker.Controllers.API
 {
     [Route("api/Trackers")]
     [ApiController]
+    [Produces("application/json")]
     public class TrackersController : ControllerBase
     {
         private readonly IServiceLayer<Tracker> _service;
@@ -33,6 +36,8 @@ namespace TraineeTracker.Controllers.API
 
         // GET: api/Trackers/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin, Trainee, Trainer")]
+
         public async Task<ActionResult<TrackerViewModel>> GetTracker(int id)
         {
             var tracker = await _service.FindAsync(id);
@@ -48,6 +53,7 @@ namespace TraineeTracker.Controllers.API
         // PUT: api/Trackers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Policy = Policies.OnlyTrainee)]
         public async Task<IActionResult> UpdateTracker(int id, TrackerViewModel trackerViewModel)
         {
             var tracker = await _service.FindAsync(id);
@@ -88,6 +94,7 @@ namespace TraineeTracker.Controllers.API
         // POST: api/Trackers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Trainer, Admin")]
         public async Task<ActionResult<TrackerViewModel>> CreateTracker(TrackerViewModel tracker)
         {
             await _service.AddAsync(Utils.ViewModelToTracker(tracker));
@@ -97,6 +104,7 @@ namespace TraineeTracker.Controllers.API
 
         // DELETE: api/Trackers/5
         [HttpDelete("{id}")]
+        [Authorize(Roles ="Trainers, Admin")]
         public async Task<IActionResult> DeleteTracker(int id)
         {
             var tracker = await _service.FindAsync(id);
