@@ -52,7 +52,7 @@ namespace TraineeTracker.Data
 
             userManager.CreateAsync(serg, "Password1!").GetAwaiter().GetResult();
             userManager.CreateAsync(adam, "Password1!").GetAwaiter().GetResult();
-            userManager.CreateAsync(lewis, "Password1!").GetAwaiter().GetResult();
+
             userManager.CreateAsync(cesar, "Password1!").GetAwaiter().GetResult();
             userManager.CreateAsync(nathan, "Password1!").GetAwaiter().GetResult();
             userManager.CreateAsync(max, "Password1!").GetAwaiter().GetResult();
@@ -87,11 +87,6 @@ namespace TraineeTracker.Data
                 new IdentityUserRole<string>
                 {
                     UserId = userManager.GetUserIdAsync(adam).GetAwaiter().GetResult(),
-                    RoleId = roleStore.GetRoleIdAsync(trainee).GetAwaiter().GetResult()
-                },
-                new IdentityUserRole<string>
-                {
-                    UserId = userManager.GetUserIdAsync(lewis).GetAwaiter().GetResult(),
                     RoleId = roleStore.GetRoleIdAsync(trainee).GetAwaiter().GetResult()
                 },
                 new IdentityUserRole<string>
@@ -181,16 +176,6 @@ namespace TraineeTracker.Data
                 UserID = userManager.GetUserIdAsync(adam).GetAwaiter().GetResult(),
                 Roles = UserData.Level.Trainee
             };
-            UserData userDataLewis = new UserData()
-            {
-                Title = "Mr.",
-                FirstName = "Lewis",
-                LastName = "Kellett",
-                Activity = "C#",
-                UserID = userManager.GetUserIdAsync(lewis).GetAwaiter().GetResult(),
-                Roles = UserData.Level.Trainee
-            };
-
             UserData userDataNathan = new UserData()
             {
                 Title = "Mr.",
@@ -261,7 +246,7 @@ namespace TraineeTracker.Data
             peter.UserData = userDataPeter;
             adam.UserData = userDataAdam;
             serg.UserData = userDataSerg;
-            lewis.UserData = userDataLewis; 
+
             nish.UserData = userDataNish;
             nathan.UserData = userDataNathan;
             max.UserData = userDataMax;
@@ -276,7 +261,6 @@ namespace TraineeTracker.Data
             context.UserDataDB.Add(userDataNish);
             context.UserDataDB.Add(userDataAdam);
             context.UserDataDB.Add(userDataSerg);
-            context.UserDataDB.Add(userDataLewis);
             context.UserDataDB.Add(userDataNathan);
             context.UserDataDB.Add(userDataMax);
             context.UserDataDB.Add(userDataRahul);
