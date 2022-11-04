@@ -47,7 +47,8 @@ We have created a trainee tracker for trainees to use and for trainers to view. 
 - Once the repo has been cloned open the ``` TraineeTracker.sln``` file. 
 - Run the code and use the url you get and copy and paste it into Postman. 
 
-Images here 
+![Image](./Images/Home.PNG)
+
 # Web API - Endpoints
 
 ```GET api/UserDatas``` - Returns all users
@@ -64,10 +65,13 @@ Images here
 
 ```PUT api/UserDatas/2``` - Updates the user with Id 2
 
-```GET api/Trackers/1``` - Returns the week with Id 1
-
+```GET api/api/UserDatas/18/Trackers``` - Returns all the trackers of ID
 
 ```PUT api/Trackers/1``` - Updates the week with Id 1
+
+![Image](./Images/PostmanAPI.PNG)
+
+Above is an example of a Postman GET request.
 
 # Testing
 Testing was done using both Moq and NUnit.
