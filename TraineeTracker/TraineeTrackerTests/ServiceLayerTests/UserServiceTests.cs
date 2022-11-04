@@ -30,7 +30,7 @@ public class UserServiceTests
             Education = "Illiterate",
             Experience = "Not Much",
             Activity = "C#",
-            Biography = "Cheeseburgers OOOoooOOOooOoOoooOo",
+            Biography = "Biography",
             ID = 1,
             UserID = "xyz"
         });

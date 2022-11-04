@@ -5,14 +5,14 @@
 }
 
 <div class="center">
-<div class="row">
+    <div class="row">
         <h1>Edit</h1>
         <hr />
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
             <div class="form-group">
-                <label class="control-label">First Name</label>
+                <label class="control-label">First Name</label> <br />
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
@@ -51,13 +51,36 @@
                 <input asp-for="Skills" class="form-control" />
                 <span asp-validation-for="Skills" class="text-danger"></span>
             </div>
+            @{
+                if (User.IsInRole("Admin"))
+                {
+                    <div class="form-group" style="float: left;">
+                        @Html.RadioButtonFor(m => m.Roles, "Trainee", Model.Roles == UserData.Level.Trainee ? true : false)<label style="color:white; margin-top: 10px;">Trainee</label>
+                        @Html.RadioButtonFor(m => m.Roles, "Trainer", Model.Roles == UserData.Level.Trainer ? true : false)<label style="color:white; margin-top: 10px;">Trainer</label>
+                    </div>
+                    <br /><br />
+                }
+            }
+
             <div class="form-group">
-                <input type="submit" value="Save" class="w-100 btn btn-lg btn-light" style="margin-top: 20px;" />
+                @{
+                    if (Model.FirstName.Length > 0 && Model.LastName.Length > 0)
+                    {
+                        <input type="submit" value="Save" class="btn btn-lg btn-light" style="margin-top: 20px; width: 49%; float: left;" />
+                        <a asp-controller="UserDatas" asp-action="Index"><input type="button" value="Back" class="btn btn-lg btn-light" style="margin-top: 20px; width:49%; float: right;" /></a>
+                    }
+                    else {
+                        <input type="submit" value="Save" class="btn btn-lg btn-light" style="margin-top: 20px; width: 100%;" />
+
+                    }
+                }
             </div>
         </form>
-</div>
+    </div>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

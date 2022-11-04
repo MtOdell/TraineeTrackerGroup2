@@ -152,7 +152,7 @@ namespace TraineeTracker.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        return LocalRedirect(Url.Content("~/UserDatas/Edit/" + user.UserData.ID));
                     }
                 }
                 foreach (var error in result.Errors)
