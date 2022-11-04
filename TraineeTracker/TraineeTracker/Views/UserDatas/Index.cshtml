@@ -63,7 +63,10 @@
                         @Html.DisplayFor(modelItem => item.Roles)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Edit</button></a>
+                        @if (item.Roles == UserData.Level.Trainer)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Edit</button></a>
+                        }
                         @if (item.Roles == UserData.Level.Trainee)
                         {
                             <a asp-action="Details" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Profile</button></a>

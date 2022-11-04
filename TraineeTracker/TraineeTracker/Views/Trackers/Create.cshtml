@@ -1,16 +1,15 @@
 ﻿@using static TraineeTracker.Models.SkillsEnum
 @model TraineeTracker.Models.ViewModels.TrackerViewModel
 
+
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Tracker</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="center">
+    <div class="row">
+        <h1>Create Tracker</h1>
+        <hr />
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -44,19 +43,14 @@
                 @Html.DropDownListFor(skill => skill.ConsultantSkills, new SelectList(Enum.GetValues(typeof(SkillsRank))),"Select Rank", new { @class = "dropdown" })
                 <span asp-validation-for="ConsultantSkills" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div>
+                <input type="submit" value="Create" class="btn btn-lg btn-light" style="margin-top: 20px; width:49%; float: left;" />
+                <a asp-action="Index" asp-route-id="@ViewContext.RouteData.Values["id"]"><input type="button" value="Back" class="btn btn-lg btn-light" style="margin-top: 20px; width:49%; float: right;" /></a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index" asp-route-id="@ViewContext.RouteData.Values["id"]">Back to List</a>
-</div>
-
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

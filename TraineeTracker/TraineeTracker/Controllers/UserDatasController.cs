@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -42,7 +43,7 @@ namespace TraineeTracker.Controllers
             var userViewModel = new List<UserDataViewModel>();
             var userDatas = (await _service.GetAllAsync()).Where(x => x.Roles == UserData.Level.Trainee);
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString))
             {
                 userDatas = userDatas.Where(user => user.FirstName.Contains(searchString) || user.LastName.Contains(searchString));
             }
@@ -53,6 +54,7 @@ namespace TraineeTracker.Controllers
             return userViewModel;
         }
 
+        [ExcludeFromCodeCoverage]
         private async Task<List<UserDataViewModel>> GetAdminView(string searchString)
         {
             var userViewModel = new List<UserDataViewModel>();
