@@ -60,7 +60,7 @@ namespace TraineeTracker.Controllers
         }
 
         // GET: Trackers/id/Create
-        public IActionResult Create(int? userId)
+        public IActionResult Create()
         {
             return View();
         }
@@ -71,13 +71,13 @@ namespace TraineeTracker.Controllers
         [Authorize(Roles = "Trainee, Trainer, Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Stop,Start,Continue,Comments,TechnicalSkills,ConsultantSkills")] TrackerViewModel trackerViewModel)
+        public async Task<IActionResult> Create(int? id, [Bind("ID,Stop,Start,Continue,Comments,TechnicalSkills,ConsultantSkills")] TrackerViewModel trackerViewModel)
         {
-            var currentUser = await _userManager.GetUserAsync();
-            
+            var trackerDataId = (await _service.GetAllAsync()).Max(x => x.ID) + 1;
+            var trackerDatas = (await _service.GetAllAsync()).Where(x => x.UserDataId == id);
             if (ModelState.IsValid)
             {
-                var tracker = new Tracker() { UserDataId = currentUser.UserData.ID };
+                var tracker = new Tracker() { UserDataId = (int)id, Week = trackerDatas.Count() + 1};
                 tracker.Stop = trackerViewModel.Stop;
                 tracker.Start = trackerViewModel.Start;
                 tracker.Continue = trackerViewModel.Continue;
@@ -86,7 +86,7 @@ namespace TraineeTracker.Controllers
                 tracker.ConsultantSkills = trackerViewModel.ConsultantSkills;
 
                 await _service.AddAsync(tracker);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new {id = id});
             }
             return View(trackerViewModel);
         }
