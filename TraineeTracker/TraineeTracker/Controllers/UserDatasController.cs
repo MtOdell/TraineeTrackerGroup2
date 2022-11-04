@@ -43,7 +43,7 @@ namespace TraineeTracker.Controllers
             var userViewModel = new List<UserDataViewModel>();
             var userDatas = (await _service.GetAllAsync()).Where(x => x.Roles == UserData.Level.Trainee);
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString))
             {
                 userDatas = userDatas.Where(user => user.FirstName.Contains(searchString) || user.LastName.Contains(searchString));
             }

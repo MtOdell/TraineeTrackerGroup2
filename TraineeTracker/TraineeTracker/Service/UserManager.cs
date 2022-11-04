@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
 using TraineeTracker.Models;
 
@@ -20,6 +21,7 @@ namespace TraineeTracker.Service
             return _userManager.GetUserAsync(_httpContextAccessor.HttpContext!.User);   
         }
 
+        [ExcludeFromCodeCoverage]
         public bool IsInRole(string role)
         {
             return _httpContextAccessor.HttpContext!.User.IsInRole(role);
