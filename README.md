@@ -20,7 +20,7 @@
 We have created a trainee tracker for trainees to use and for trainers to view. The trainee tracker closely follows the same layout as ones given to us during our training at Sparta Global- they consist of a section where the trainee writes what they would like to start doing, stop doing and continue doing going into the next week. Following this, there is also a selector for consultanat skills and technical skills where the trainee ranks if they are unskilled, low skilled, partially skilled or skilled in each section for the weeks content. The trainee can add a tracker for each week and create profiles for themselves. We have also implemented a feature where the admin can assign the roles of the user. We have an API that the user can use to make direct API requests.
 
  ## Original Sparta Global Trainee Tracker: 
-![Image](./Images/Skills.PNG)
+![Image](./Images/Skills.png)
 
 # Built With
  This applications backend is built using .NET 6 and C# with the frontend being developed using HTML, CSS and Javascript.
@@ -47,7 +47,10 @@ We have created a trainee tracker for trainees to use and for trainers to view. 
 - Once the repo has been cloned open the ``` TraineeTracker.sln``` file. 
 - Run the code and use the url you get and copy and paste it into Postman. 
 
-Images here 
+![Image](./Images/Home.png)
+
+Above is an image of the home page.
+
 # Web API - Endpoints
 
 ```GET api/UserDatas``` - Returns all users
@@ -64,10 +67,13 @@ Images here
 
 ```PUT api/UserDatas/2``` - Updates the user with Id 2
 
-```GET api/Trackers/1``` - Returns the week with Id 1
-
+```GET api/api/UserDatas/18/Trackers``` - Returns all the trackers of ID
 
 ```PUT api/Trackers/1``` - Updates the week with Id 1
+
+![Image](./Images/PostmanAPI.png)
+
+Above is an example of a Postman GET request.
 
 # Testing
 Testing was done using both Moq and NUnit.
