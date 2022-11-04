@@ -20,7 +20,7 @@
 We have created a trainee tracker for trainees to use and for trainers to view. The trainee tracker closely follows the same layout as ones given to us during our training at Sparta Global- they consist of a section where the trainee writes what they would like to start doing, stop doing and continue doing going into the next week. Following this, there is also a selector for consultanat skills and technical skills where the trainee ranks if they are unskilled, low skilled, partially skilled or skilled in each section for the weeks content. The trainee can add a tracker for each week and create profiles for themselves. We have also implemented a feature where the admin can assign the roles of the user. We have an API that the user can use to make direct API requests.
 
  ## Original Sparta Global Trainee Tracker: 
-![Image](./Images/Skills.PNG)
+![Image](./Images/Skills.png)
 
 # Built With
  This applications backend is built using .NET 6 and C# with the frontend being developed using HTML, CSS and Javascript.
