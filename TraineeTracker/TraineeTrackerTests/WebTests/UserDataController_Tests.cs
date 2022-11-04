@@ -58,6 +58,32 @@ namespace TraineeTrackerTests.WebTests
         [Test]
         [Category("Index Path")]
         [Category("Happy Path")]
+        public void WhenIndexIsCalledAs_Trainer_WithSearchString_ReturnsExpected()
+        {
+            var mockService = new Mock<IServiceLayer<UserData>>();
+            var mockUser = new Mock<IUserManager<User>>();
+
+            mockUser.Setup(x => x.IsInRole("Trainer")).Returns(true);
+            mockUser.Setup(x => x.GetUserAsync()).Returns(Task.FromResult(new User() { Id = "AAA" }));
+            mockService.Setup(x => x.GetAllAsync())
+                .Returns(Task.FromResult((IEnumerable<UserData>)new List<UserData>() { new UserData() { UserID = "AAA", FirstName="AAA", Activity = "ABCD" } }));
+
+            _sut = new UserDatasController(mockService.Object, mockUser.Object);
+
+            var result = ((ViewResult)_sut.Index("AAA").Result).Model;
+            List<UserDataViewModel> list = (List<UserDataViewModel>)result!;
+
+            mockUser.Verify(x => x.IsInRole("Trainer"), Times.Once);
+            mockUser.Verify(x => x.GetUserAsync(), Times.Once);
+            mockService.Verify(x => x.GetAllAsync(), Times.Once);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(list.Count, Is.EqualTo(1));
+            Assert.That(list[0]!.Activity, Is.EqualTo("ABCD"));
+        }
+
+        [Test]
+        [Category("Index Path")]
+        [Category("Happy Path")]
         public void WhenIndexIsCalledAs_Trainee_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<UserData>>();
@@ -94,6 +120,43 @@ namespace TraineeTrackerTests.WebTests
             var result = (NoContentResult)_sut.Index(It.IsAny<string>()).Result;
 
             mockUser.Verify(x => x.IsInRole(It.IsAny<string>()), Times.Exactly(3));
+
+            Assert.That(result, Is.Not.Null);
+        }
+
+        [Test]
+        [Category("Index Path")]
+        [Category("Sad Path")]
+        public void WhenIndexIsCalledAs_Admin_NoUsers_ReturnsExpected()
+        {
+            var mockService = new Mock<IServiceLayer<UserData>>();
+            var mockUser = new Mock<IUserManager<User>>();
+            mockUser.Setup(x => x.IsInRole(It.IsAny<string>())).Returns(true);
+            _sut = new UserDatasController(mockService.Object, mockUser.Object);
+
+            var result = _sut.Index(It.IsAny<string>()).Result;
+
+            mockUser.Verify(x => x.IsInRole(It.IsAny<string>()), Times.Once);
+
+            Assert.That(result, Is.Not.Null);
+        }
+
+        [Test]
+        [Category("Index Path")]
+        [Category("Sad Path")]
+        public void WhenIndexIsCalledAs_Admin_ReturnsExpected()
+        {
+            var mockService = new Mock<IServiceLayer<UserData>>();
+            var mockUser = new Mock<IUserManager<User>>();
+            mockUser.Setup(x => x.IsInRole(It.IsAny<string>())).Returns(true);
+            mockService.Setup(x => x.GetAllAsync())
+               .Returns(Task.FromResult((IEnumerable<UserData>)new List<UserData>() { new UserData() { UserID = "AAA", Activity = "ABCD" } }));
+
+            _sut = new UserDatasController(mockService.Object, mockUser.Object);
+
+            var result = _sut.Index(It.IsAny<string>()).Result;
+
+            mockUser.Verify(x => x.IsInRole(It.IsAny<string>()), Times.Once);
 
             Assert.That(result, Is.Not.Null);
         }
@@ -322,6 +385,22 @@ namespace TraineeTrackerTests.WebTests
             Assert.That(result, Is.InstanceOf<RedirectToActionResult>());
         }
 
+        [Test]
+        [Category("Edit/Post Path")]
+        [Category("Sad Path")]
+        public void WhenPostEditIsCalledWith_AsAdmin_ReturnsExpected()
+        {
+            var mockService = new Mock<IServiceLayer<UserData>>();
+            var mockUser = new Mock<IUserManager<User>>();
+            mockUser.Setup(x => x.IsInRole("Admin")).Returns(true);
+            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new UserData() { FirstName = "TEST" })!);
+            _sut = new UserDatasController(mockService.Object, mockUser.Object);
+
+            var result = _sut.Edit(0, new UserDataViewModel() { ID = 0 }).Result;
+
+            mockService.Verify(x => x.FindAsync(It.IsAny<int>()), Times.Once);
+            Assert.That(result, Is.InstanceOf<RedirectToActionResult>());
+        }
 
         [Test]
         [Category("Edit/Post Path")]
@@ -338,7 +417,6 @@ namespace TraineeTrackerTests.WebTests
             mockService.Verify(x => x.FindAsync(It.IsAny<int>()), Times.Once);
             Assert.That(result, Is.InstanceOf<NotFoundResult>());
         }
-
 
         [Test]
         [Category("Edit/Post Path")]

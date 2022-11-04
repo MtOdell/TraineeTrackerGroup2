@@ -5,7 +5,6 @@ using TraineeTracker.Models;
 
 namespace TraineeTracker.Service
 {
-    [ExcludeFromCodeCoverage]
     public class UserManager : IUserManager<User>
     {
         private readonly UserManager<User> _userManager;
@@ -22,6 +21,7 @@ namespace TraineeTracker.Service
             return _userManager.GetUserAsync(_httpContextAccessor.HttpContext!.User);   
         }
 
+        [ExcludeFromCodeCoverage]
         public bool IsInRole(string role)
         {
             return _httpContextAccessor.HttpContext!.User.IsInRole(role);
