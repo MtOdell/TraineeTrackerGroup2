@@ -5,53 +5,48 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Tracker</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="center">
+    <div class="row">
+        <h1>Edit</h1>
+        <hr />
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
             <div class="form-group">
-                <label asp-for="Stop" class="control-label"></label>
+                <label asp-for="Stop" class="control-label">Stop:</label>
                 <input asp-for="Stop" class="form-control" />
                 <span asp-validation-for="Stop" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Start" class="control-label"></label>
+                <label asp-for="Start" class="control-label">Start:</label>
                 <input asp-for="Start" class="form-control" />
                 <span asp-validation-for="Start" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Continue" class="control-label"></label>
+                <label asp-for="Continue" class="control-label">Continue:</label>
                 <input asp-for="Continue" class="form-control" />
                 <span asp-validation-for="Continue" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Comments" class="control-label"></label>
+                <label asp-for="Comments" class="control-label">Comments:</label>
                 <input asp-for="Comments" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="TechnicalSkills" class="control-label"></label>
-                @Html.DropDownListFor(skill => skill.TechnicalSkills, new SelectList(Enum.GetValues(typeof(SkillsRank))),"Select Rank")
+                <label asp-for="TechnicalSkills" class="control-label">Technical Skills:</label>
+                @Html.DropDownListFor(skill => skill.TechnicalSkills, new SelectList(Enum.GetValues(typeof(SkillsRank))),"Select Rank", new { @class = "dropdown" })
                 <span asp-validation-for="TechnicalSkills" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ConsultantSkills" class="control-label"></label>
-                @Html.DropDownListFor(skill => skill.ConsultantSkills, new SelectList(Enum.GetValues(typeof(SkillsRank))),"Select Rank")
+                <label asp-for="ConsultantSkills" class="control-label">Consultant Skills:</label>
+                @Html.DropDownListFor(skill => skill.ConsultantSkills, new SelectList(Enum.GetValues(typeof(SkillsRank))),"Select Rank", new { @class = "dropdown" })
                 <span asp-validation-for="ConsultantSkills" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-lg btn-light" style="margin-top: 20px; width: 49%; float: left;" />
+                <a asp-action="Index" asp-route-id="@Model?.UserDataId"><input type="button" value="Back" class="btn btn-lg btn-light" style="margin-top: 20px; width:49%; float: right;" /></a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index" asp-route-id="@Model?.UserDataId">Back to List</a>
 </div>
 
 @section Scripts {

@@ -13,8 +13,11 @@
     <header>
         <nav class="navbar navbar-dark shadow-sm" style="background-color: #e33661;">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Sparta Trainee Tracker</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index" style="margin-top: -13px; margin-left: -13px;">
+                    <img src="~/images/Sparta-Global.png" width="130" height="56.6" alt="Not found">
+                    &nbsp;<h4 style="display: inline; text-shadow: 2px 3px #474646;">Trainee Tracker</h4>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" style="margin-top: -15px;">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
@@ -48,7 +51,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container" style="color:white;">
-            &copy; 2022 - TraineeTracker - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - TraineeTracker - <a asp-area="" asp-controller="Home" asp-action="Privacy" style="color:#e33661;">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
