@@ -1,6 +1,6 @@
 # Trainee Tracker Group 2 
 
-[![Coverage Status](https://coveralls.io/repos/github/MtOdell/TraineeTrackerGroup2/badge.svg?branch=main&kill_cache=1)](https://coveralls.io/github/MtOdell/TraineeTrackerGroup2?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/MtOdell/TraineeTrackerGroup2/badge.svg?branch=main&kill_cache=1)](https://coveralls.io/github/MtOdell/TraineeTrackerGroup2?branch=main&kill_cache=1)
 
 ## Table Of Contents
 
