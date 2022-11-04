@@ -133,8 +133,8 @@ namespace TraineeTracker.Data
             UserData userDataPhil = new UserData()
             { 
                 Title = "Mr.",
-                FirstName = "Phil",
-                LastName = "Phil",
+                FirstName = "Phill",
+                LastName = "Windridge",
                 Activity = "C#",
                 UserID = userManager.GetUserIdAsync(phil).GetAwaiter().GetResult(),
                 Roles = UserData.Level.Trainer
