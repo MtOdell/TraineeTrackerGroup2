@@ -32,7 +32,6 @@ namespace TraineeTracker
             builder.Services.AddScoped<IServiceLayer<UserData>, UserDataService>();
             builder.Services.AddScoped<IUserManager<User>, UserManager>();
 
-
             var app = builder.Build();
             using (var scope = app.Services.CreateScope())
             {
