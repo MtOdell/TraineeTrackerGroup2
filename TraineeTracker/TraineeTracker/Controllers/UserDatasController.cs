@@ -46,12 +46,30 @@ namespace TraineeTracker.Controllers
             {
                 userDatas = userDatas.Where(user => user.FirstName.Contains(searchString) || user.LastName.Contains(searchString));
             }
-            foreach(var userData in userDatas)
+            foreach (var userData in userDatas)
             {
                 userViewModel.Add(Utils.UserDataToViewModel(userData));
             }
             return userViewModel;
         }
+
+        private async Task<List<UserDataViewModel>> GetAdminView(string searchString)
+        {
+            var userViewModel = new List<UserDataViewModel>();
+            var userDatas = (await _service.GetAllAsync()).Where(x => x.Roles != UserData.Level.Admin);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                userDatas = userDatas.Where(user => user.FirstName.Contains(searchString) || user.LastName.Contains(searchString));
+            }
+
+            foreach (var userData in userDatas)
+            {
+                userViewModel.Add(Utils.UserDataToViewModel(userData));
+            }
+            return userViewModel;
+        }
+
         public async Task<IActionResult> AttemptGetUserDataViewModel(int? id)
         {
             var currentUser = await _userManager.GetUserAsync();
@@ -71,7 +89,7 @@ namespace TraineeTracker.Controllers
 
             if(_userManager.IsInRole("Trainer") || _userManager.IsInRole("Admin") || currentUser.Id == userData.UserID)
             return View(userDataViewModel);
-            else return NoContent();
+            else return LocalRedirect("~/Identity/Account/AccessDenied");
         }
 
         // GET: UserDatas
@@ -82,13 +100,7 @@ namespace TraineeTracker.Controllers
 
             if (_userManager.IsInRole("Admin"))
             {
-                var userViewModel = new List<UserDataViewModel>();
-                var userDatas = (await _service.GetAllAsync()).Where(x => x.Roles != UserData.Level.Admin);
-                foreach (var userData in userDatas)
-                {
-                    userViewModel.Add(Utils.UserDataToViewModel(userData));
-                }
-                return View(userViewModel);
+                return View(await GetAdminView(searchString));
             }
 
             if (_userManager.IsInRole("Trainee"))
@@ -137,7 +149,7 @@ namespace TraineeTracker.Controllers
         [Authorize(Roles = "Trainee, Trainer, Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID, FirstName,LastName,Title,Education,Experience,Activity,Biography,Skills")] UserDataViewModel userDataViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("ID, FirstName,LastName,Title,Education,Experience,Activity,Biography,Skills, Roles")] UserDataViewModel userDataViewModel)
         {
             var userData = await _service.FindAsync(id);
             if (id != userDataViewModel.ID)
@@ -157,6 +169,11 @@ namespace TraineeTracker.Controllers
                     userData.Activity = userDataViewModel.Activity;
                     userData.Biography = userDataViewModel.Biography;
                     userData.Skills = userDataViewModel.Skills;
+                    if (_userManager.IsInRole("Admin"))
+                    {
+                        await _userManager.ChangeRole(await _userManager.GetUserByIdAsync(userData.UserID), userDataViewModel.Roles.ToString());
+                        userData.Roles = userDataViewModel.Roles;
+                    }
                     await _service.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

@@ -1,4 +1,5 @@
-﻿@model TraineeTracker.Models.Tracker
+﻿@using static TraineeTracker.Models.SkillsEnum
+@model TraineeTracker.Models.ViewModels.TrackerViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -12,10 +13,7 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserDataId" class="control-label"></label>
-                <select asp-for="UserDataId" class ="form-control" asp-items="ViewBag.UserDataId"></select>
-            </div>
+
             <div class="form-group">
                 <label asp-for="Stop" class="control-label"></label>
                 <input asp-for="Stop" class="form-control" />
@@ -37,13 +35,13 @@
                 <span asp-validation-for="Comments" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TechnicalSkills" class="control-label"></label>
-                <input asp-for="TechnicalSkills" class="form-control" />
+                <label asp-for="TechnicalSkills" class="control-label">Technical Skills:</label>
+                @Html.DropDownListFor(skill => skill.TechnicalSkills, new SelectList(Enum.GetValues(typeof(SkillsRank))),"Select Rank", new { @class = "dropdown" })
                 <span asp-validation-for="TechnicalSkills" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ConsultantSkills" class="control-label"></label>
-                <input asp-for="ConsultantSkills" class="form-control" />
+                <label asp-for="ConsultantSkills" class="control-label">Consultant Skills:</label>
+                @Html.DropDownListFor(skill => skill.ConsultantSkills, new SelectList(Enum.GetValues(typeof(SkillsRank))),"Select Rank", new { @class = "dropdown" })
                 <span asp-validation-for="ConsultantSkills" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -54,9 +52,11 @@
 </div>
 
 <div>
-    <a asp-action="Index" asp-route-id="@Model?.UserDataId">Back to List</a>
+    <a asp-action="Index" asp-route-id="@ViewContext.RouteData.Values["id"]">Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
