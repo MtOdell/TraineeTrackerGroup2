@@ -49,6 +49,8 @@ We have created a trainee tracker for trainees to use and for trainers to view. 
 
 ![Image](./Images/Home.png)
 
+Above is an image of the home page.
+
 # Web API - Endpoints
 
 ```GET api/UserDatas``` - Returns all users
