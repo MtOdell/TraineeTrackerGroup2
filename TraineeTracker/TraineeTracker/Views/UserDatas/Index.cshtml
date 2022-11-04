@@ -39,6 +39,9 @@
                     @Html.DisplayName("Last Name")
                 </th>
                 <th>
+                    @Html.DisplayName("Role")
+                </th>
+                <th>
                     @Html.DisplayName("Modify")
                 </th>
             </tr>
@@ -57,9 +60,15 @@
                         @Html.DisplayFor(modelItem => item.LastName)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.Roles)
+                    </td>
+                    <td>
                         <a asp-action="Edit" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Edit</button></a>
-                        <a asp-action="Details" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Profile</button></a>
-                        <a asp-controller="Trackers" asp-action="Index" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Trackers</button></a>
+                        @if (item.Roles == UserData.Level.Trainee)
+                        {
+                            <a asp-action="Details" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Profile</button></a>
+                            <a asp-controller="Trackers" asp-action="Index" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Trackers</button></a>
+                        }
                         @if (User.IsInRole("Trainer") || User.IsInRole("Admin"))
                         {
                             <a asp-action="Delete" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Delete</button></a>
