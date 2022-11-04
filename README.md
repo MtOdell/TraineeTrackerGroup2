@@ -47,7 +47,7 @@ We have created a trainee tracker for trainees to use and for trainers to view. 
 - Once the repo has been cloned open the ``` TraineeTracker.sln``` file. 
 - Run the code and use the url you get and copy and paste it into Postman. 
 
-![Image](./Images/Home.PNG)
+![Image](./Images/Home.png)
 
 # Web API - Endpoints
 
@@ -69,7 +69,7 @@ We have created a trainee tracker for trainees to use and for trainers to view. 
 
 ```PUT api/Trackers/1``` - Updates the week with Id 1
 
-![Image](./Images/PostmanAPI.PNG)
+![Image](./Images/PostmanAPI.png)
 
 Above is an example of a Postman GET request.
 
