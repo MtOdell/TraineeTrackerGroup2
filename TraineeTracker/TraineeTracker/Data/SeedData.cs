@@ -2,12 +2,36 @@
 using Microsoft.AspNetCore.Identity;
 using TraineeTracker.Models;
 using System.Diagnostics.CodeAnalysis;
+using static TraineeTracker.Models.SkillsEnum;
+using TraineeTracker.Data.Migrations;
 
 namespace TraineeTracker.Data
 {
+    [ExcludeFromCodeCoverage]
     public class SeedData
     {
-        [ExcludeFromCodeCoverage]
+        private static Tracker GetDefaultTracker(int week)
+        {
+            return new Tracker()
+            {
+                Stop = "Something bad",
+                Start = "Something good",
+                Continue = "That thing I'm good at!",
+                Week = week,
+                ConsultantSkills = SkillsRank.Low_Skilled,
+                TechnicalSkills = SkillsRank.Skilled
+            };
+        }
+        private static void AddGenericTracker(UserData user, int week) => user.Trackers!.Add(GetDefaultTracker(week));
+
+        private static void AddGenericTrackers(UserData user)
+        {
+            for(int i = 1; i < 8; i++)
+            {
+                AddGenericTracker(user, i);
+            }
+        }
+
 
         public static void Initialize(IServiceProvider serviceProvider)
         {
@@ -72,7 +96,7 @@ namespace TraineeTracker.Data
                 new IdentityUserRole<string>
                 {
                     UserId = userManager.GetUserIdAsync(lewis).GetAwaiter().GetResult(),
-                    RoleId = roleStore.GetRoleIdAsync(trainer).GetAwaiter().GetResult()
+                    RoleId = roleStore.GetRoleIdAsync(trainee).GetAwaiter().GetResult()
                 }
 
             };
@@ -81,39 +105,45 @@ namespace TraineeTracker.Data
             context.SaveChanges();
 
             UserData userDataPhil = new UserData()
-            {
+            { 
+                Title = "Mr.",
                 FirstName = "Phil",
                 LastName = "Phil",
                 Activity = "C#",
                 UserID = userManager.GetUserIdAsync(phil).GetAwaiter().GetResult(),
-                Roles = UserData.Level.Trainee
+                Roles = UserData.Level.Trainer
             };
             UserData userDataPeter = new UserData()
             {
+                Title = "Mr.",
                 FirstName = "Peter",
                 LastName = "Bellaby",
                 Activity = "C#",
                 UserID = userManager.GetUserIdAsync(peter).GetAwaiter().GetResult(),
-                Roles = UserData.Level.Trainee
+                Roles = UserData.Level.Trainer
             };
             UserData userDataNish = new UserData()
             {
-                FirstName = "Nish",
-                LastName = "Mandela",
+                Title = "Mr.",
+                FirstName = "Nishant",
+                LastName = "Mandal",
                 Activity = "C#",
                 UserID = userManager.GetUserIdAsync(nish).GetAwaiter().GetResult(),
                 Roles = UserData.Level.Trainer
             };
+            
             UserData userDataSerg = new UserData()
             {
-                FirstName = "Serg",
-                LastName = "P",
+                Title = "Mr.",
+                FirstName = "Sergiusz",
+                LastName = "Pietrala",
                 Activity = "C#",
                 UserID = userManager.GetUserIdAsync(serg).GetAwaiter().GetResult(),
-                Roles = UserData.Level.Admin
+                Roles = UserData.Level.Trainee
             };
             UserData userDataAdam = new UserData()
             {
+                Title = "Mr.",
                 FirstName = "Adam",
                 LastName = "Millard",
                 Activity = "C#",
@@ -122,26 +152,33 @@ namespace TraineeTracker.Data
             };
             UserData userDataLewis = new UserData()
             {
+                Title = "Mr.",
                 FirstName = "Lewis",
-                LastName = "Kellet",
+                LastName = "Kellett",
                 Activity = "C#",
                 UserID = userManager.GetUserIdAsync(lewis).GetAwaiter().GetResult(),
-                Roles = UserData.Level.Trainer
+                Roles = UserData.Level.Trainee
             };
-            userDataPhil.Trackers.Add(new Tracker() { Stop = "Being funny", Week = 1 });
-            userDataPhil.Trackers.Add(new Tracker() { Stop = "Playing Bobble League", Week = 2 });
-            
+
+            UserData userDataAdmin = new UserData()
+            {
+                Title = "Mr.",
+                FirstName = "Admin",
+                LastName = "Admin",
+                Activity = "C#",
+                UserID = userManager.GetUserIdAsync(lewis).GetAwaiter().GetResult(),
+                Roles = UserData.Level.Admin
+            };
+
+
+            AddGenericTrackers(userDataSerg);
+            AddGenericTrackers(userDataAdam);
+            AddGenericTrackers(userDataLewis);
+
             phil.UserData = userDataPhil;
-
-            userDataPeter.Trackers.Add(new Tracker() { Start = "Being funny", Week = 1  });
             peter.UserData = userDataPeter;
-
-            userDataAdam.Trackers.Add(new Tracker() { Start = "Being funny", Week = 1 });
             adam.UserData = userDataAdam;
-
-            userDataSerg.Trackers.Add(new Tracker() { Stop = "playing bobble league", Week = 2 });
             serg.UserData = userDataSerg;
-
             lewis.UserData = userDataLewis; 
             nish.UserData = userDataNish;
 

@@ -37,6 +37,9 @@ namespace TraineeTracker
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
+                var dbContext = scope.ServiceProvider.GetService<TraineeTrackerContext>();
+                if (dbContext != null)
+                    dbContext.Database.Migrate();
                 SeedData.Initialize(services);
             }
 
