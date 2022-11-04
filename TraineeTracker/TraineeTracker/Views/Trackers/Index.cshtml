@@ -60,7 +60,9 @@
     <hr />
     @if (User.IsInRole("Trainer") || User.IsInRole("Admin"))
     {
-        <a asp-action="Create"><button type="button" class="modify-user-btn btn-lg btn-light">Create New</button></a>
+        <div>
+            <a asp-action="Create"><button type="button" class="modify-user-btn btn-lg btn-light" style="float: left;">Create New</button></a>
+        </div>
     }
     <br /> <br />
 
@@ -81,6 +83,7 @@
                             <td>
                                 <a asp-action="Edit" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Edit</button></a>
                                 <a asp-action="Details" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Details</button></a>
+                                <a asp-controller="UserDatas" asp-action="Index"><button type="button" class="modify-user-btn btn-light">Back</button></a>
                                 @if (User.IsInRole("Trainer") || User.IsInRole("Admin")){
                                     <a asp-action="Delete" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Delete</button></a>
                                 }

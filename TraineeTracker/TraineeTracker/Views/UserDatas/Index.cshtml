@@ -16,6 +16,16 @@
 
 <div class="row">
     <h1>@ViewData["Title"]</h1>
+    <hr />
+    @if (User.IsInRole("Trainer") || User.IsInRole("Admin"))
+    {
+        <form asp-action="Index">
+            <div class="d-flex flex-row w-30 my-4 p-0" style="float: right;">
+                <input type="text" name="SearchString" class="form-control mx-2" id="SearchString" placeholder="Trainee's name" />
+                <button type="submit" value="Filter" class="btn btn-primary mb-2">Search</button>
+            </div>
+        </form>
+    }
     <table class="table" style="color:white;">
         <thead>
             <tr>
@@ -34,16 +44,6 @@
             </tr>
         </thead>
         <tbody>
-            @if(User.IsInRole("Trainer")){
-        
-                <form asp-action="Index" >     
-                    <div class="d-flex flex-row w-50 my-4 p-0">
-                        <input type="text" name="SearchString" class="form-control mx-2" id="SearchString" placeholder="Trainee's name">
-                        <button type="submit" value="Filter" class="btn btn-primary mb-2">Search</button>
-                    </div>
-                </form>
-        
-            }
             @foreach (var item in Model)
             {
                 <tr>
@@ -60,7 +60,7 @@
                         <a asp-action="Edit" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Edit</button></a>
                         <a asp-action="Details" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Profile</button></a>
                         <a asp-controller="Trackers" asp-action="Index" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Trackers</button></a>
-                        @if (User.IsInRole("Trainer"))
+                        @if (User.IsInRole("Trainer") || User.IsInRole("Admin"))
                         {
                             <a asp-action="Delete" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Delete</button></a>
                         }
