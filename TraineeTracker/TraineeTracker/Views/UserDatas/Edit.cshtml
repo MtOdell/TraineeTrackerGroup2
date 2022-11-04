@@ -54,7 +54,7 @@
             @{
                 if (User.IsInRole("Admin"))
                 {
-                    <div class="form-group">
+                    <div class="form-group" style="float: left;">
                         @Html.RadioButtonFor(m => m.Roles, "Trainee", Model.Roles == UserData.Level.Trainee ? true : false)@Html.Label("Trainee")
                         @Html.RadioButtonFor(m => m.Roles, "Trainer", Model.Roles == UserData.Level.Trainer ? true : false)@Html.Label("Trainer")
                     </div>
@@ -62,8 +62,17 @@
             }
 
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-lg btn-light" style="margin-top: 20px; width: 49%; float: left;" />
-                <a asp-controller="UserDatas" asp-action="Index"><input type="button" value="Back" class="btn btn-lg btn-light" style="margin-top: 20px; width:49%; float: right;" /></a>
+                @{
+                    if (Model.FirstName.Length > 0 && Model.LastName.Length > 0)
+                    {
+                        <input type="submit" value="Save" class="btn btn-lg btn-light" style="margin-top: 20px; width: 49%; float: left;" />
+                        <a asp-controller="UserDatas" asp-action="Index"><input type="button" value="Back" class="btn btn-lg btn-light" style="margin-top: 20px; width:49%; float: right;" /></a>
+                    }
+                    else {
+                        <input type="submit" value="Save" class="btn btn-lg btn-light" style="margin-top: 20px; width: 100%;" />
+
+                    }
+                }
             </div>
         </form>
     </div>
