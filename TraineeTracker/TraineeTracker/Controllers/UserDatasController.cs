@@ -53,6 +53,23 @@ namespace TraineeTracker.Controllers
             return userViewModel;
         }
 
+        private async Task<List<UserDataViewModel>> GetAdminView(string searchString)
+        {
+            var userViewModel = new List<UserDataViewModel>();
+            var userDatas = (await _service.GetAllAsync()).Where(x => x.Roles != UserData.Level.Admin);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                userDatas = userDatas.Where(user => user.FirstName.Contains(searchString) || user.LastName.Contains(searchString));
+            }
+
+            foreach (var userData in userDatas)
+            {
+                userViewModel.Add(Utils.UserDataToViewModel(userData));
+            }
+            return userViewModel;
+        }
+
         public async Task<IActionResult> AttemptGetUserDataViewModel(int? id)
         {
             var currentUser = await _userManager.GetUserAsync();
@@ -83,19 +100,7 @@ namespace TraineeTracker.Controllers
 
             if (_userManager.IsInRole("Admin"))
             {
-                var userViewModel = new List<UserDataViewModel>();
-                var userDatas = (await _service.GetAllAsync()).Where(x => x.Roles != UserData.Level.Admin);
-
-                if (!String.IsNullOrEmpty(searchString))
-                {
-                    userDatas = userDatas.Where(user => user.FirstName.Contains(searchString) || user.LastName.Contains(searchString));
-                }
-
-                foreach (var userData in userDatas)
-                {
-                    userViewModel.Add(Utils.UserDataToViewModel(userData));
-                }
-                return View(userViewModel);
+                return View(await GetAdminView(searchString));
             }
 
             if (_userManager.IsInRole("Trainee"))

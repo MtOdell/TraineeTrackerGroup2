@@ -30,7 +30,6 @@ namespace TraineeTracker.Service
             var roleToDelete = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
             await _userManager.AddToRoleAsync(user, role);
             await _userManager.RemoveFromRoleAsync(user, roleToDelete);
-            var letssee = await _userManager.IsInRoleAsync(user, roleToDelete);
         }
 
         public async Task<User> GetUserByIdAsync(string id)
