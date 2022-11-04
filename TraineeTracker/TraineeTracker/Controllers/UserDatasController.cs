@@ -46,7 +46,7 @@ namespace TraineeTracker.Controllers
             {
                 userDatas = userDatas.Where(user => user.FirstName.Contains(searchString) || user.LastName.Contains(searchString));
             }
-            foreach(var userData in userDatas)
+            foreach (var userData in userDatas)
             {
                 userViewModel.Add(Utils.UserDataToViewModel(userData));
             }
@@ -89,7 +89,7 @@ namespace TraineeTracker.Controllers
 
             if(_userManager.IsInRole("Trainer") || _userManager.IsInRole("Admin") || currentUser.Id == userData.UserID)
             return View(userDataViewModel);
-            else return NoContent();
+            else return LocalRedirect("~/Identity/Account/AccessDenied");
         }
 
         // GET: UserDatas
