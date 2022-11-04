@@ -61,7 +61,7 @@
     @if (User.IsInRole("Trainer") || User.IsInRole("Admin"))
     {
         <div>
-            <a asp-action="Create"><button type="button" class="modify-user-btn btn-lg btn-light" style="float: left;">Create New</button></a>
+            <a asp-action="Create" asp-route-id="@ViewContext.RouteData.Values["id"]"><button type="button" class="modify-user-btn btn-lg btn-light" style="float: left;">Create New</button></a>
         </div>
     }
     <br /> <br />

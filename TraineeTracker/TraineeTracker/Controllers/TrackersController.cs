@@ -19,13 +19,15 @@ namespace TraineeTracker.Controllers
     public class TrackersController : Controller
     {
         private readonly IServiceLayer<Tracker> _service;
+        private readonly IUserManager<User> _userManager;
 
-        public TrackersController(IServiceLayer<Tracker> service)
+        public TrackersController(IServiceLayer<Tracker> service, IUserManager<User> userManager)
         {
             _service = service;
+            _userManager = userManager;
         }
         [Authorize(Roles = "Trainee, Trainer, Admin")]
-        // GET: Trackers
+        // GET: Trackers/id
         public async Task<IActionResult> Index(int? id)
         {
             var trackerDatas = (await _service.GetAllAsync()).Where(x => x.UserDataId == id);
@@ -57,8 +59,8 @@ namespace TraineeTracker.Controllers
             return View(trackerViewModel);
         }
 
-        // GET: Trackers/Create
-        public IActionResult Create()
+        // GET: Trackers/id/Create
+        public IActionResult Create(int? userId)
         {
             return View();
         }
@@ -69,14 +71,24 @@ namespace TraineeTracker.Controllers
         [Authorize(Roles = "Trainee, Trainer, Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,UserDataId,Stop,Start,Continue,Comments,TechnicalSkills,ConsultantSkills")] Tracker tracker)
+        public async Task<IActionResult> Create([Bind("ID,Stop,Start,Continue,Comments,TechnicalSkills,ConsultantSkills")] TrackerViewModel trackerViewModel)
         {
+            var currentUser = await _userManager.GetUserAsync();
+            
             if (ModelState.IsValid)
             {
+                var tracker = new Tracker() { UserDataId = currentUser.UserData.ID };
+                tracker.Stop = trackerViewModel.Stop;
+                tracker.Start = trackerViewModel.Start;
+                tracker.Continue = trackerViewModel.Continue;
+                tracker.Comments = trackerViewModel.Comments;
+                tracker.TechnicalSkills = trackerViewModel.TechnicalSkills;
+                tracker.ConsultantSkills = trackerViewModel.ConsultantSkills;
+
                 await _service.AddAsync(tracker);
                 return RedirectToAction(nameof(Index));
             }
-            return View(tracker);
+            return View(trackerViewModel);
         }
         [Authorize(Roles = "Trainee, Trainer, Admin")]
         // GET: Trackers/Edit/5

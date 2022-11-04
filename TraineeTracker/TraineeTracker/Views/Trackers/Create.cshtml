@@ -1,4 +1,4 @@
-﻿@model TraineeTracker.Models.Tracker
+﻿@model TraineeTracker.Models.ViewModels.TrackerViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -12,10 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserDataId" class="control-label"></label>
-                <select asp-for="UserDataId" class ="form-control" asp-items="ViewBag.UserDataId"></select>
-            </div>
+
             <div class="form-group">
                 <label asp-for="Stop" class="control-label"></label>
                 <input asp-for="Stop" class="form-control" />
@@ -54,7 +51,7 @@
 </div>
 
 <div>
-    <a asp-action="Index" asp-route-id="@Model?.UserDataId">Back to List</a>
+    <a asp-action="Index" asp-route-id="@ViewContext.RouteData.Values["id"]">Back to List</a>
 </div>
 
 @section Scripts {
