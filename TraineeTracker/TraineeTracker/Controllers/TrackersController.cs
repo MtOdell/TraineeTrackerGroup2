@@ -19,12 +19,10 @@ namespace TraineeTracker.Controllers
     public class TrackersController : Controller
     {
         private readonly IServiceLayer<Tracker> _service;
-        private readonly IUserManager<User> _userManager;
 
-        public TrackersController(IServiceLayer<Tracker> service, IUserManager<User> userManager)
+        public TrackersController(IServiceLayer<Tracker> service)
         {
             _service = service;
-            _userManager = userManager;
         }
         [Authorize(Roles = "Trainee, Trainer, Admin")]
         // GET: Trackers/id
