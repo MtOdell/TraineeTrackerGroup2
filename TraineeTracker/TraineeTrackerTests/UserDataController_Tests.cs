@@ -398,7 +398,7 @@ namespace TraineeTrackerTests
             mockService.Verify(x => x.Exists(It.IsAny<int>()), Times.Once);
             mockService.Verify(x => x.SaveChangesAsync(), Times.Once);
         }
-        
+
         [Test]
         [Category("AttemptGetUserDataViewModel Path")]
         [Category("Sad Path")]
@@ -406,8 +406,8 @@ namespace TraineeTrackerTests
         {
             var mockService = new Mock<IServiceLayer<UserData>>();
             var mockUser = new Mock<IUserManager<User>>();
-            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new UserData() { ID=1,FirstName = "TEST" })!);
-            mockUser.Setup(x => x.GetUserAsync()).Returns(Task.FromResult(new User() { Id="a"}));
+            mockService.Setup(x => x.FindAsync(It.IsAny<int>())).Returns(Task.FromResult(new UserData() { ID = 1, FirstName = "TEST" })!);
+            mockUser.Setup(x => x.GetUserAsync()).Returns(Task.FromResult(new User() { Id = "a" }));
 
             _sut = new UserDatasController(mockService.Object, mockUser.Object);
 
@@ -415,8 +415,8 @@ namespace TraineeTrackerTests
 
             mockService.Verify(x => x.FindAsync(It.IsAny<int>()), Times.Once);
             mockUser.Verify(x => x.GetUserAsync(), Times.Once);
-            Assert.That(result, Is.InstanceOf<NoContentResult>());
         }
+
     }
 }
 

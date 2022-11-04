@@ -148,11 +148,13 @@ namespace TraineeTrackerTests
         public void WhenCreateIsCalled_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
+            mockService.Setup(x => x.GetAllAsync())
+               .Returns(Task.FromResult(((IEnumerable<Tracker>)new List<Tracker>() { new Tracker() { Comments = "ABCD" } })));
 
             mockService.Setup(x => x.AddAsync(It.IsAny<Tracker>()));
             _sut = new TrackersController(mockService.Object);
 
-            var result = _sut.Create(new Tracker());
+            var result = _sut.Create(0, new TrackerViewModel());
 
             mockService.Verify(x => x.AddAsync(It.IsAny<Tracker>()), Times.Exactly(1));
             Assert.That(result, Is.Not.Null);
@@ -164,12 +166,14 @@ namespace TraineeTrackerTests
         public void WhenCreateIsCalled_WithInvalidModel_ReturnsExpected()
         {
             var mockService = new Mock<IServiceLayer<Tracker>>();
+            mockService.Setup(x => x.GetAllAsync())
+               .Returns(Task.FromResult(((IEnumerable<Tracker>)new List<Tracker>() { new Tracker() { Comments = "ABCD" } })));
 
             mockService.Setup(x => x.AddAsync(It.IsAny<Tracker>()));
             _sut = new TrackersController(mockService.Object);
             _sut.ModelState.AddModelError("key", "error message");
 
-            var result = _sut.Create(new Tracker());
+            var result = _sut.Create(0, new TrackerViewModel());
 
             mockService.Verify(x => x.AddAsync(It.IsAny<Tracker>()), Times.Never());
             Assert.That(result, Is.Not.Null);

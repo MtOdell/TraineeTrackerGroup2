@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -53,6 +54,7 @@ namespace TraineeTracker.Controllers
             return userViewModel;
         }
 
+        [ExcludeFromCodeCoverage]
         private async Task<List<UserDataViewModel>> GetAdminView(string searchString)
         {
             var userViewModel = new List<UserDataViewModel>();
