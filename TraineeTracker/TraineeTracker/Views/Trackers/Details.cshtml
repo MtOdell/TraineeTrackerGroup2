@@ -5,49 +5,49 @@
 }
 
 <div class="row">
-    <h1>Details</h1>
+    <h1 id="heading">Details</h1>
     <hr />
-    <table class="table" style="color:white;">
+    <table class="table" id="table" style="color:white;">
         <thead>
             <tr>
-                <th>
+                <th id="stop_heading">
                     @Html.DisplayNameFor(model => model.Stop)
                 </th>
-                <th>
+                <th id="start_heading">
                     @Html.DisplayNameFor(model => model.Start)
                 </th>
-                <th>
+                <th id="continue_heading">
                     @Html.DisplayNameFor(model => model.Continue)
                 </th>
-                <th>
+                <th id="comments_heading">
                     @Html.DisplayNameFor(model => model.Comments)
                 </th>
-                <th>
+                <th id="technical_heading">
                     @Html.DisplayNameFor(model => model.TechnicalSkills)
                 </th>
-                <th>
+                <th id="consultant_heading">
                     @Html.DisplayNameFor(model => model.ConsultantSkills)
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>
+                <td id="stop_data">
                     @Html.DisplayFor(model => model.Stop)
                 </td>
-                <td>
+                <td id="start_data">
                     @Html.DisplayFor(model => model.Start)
                 </td>
-                <td>
+                <td id="continue_data">
                     @Html.DisplayFor(model => model.Continue)
                 </td>
-                <td>
+                <td id="comments_data">
                     @Html.DisplayFor(model => model.Comments)
                 </td>
-                <td>
+                <td id="technical_data">
                     @Html.DisplayFor(model => model.TechnicalSkills)
                 </td>
-                <td>
+                <td id="consultant_data">
                     @Html.DisplayFor(model => model.ConsultantSkills)
                 </td>
             </tr>
@@ -55,6 +55,6 @@
     </table>
 </div>
 <div>
-    <a asp-action="Index" asp-route-id="@Model?.UserDataId"><button type="button" class="modify-user-btn btn-light" style="float: right; margin-left: 5px;">Back</button></a>
-    <a asp-action="Edit" asp-route-id="@Model?.ID"><button type="button" class="modify-user-btn btn-light" style="float: right;">Edit</button></a>
+    <a asp-action="Index" asp-route-id="@Model?.UserDataId"><button type="button" class="modify-user-btn btn-light" id="back_btn" style="float: right; margin-left: 5px;">Back</button></a>
+    <a asp-action="Edit" asp-route-id="@Model?.ID"><button type="button" class="modify-user-btn btn-light" id="edit_btn" style="float: right;">Edit</button></a>
 </div>
