@@ -56,35 +56,35 @@
 </script>
 
 <div class="row">
-    <h1>Index</h1>
+    <h1 id="heading">Index</h1>
     <hr />
     @if (User.IsInRole("Trainer") || User.IsInRole("Admin"))
     {
         <div>
-            <a asp-action="Create" asp-route-id="@ViewContext.RouteData.Values["id"]"><button type="button" class="modify-user-btn btn-lg btn-light" style="float: left;">Create New</button></a>
-            <a asp-controller="UserDatas" asp-action="Index"><button type="button" class="modify-user-btn btn-lg btn-light" style="float: left; margin-left: 10px; width: 11%;">Back</button></a>
+            <a asp-action="Create" asp-route-id="@ViewContext.RouteData.Values["id"]"><button type="button" class="modify-user-btn btn-lg btn-light" id="create_btn" style="float: left;">Create New</button></a>
+            <a asp-controller="UserDatas" asp-action="Index"><button type="button" class="modify-user-btn btn-lg btn-light" id="back_btn" style="float: left; margin-left: 10px; width: 11%;">Back</button></a>
         </div>
     }
     <br /> <br />
 
-    <div style="width: 100%; float left;">
+    <div style="width: 100%; float: left;">
         <div style="float: left; display: inline;">
-            <table class="table" style="color:white; width: 700px;">
+            <table class="table" id="table" style="color:white; width: 700px;">
                 <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Modify</th>
+                        <th scope="col" id="col_1_heading">#</th>
+                        <th scope="col" id="col_2_heading">Modify</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <th scope="row"><h5 style="display:inline;">@Html.DisplayNameFor(modelItem => item.Week) @Html.DisplayFor(modelItem => item.Week)</h5></th>
-                            <td>
-                                <a asp-action="Details" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Details</button></a>
+                        <tr id="table_row">
+                            <th scope="row" id="row_heading"><h5 style="display:inline;">@Html.DisplayNameFor(modelItem => item.Week) @Html.DisplayFor(modelItem => item.Week)</h5></th>
+                            <td id="row_data">
+                                <a asp-action="Details" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light" id="details_btn">Details</button></a>
                                 @if (User.IsInRole("Trainer") || User.IsInRole("Admin")){
-                                    <a asp-action="Delete" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light">Delete</button></a>
+                                    <a asp-action="Delete" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light" id="delete_btn">Delete</button></a>
                                 }
                             </td>
                         </tr>

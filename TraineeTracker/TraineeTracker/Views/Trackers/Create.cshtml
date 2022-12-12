@@ -8,44 +8,44 @@
 
 <div class="center">
     <div class="row">
-        <h1>Create Tracker</h1>
+        <h1 id="heading">Create Tracker</h1>
         <hr />
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="Stop" class="control-label"></label>
-                <input asp-for="Stop" class="form-control" />
-                <span asp-validation-for="Stop" class="text-danger"></span>
+                <label asp-for="Stop" class="control-label" id="stop_label"></label>
+                <input asp-for="Stop" class="form-control" id="stop_input" />
+                <span asp-validation-for="Stop" class="text-danger" id="stop_error_text"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Start" class="control-label"></label>
-                <input asp-for="Start" class="form-control" />
-                <span asp-validation-for="Start" class="text-danger"></span>
+                <label asp-for="Start" class="control-label" id="start_label"></label>
+                <input asp-for="Start" class="form-control" id="start_input" />
+                <span asp-validation-for="Start" class="text-danger" id="start_error_text"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Continue" class="control-label"></label>
-                <input asp-for="Continue" class="form-control" />
-                <span asp-validation-for="Continue" class="text-danger"></span>
+                <label asp-for="Continue" class="control-label" id="continue_label"></label>
+                <input asp-for="Continue" class="form-control" id="continue_input" />
+                <span asp-validation-for="Continue" class="text-danger" id="continue_error_text"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Comments" class="control-label"></label>
-                <input asp-for="Comments" class="form-control" />
-                <span asp-validation-for="Comments" class="text-danger"></span>
+                <label asp-for="Comments" class="control-label" id="comments_label"></label>
+                <input asp-for="Comments" class="form-control" id="comments_input" />
+                <span asp-validation-for="Comments" class="text-danger" id="comments_error_text"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TechnicalSkills" class="control-label">Technical Skills:</label>
-                @Html.DropDownListFor(skill => skill.TechnicalSkills, new SelectList(Enum.GetValues(typeof(SkillsRank))),"Select Rank", new { @class = "dropdown" })
-                <span asp-validation-for="TechnicalSkills" class="text-danger"></span>
+                <label asp-for="TechnicalSkills" class="control-label" id="technical_label">Technical Skills:</label>
+                @Html.DropDownListFor(skill => skill.TechnicalSkills, new SelectList(Enum.GetValues(typeof(SkillsRank))),"Select Rank", new { @class = "dropdown", @id = "technical_dropdown" })
+                <span asp-validation-for="TechnicalSkills" class="text-danger" id="technical_error_text"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ConsultantSkills" class="control-label">Consultant Skills:</label>
-                @Html.DropDownListFor(skill => skill.ConsultantSkills, new SelectList(Enum.GetValues(typeof(SkillsRank))),"Select Rank", new { @class = "dropdown" })
-                <span asp-validation-for="ConsultantSkills" class="text-danger"></span>
+                <label asp-for="ConsultantSkills" class="control-label" id="consultant_label">Consultant Skills:</label>
+                @Html.DropDownListFor(skill => skill.ConsultantSkills, new SelectList(Enum.GetValues(typeof(SkillsRank))),"Select Rank", new { @class = "dropdown", @id = "consultant_dropdown" })
+                <span asp-validation-for="ConsultantSkills" class="text-danger" id="consultant_error_text"></span>
             </div>
             <div>
-                <input type="submit" value="Create" class="btn btn-lg btn-light" style="margin-top: 20px; width:49%; float: left;" />
-                <a asp-action="Index" asp-route-id="@ViewContext.RouteData.Values["id"]"><input type="button" value="Back" class="btn btn-lg btn-light" style="margin-top: 20px; width:49%; float: right;" /></a>
+                <input type="submit" value="Create" class="btn btn-lg btn-light" id="submit_btn" style="margin-top: 20px; width:49%; float: left;" />
+                <a asp-action="Index" asp-route-id="@ViewContext.RouteData.Values["id"]"><input type="button" value="Back" class="btn btn-lg btn-light" id="back_btn" style="margin-top: 20px; width:49%; float: right;" /></a>
             </div>
         </form>
     </div>

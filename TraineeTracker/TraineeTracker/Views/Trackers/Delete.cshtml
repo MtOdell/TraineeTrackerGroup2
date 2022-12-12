@@ -5,50 +5,50 @@
 }
 
 <div class="row">
-    <h1>Delete</h1>
-    <h3>Are you sure you want to delete this?</h3>
+    <h1 id="heading">Delete</h1>
+    <h3 id="sub_heading">Are you sure you want to delete this?</h3>
     <hr />
-    <table class="table" style="color:white;">
+    <table class="table" id="table" style="color:white;">
         <thead>
             <tr>
-                <th>
+                <th id="stop_heading">
                     @Html.DisplayNameFor(model => model.Stop)
                 </th>
-                <th>
+                <th id="start_heading">
                     @Html.DisplayNameFor(model => model.Start)
                 </th>
-                <th>
+                <th id="continue_heading">
                     @Html.DisplayNameFor(model => model.Continue)
                 </th>
-                <th>
+                <th id="comments_heading">
                     @Html.DisplayNameFor(model => model.Comments)
                 </th>
-                <th>
+                <th id="technical_heading">
                     @Html.DisplayNameFor(model => model.TechnicalSkills)
                 </th>
-                <th>
+                <th id="consultant_heading">
                     @Html.DisplayNameFor(model => model.ConsultantSkills)
                 </th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>
+                <td id="stop_data">
                     @Html.DisplayFor(model => model.Stop)
                 </td>
-                <td>
+                <td id="start_data">
                     @Html.DisplayFor(model => model.Start)
                 </td>
-                <td>
+                <td id="continue_data">
                     @Html.DisplayFor(model => model.Continue)
                 </td>
-                <td>
+                <td id="comments_data">
                     @Html.DisplayFor(model => model.Comments)
                 </td>
-                <td>
+                <td id="technical_data">
                     @Html.DisplayFor(model => model.TechnicalSkills)
                 </td>
-                <td>
+                <td id="consultant_data">
                     @Html.DisplayFor(model => model.ConsultantSkills)
                 </td>
             </tr>
@@ -57,8 +57,8 @@
     <div>
         <form asp-action="Delete">
             <input type="hidden" asp-for="ID" />
-            <input type="submit" value="Delete" class="btn btn-danger" />
-            <a asp-action="Index" asp-route-id="@Model?.UserDataId"><button type="button" class="btn btn-light" style="margin-left: 5px;">Back</button></a>
+            <input type="submit" value="Delete" class="btn btn-danger" id="delete_btn" />
+            <a asp-action="Index" asp-route-id="@Model?.UserDataId"><button type="button" class="btn btn-light" id="back_btn" style="margin-left: 5px;">Back</button></a>
         </form>
     </div>
 </div>
