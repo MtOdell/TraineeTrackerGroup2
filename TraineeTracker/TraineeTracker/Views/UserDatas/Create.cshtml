@@ -11,61 +11,61 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" id="error_message" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="UserID" class="control-label"></label>
-                <input asp-for="UserID" class="form-control" />
-                <span asp-validation-for="UserID" class="text-danger"></span>
+                <label asp-for="UserID" id="user_id_label" class="control-label"></label>
+                <input asp-for="UserID" id="user_id_input" class="form-control" />
+                <span asp-validation-for="UserID" id="user_id_error" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+                <label asp-for="FirstName" id="first_name_label" class="control-label"></label>
+                <input asp-for="FirstName" id="first_name_input" class="form-control" />
+                <span asp-validation-for="FirstName" id="first_name_error" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
+                <label asp-for="LastName" id="last_name_label" class="control-label"></label>
+                <input asp-for="LastName" id="last_name_input" class="form-control" />
+                <span asp-validation-for="LastName" id="last_name_error" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label asp-for="Title" id="title_label" class="control-label"></label>
+                <input asp-for="Title" id="title_input" class="form-control" />
+                <span asp-validation-for="Title" id="title_error" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Education" class="control-label"></label>
-                <input asp-for="Education" class="form-control" />
-                <span asp-validation-for="Education" class="text-danger"></span>
+                <label asp-for="Education" id="education_label" class="control-label"></label>
+                <input asp-for="Education" id="education_input" class="form-control" />
+                <span asp-validation-for="Education" id="education_error" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Experience" class="control-label"></label>
-                <input asp-for="Experience" class="form-control" />
-                <span asp-validation-for="Experience" class="text-danger"></span>
+                <label asp-for="Experience" id="experience_label" class="control-label"></label>
+                <input asp-for="Experience" id="experience_input" class="form-control" />
+                <span asp-validation-for="Experience" id="experience_error" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Activity" class="control-label"></label>
-                <input asp-for="Activity" class="form-control" />
-                <span asp-validation-for="Activity" class="text-danger"></span>
+                <label asp-for="Activity" id="activity_label" class="control-label"></label>
+                <input asp-for="Activity" id="activity_input" class="form-control" />
+                <span asp-validation-for="Activity" id="activity_error" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Biography" class="control-label"></label>
-                <input asp-for="Biography" class="form-control" />
-                <span asp-validation-for="Biography" class="text-danger"></span>
+                <label asp-for="Biography" id="biography_label" class="control-label"></label>
+                <input asp-for="Biography" id="biography_input" class="form-control" />
+                <span asp-validation-for="Biography" id="biography_error" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Skills" class="control-label"></label>
-                <input asp-for="Skills" class="form-control" />
-                <span asp-validation-for="Skills" class="text-danger"></span>
+                <label asp-for="Skills" id="skills_label" class="control-label"></label>
+                <input asp-for="Skills" id="skills_input" class="form-control" />
+                <span asp-validation-for="Skills" id="skills_error" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" id="create_button" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" id="back_to_list_button">Back to List</a>
 </div>
 
 @section Scripts {

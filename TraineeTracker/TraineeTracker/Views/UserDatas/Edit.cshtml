@@ -12,49 +12,49 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
             <div class="form-group">
-                <label class="control-label">First Name</label> <br />
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+                <label id="first_name_label" class="control-label">First Name</label> <br />
+                <input asp-for="FirstName" id="first_name_input" class="form-control" />
+                <span asp-validation-for="FirstName" id="first_name_error" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">Last Name</label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
+                <label id="last_name_label" class="control-label">Last Name</label>
+                <input asp-for="LastName" id="last_name_input" class="form-control" />
+                <span asp-validation-for="LastName" id="last_name_error" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label asp-for="Title" id="title_label" class="control-label"></label>
+                <input asp-for="Title" id="title_input" class="form-control" />
+                <span asp-validation-for="Title" id="title_error" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Education" class="control-label"></label>
-                <input asp-for="Education" class="form-control" />
-                <span asp-validation-for="Education" class="text-danger"></span>
+                <label asp-for="Education" id="education_label" class="control-label"></label>
+                <input asp-for="Education" id="education_input" class="form-control" />
+                <span asp-validation-for="Education" id="education_error" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Experience" class="control-label"></label>
-                <input asp-for="Experience" class="form-control" />
-                <span asp-validation-for="Experience" class="text-danger"></span>
+                <label asp-for="Experience" id="experience_label" class="control-label"></label>
+                <input asp-for="Experience" id="experience_input" class="form-control" />
+                <span asp-validation-for="Experience" id="experience_error" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Activity" class="control-label"></label>
-                <input asp-for="Activity" class="form-control" />
-                <span asp-validation-for="Activity" class="text-danger"></span>
+                <label asp-for="Activity" id="activity_label" class="control-label"></label>
+                <input asp-for="Activity" id="activity_input" class="form-control" />
+                <span asp-validation-for="Activity" id="activity_error" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Biography" class="control-label"></label>
-                <input asp-for="Biography" class="form-control" />
-                <span asp-validation-for="Biography" class="text-danger"></span>
+                <label asp-for="Biography" id="biography_label" class="control-label"></label>
+                <input asp-for="Biography" id="biography_input" class="form-control" />
+                <span asp-validation-for="Biography" id="biography_error" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Skills" class="control-label"></label>
-                <input asp-for="Skills" class="form-control" />
-                <span asp-validation-for="Skills" class="text-danger"></span>
+                <label asp-for="Skills" id="skills_label" class="control-label"></label>
+                <input asp-for="Skills" id="skills_input" class="form-control" />
+                <span asp-validation-for="Skills" id="skills_error" class="text-danger"></span>
             </div>
             @{
                 if (User.IsInRole("Admin"))
                 {
-                    <div class="form-group" style="float: left;">
+                    <div id="role_selection" class="form-group" style="float: left;">
                         @Html.RadioButtonFor(m => m.Roles, "Trainee", Model.Roles == UserData.Level.Trainee ? true : false)<label style="color:white; margin-top: 10px;">Trainee</label>
                         @Html.RadioButtonFor(m => m.Roles, "Trainer", Model.Roles == UserData.Level.Trainer ? true : false)<label style="color:white; margin-top: 10px;">Trainer</label>
                     </div>
@@ -66,11 +66,11 @@
                 @{
                     if (Model.FirstName.Length > 0 && Model.LastName.Length > 0)
                     {
-                        <input type="submit" value="Save" class="btn btn-lg btn-light" style="margin-top: 20px; width: 49%; float: left;" />
-                        <a asp-controller="UserDatas" asp-action="Index"><input type="button" value="Back" class="btn btn-lg btn-light" style="margin-top: 20px; width:49%; float: right;" /></a>
+                        <input type="submit" value="Save" id="save_button" class="btn btn-lg btn-light" style="margin-top: 20px; width: 49%; float: left;" />
+                        <a asp-controller="UserDatas" asp-action="Index"><input type="button" value="Back" id="back_button" class="btn btn-lg btn-light" style="margin-top: 20px; width:49%; float: right;" /></a>
                     }
                     else {
-                        <input type="submit" value="Save" class="btn btn-lg btn-light" style="margin-top: 20px; width: 100%;" />
+                        <input type="submit" value="Save" id="save_button" class="btn btn-lg btn-light" style="margin-top: 20px; width: 100%;" />
 
                     }
                 }
