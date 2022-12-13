@@ -35,5 +35,8 @@
   <ItemGroup>
     <ProjectReference Include="..\TraineeTracker\TraineeTracker.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="lib\tests\" />
+  </ItemGroup>
 
 </Project>
