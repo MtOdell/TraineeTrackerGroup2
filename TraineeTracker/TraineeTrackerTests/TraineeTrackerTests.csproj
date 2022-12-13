@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -34,6 +34,11 @@
 	</ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TraineeTracker\TraineeTracker.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="lib\TestHost.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
