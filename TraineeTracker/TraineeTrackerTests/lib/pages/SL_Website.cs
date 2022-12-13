@@ -15,11 +15,21 @@ namespace TraineeTrackerTests.lib.pages
         public IWebDriver SeleniumDriver { get; set; }
         public SL_LoginPage SL_LoginPage { get; set; }
         public SL_Homepage SL_HomePage { get; set; }
+        public SL_Tracker_Index SL_Tracker_Index { get; set; }
+        public SL_Tracker_Create SL_Tracker_Create { get; set; }
+        public SL_Tracker_Details SL_Tracker_Details { get; set; }
+        public SL_Tracker_Edit SL_Tracker_Edit { get; set; }
+        public SL_Tracker_Delete SL_Tracker_Delete { get; set; }
         public SL_Website(int pageLoadInSecs = 10, int implicitWaitInSecs = 10, bool isHeadless = false)
         {
             SeleniumDriver = new SeleniumDriverConfig<T>(pageLoadInSecs, implicitWaitInSecs, isHeadless).Driver;
             SL_HomePage = new SL_Homepage(SeleniumDriver);
             SL_LoginPage = new SL_LoginPage(SeleniumDriver);
+            SL_Tracker_Index = new SL_Tracker_Index(SeleniumDriver);
+            SL_Tracker_Create = new SL_Tracker_Create(SeleniumDriver);
+            SL_Tracker_Details = new SL_Tracker_Details(SeleniumDriver);
+            SL_Tracker_Edit = new SL_Tracker_Edit(SeleniumDriver);
+            SL_Tracker_Delete = new SL_Tracker_Delete(SeleniumDriver);
         }
         #endregion
     }
