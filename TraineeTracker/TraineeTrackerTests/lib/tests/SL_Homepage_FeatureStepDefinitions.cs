@@ -50,7 +50,7 @@ namespace TraineeTrackerTests.lib.tests
         public void GivenIAmLoggedIn()
         {
             SL_Website.SL_LoginPage.VisitLoginPage();
-            SL_Website.SL_LoginPage.EnterUserName("Phil@SpartaGlobal.com");
+            SL_Website.SL_LoginPage.EnterEmail("Phil@SpartaGlobal.com");
             SL_Website.SL_LoginPage.EnterPassword("Password1!");
             SL_Website.SL_LoginPage.ClickLoginButton();
         }
