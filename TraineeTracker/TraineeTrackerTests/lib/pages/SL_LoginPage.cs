@@ -10,6 +10,17 @@ namespace TraineeTrackerTests.lib.pages
     public class SL_LoginPage
     {
         private IWebDriver SeleniumDriver { get; }
-        private string _homePageUrl = AppConfigReader.LoginUrl;
+        private string _loginPageUrl = AppConfigReader.LoginUrl;
+        private IWebElement _passwordField => SeleniumDriver.FindElement(By.Id("password_field"));
+        private IWebElement _usernameField => SeleniumDriver.FindElement(By.Id("email_field"));
+        private IWebElement _loginButton => SeleniumDriver.FindElement(By.Id("login_submit"));
+        public SL_LoginPage(IWebDriver seleniumDriver)
+        {
+            SeleniumDriver = seleniumDriver;
+        }
+        public void VisitLoginPage() => SeleniumDriver.Navigate().GoToUrl(_loginPageUrl);
+        public void EnterUserName(string username) => _usernameField.SendKeys(username);
+        public void EnterPassword(string password) => _passwordField.SendKeys(password);
+        public void ClickLoginButton() => _loginButton.Click();
     }
 }
