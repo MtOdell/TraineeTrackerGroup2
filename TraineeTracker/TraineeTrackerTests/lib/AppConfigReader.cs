@@ -11,5 +11,10 @@ namespace TraineeTrackerTests.lib
     {
         public static readonly string BaseUrl = ConfigurationManager.AppSettings["base_url"];
         public static readonly string LoginUrl = ConfigurationManager.AppSettings["login_url"];
+        public static readonly string UserCreateUrl = ConfigurationManager.AppSettings["user_create_url"];
+        public static readonly string UserDeleteUrl = ConfigurationManager.AppSettings["user_delete_url"];
+        public static readonly string UserDetailsUrl = ConfigurationManager.AppSettings["user_details_url"];
+        public static readonly string UserEditUrl = ConfigurationManager.AppSettings["user_edit_url"];
+        public static readonly string UserIndexUrl = ConfigurationManager.AppSettings["user_index_url"];
     }
 }
