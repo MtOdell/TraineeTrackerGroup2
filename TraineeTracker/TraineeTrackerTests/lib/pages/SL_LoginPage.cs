@@ -14,6 +14,8 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement _passwordField => SeleniumDriver.FindElement(By.Id("password_field"));
         private IWebElement _usernameField => SeleniumDriver.FindElement(By.Id("email_field"));
         private IWebElement _loginButton => SeleniumDriver.FindElement(By.Id("login_submit"));
+        private IWebElement _registerButton => SeleniumDriver.FindElement(By.Id("register_button"));
+        private IWebElement _forgotPasswordButton => SeleniumDriver.FindElement(By.Id("forgot_password"));
         public SL_LoginPage(IWebDriver seleniumDriver)
         {
             SeleniumDriver = seleniumDriver;
@@ -22,10 +24,7 @@ namespace TraineeTrackerTests.lib.pages
         public void EnterUserName(string username) => _usernameField.SendKeys(username);
         public void EnterPassword(string password) => _passwordField.SendKeys(password);
         public void ClickLoginButton() => _loginButton.Click();
-
-        internal void VisitHomePage()
-        {
-            throw new NotImplementedException();
-        }
+        public void ClickRegisterButton() => _registerButton.Click();
+        public void ClickForgotPasswordButton() => _forgotPasswordButton.Click();
     }
 }
