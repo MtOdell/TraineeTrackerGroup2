@@ -12,7 +12,7 @@ namespace TraineeTrackerTests.lib.pages
         private IWebDriver SeleniumDriver { get; }
         private string _loginPageUrl = AppConfigReader.LoginUrl;
         private IWebElement _passwordField => SeleniumDriver.FindElement(By.Id("password_field"));
-        private IWebElement _usernameField => SeleniumDriver.FindElement(By.Id("email_field"));
+        private IWebElement _emailField => SeleniumDriver.FindElement(By.Id("email_field"));
         private IWebElement _loginButton => SeleniumDriver.FindElement(By.Id("login_submit"));
         private IWebElement _registerButton => SeleniumDriver.FindElement(By.Id("register_button"));
         private IWebElement _forgotPasswordButton => SeleniumDriver.FindElement(By.Id("forgot_password"));
@@ -21,7 +21,7 @@ namespace TraineeTrackerTests.lib.pages
             SeleniumDriver = seleniumDriver;
         }
         public void VisitLoginPage() => SeleniumDriver.Navigate().GoToUrl(_loginPageUrl);
-        public void EnterUserName(string username) => _usernameField.SendKeys(username);
+        public void EnterEmail(string email) => _emailField.SendKeys(email);
         public void EnterPassword(string password) => _passwordField.SendKeys(password);
         public void ClickLoginButton() => _loginButton.Click();
         public void ClickRegisterButton() => _registerButton.Click();
