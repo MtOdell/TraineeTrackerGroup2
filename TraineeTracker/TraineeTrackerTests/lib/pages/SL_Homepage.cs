@@ -23,5 +23,26 @@ namespace TraineeTrackerTests.lib.pages
         {
             SeleniumDriver = seleniumDriver;
         }
+
+        public void VisitHomePage() => SeleniumDriver.Navigate().GoToUrl(_homePageUrl);
+        public void ClickLoginButton() => _loginButton.Click();
+
+        public void ClickRegisterButton() 
+        {
+            _navBar.Click();
+            _navBarRegister.Click();
+        }
+
+        public void ClickPrivacyButton()
+        {
+            _navBar.Click();
+            _navBarPrivacy.Click();
+        }
+
+        public void ClickUserButton()
+        {
+            _navBar.Click();
+            _navBarUser.Click();
+        }
     } 
 }

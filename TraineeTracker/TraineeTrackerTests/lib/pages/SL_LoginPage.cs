@@ -22,5 +22,10 @@ namespace TraineeTrackerTests.lib.pages
         public void EnterUserName(string username) => _usernameField.SendKeys(username);
         public void EnterPassword(string password) => _passwordField.SendKeys(password);
         public void ClickLoginButton() => _loginButton.Click();
+
+        internal void VisitHomePage()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
