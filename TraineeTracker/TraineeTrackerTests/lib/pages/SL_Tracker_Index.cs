@@ -19,7 +19,6 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement GetPieChartElement2 => SeleniumDriver.FindElement(By.Id("piechart_two"));
 
         private string _indexUrl = AppConfigReader.TrackerIndexUrl;
-        
 
         public SL_Tracker_Index(IWebDriver seleniumDriver)
         {
@@ -27,5 +26,9 @@ namespace TraineeTrackerTests.lib.pages
         }
 
         public void VisitIndexPage(int id) => SeleniumDriver.Navigate().GoToUrl(@$"{_indexUrl}/{id}");
+        public void ClickCreateButton() => GetCreateBtn.Click();
+        public void ClickBackButton() => GetBackBtn.Click();
+        public void ClickDetailsButton(int index) => GetDetailsBtns[index].Click();
+        public void ClickDeleteButton(int index) => GetDeleteBtns[index].Click();
     }
 }
