@@ -11,7 +11,7 @@ namespace TraineeTrackerTests.lib.tests
     [Binding]
     public class SL_LoginPageStepDefinitions
     {
-        public SL_Website<ChromeDriver> SL_Website { get; } = new SL_Website<ChromeDriver>();
+        public Website<ChromeDriver> SL_Website { get; } = new Website<ChromeDriver>();
         protected Credentials _credentials;
         [Given(@"I am on the Loginpage")]
         public void GivenIAmOnTheLoginpage()

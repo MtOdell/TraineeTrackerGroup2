@@ -9,19 +9,19 @@ using TraineeTrackerTests.lib.driver_config;
 
 namespace TraineeTrackerTests.lib.pages
 {
-    public class SL_Website<T> where T : IWebDriver, new()
+    public class Website<T> where T : IWebDriver, new()
     {
         #region Accessible Page Objects and Selenium Driver
         public IWebDriver SeleniumDriver { get; set; }
-        public LoginPage SL_LoginPage { get; set; }
-        public SL_Homepage SL_HomePage { get; set; }
-        public RegisterPage SL_RegisterPage { get; set; }
-        public SL_Website(int pageLoadInSecs = 10, int implicitWaitInSecs = 10, bool isHeadless = false)
+        public SL_LoginPage SL_LoginPage { get; set; }
+        public Homepage Homepage { get; set; }
+        public SL_RegisterPage SL_RegisterPage { get; set; }
+        public Website(int pageLoadInSecs = 10, int implicitWaitInSecs = 10, bool isHeadless = false)
         {
             SeleniumDriver = new SeleniumDriverConfig<T>(pageLoadInSecs, implicitWaitInSecs, isHeadless).Driver;
-            SL_HomePage = new SL_Homepage(SeleniumDriver);
-            SL_LoginPage = new LoginPage(SeleniumDriver);
-            SL_RegisterPage = new RegisterPage(SeleniumDriver);
+            Homepage = new Homepage(SeleniumDriver);
+            SL_LoginPage = new SL_LoginPage(SeleniumDriver);
+            SL_RegisterPage = new SL_RegisterPage(SeleniumDriver);
         }
         #endregion
     }
