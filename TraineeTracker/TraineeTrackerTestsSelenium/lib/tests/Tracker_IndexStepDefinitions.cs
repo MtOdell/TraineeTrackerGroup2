@@ -12,6 +12,12 @@ namespace TraineeTrackerTests.lib.tests
             throw new PendingStepException();
         }
 
+        [Given(@"I am a valid trainee")]
+        public void GivenIAmAValidTrainee()
+        {
+            throw new PendingStepException();
+        }
+
         [Given(@"I am on the View Trainees page")]
         public void GivenIAmOnTheViewTraineesPage()
         {
@@ -98,6 +104,12 @@ namespace TraineeTrackerTests.lib.tests
 
         [Then(@"no trackers should be displayed")]
         public void ThenNoTrackersShouldBeDisplayed()
+        {
+            throw new PendingStepException();
+        }
+
+        [Then(@"the only button I can see should be the Details buttons for my trackers")]
+        public void ThenTheOnlyButtonICanSeeShouldBeTheDetailsButtonsForMyTrackers()
         {
             throw new PendingStepException();
         }

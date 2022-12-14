@@ -12,7 +12,7 @@ namespace TraineeTrackerTests.lib.tests
             throw new PendingStepException();
         }
 
-        [Then(@"the details for that tracker should be shown")]
+        [Then(@"the correct details for that tracker should be shown")]
         public void ThenTheDetailsForThatTrackerShouldBeShown()
         {
             throw new PendingStepException();
@@ -36,13 +36,13 @@ namespace TraineeTrackerTests.lib.tests
             throw new PendingStepException();
         }
 
-        [Then(@"I should be taken to the Index page")]
+        [Then(@"I should be taken to the Tracker Index page")]
         public void ThenIShouldBeTakenToTheIndexPage()
         {
             throw new PendingStepException();
         }
 
-        [When(@"I go to a URL of the Details page for a tracker that does not exist")]
+        [When(@"I go to the URL of the Details page for a tracker that does not exist")]
         public void WhenIGoToAURLOfTheDetailsPageForATrackerThatDoesNotExist()
         {
             throw new PendingStepException();

@@ -1,4 +1,4 @@
-﻿Feature: SL_Tracker_Index
+﻿Feature: Tracker_Index
 
 As a user, I want to be able to see a list of trackers, so I can access them
 
@@ -49,6 +49,13 @@ Scenario: I click the Delete button on a tracker in the list
 	And I am on the trainee Tracker page
 	When I click the Delete button on a tracker in the list
 	Then I should be taken to the Delete page for that tracker
+
+@TrackerIndex
+@Happy
+Scenario: I am logged in as a trainee and I am on the Tracker Index page
+	Given I am a valid trainee
+	And I am on the trainee Tracker page
+	Then the only button I can see should be the Details buttons for my trackers
 
 @TrackerIndex
 @Sad
