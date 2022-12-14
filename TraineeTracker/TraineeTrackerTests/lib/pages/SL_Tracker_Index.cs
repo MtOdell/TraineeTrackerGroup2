@@ -30,5 +30,20 @@ namespace TraineeTrackerTests.lib.pages
         public void ClickBackButton() => GetBackBtn.Click();
         public void ClickDetailsButton(int index) => GetDetailsBtns[index].Click();
         public void ClickDeleteButton(int index) => GetDeleteBtns[index].Click();
+        public ReadOnlyCollection<IWebElement> GetAllSectionsOfPieChart(int pieChartNumber)
+        {
+            if (pieChartNumber == 1)
+            {
+                return GetPieChartElement1.FindElements(By.TagName("g"));
+            }
+            else if (pieChartNumber == 2)
+            {
+                return GetPieChartElement2.FindElements(By.TagName("g"));
+            }
+            else
+            {
+                throw new ArgumentException("Piechart number must be either 1 or 2");
+            }
+        }
     }
 }
