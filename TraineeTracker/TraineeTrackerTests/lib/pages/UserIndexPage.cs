@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace TraineeTrackerTests.lib.pages
 {
-    public class SL_UserIndexPage
+    public class UserIndexPage
     {
         private IWebDriver SeleniumDriver { get; }
-        private string _userIndexPageUrl = AppConfigReader.UserIndexUrl;
+        private string _userIndexPageUrl = "https://localhost:7166/UserDatas/Index/";
         private IWebElement _editButton => SeleniumDriver.FindElement(By.Id("edit_button"));
         private IWebElement _profileButton => SeleniumDriver.FindElement(By.Id("profile_button"));
         private IWebElement _trackersButton => SeleniumDriver.FindElement(By.Id("trackers_button"));
         private IWebElement _deleteButton => SeleniumDriver.FindElement(By.Id("delete_button"));
 
-        public SL_UserIndexPage(IWebDriver seleniumDriver)
+        public UserIndexPage(IWebDriver seleniumDriver)
         {
             SeleniumDriver = seleniumDriver;
         }

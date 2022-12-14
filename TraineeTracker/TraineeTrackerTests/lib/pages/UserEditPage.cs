@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace TraineeTrackerTests.lib.pages
 {
-    public class SL_UserEditPage
+    public class UserEditPage
     {
         private IWebDriver SeleniumDriver { get; }
-        private string _userEditPageUrl = AppConfigReader.UserEditUrl;
+        private string _userEditPageUrl = "https://localhost:7166/UserDatas/Edit/";
         private IWebElement _firstNameInput => SeleniumDriver.FindElement(By.Id("first_name_input"));
         private IWebElement _lastNameInput => SeleniumDriver.FindElement(By.Id("last_name_input"));
         private IWebElement _titleInput => SeleniumDriver.FindElement(By.Id("title_input"));
@@ -23,7 +23,7 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement _saveButton => SeleniumDriver.FindElement(By.Id("save_button"));
         private IWebElement _backButton => SeleniumDriver.FindElement(By.Id("back_button"));
 
-        public SL_UserEditPage(IWebDriver seleniumDriver)
+        public UserEditPage(IWebDriver seleniumDriver)
         {
             SeleniumDriver = seleniumDriver;
         }
