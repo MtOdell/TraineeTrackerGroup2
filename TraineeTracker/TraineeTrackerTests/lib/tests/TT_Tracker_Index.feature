@@ -40,7 +40,7 @@ Scenario: I click the Details button on a tracker in the list
 	Given I am a valid trainer
 	And I am on the trainee Tracker page
 	When I click the Details button on a tracker in the list
-	Then I should be taken to the details page for that tracker
+	Then I should be taken to the Details page for that tracker
 
 @TrackerIndex
 @Happy
@@ -48,7 +48,7 @@ Scenario: I click the Delete button on a tracker in the list
 	Given I am a valid trainer
 	And I am on the trainee Tracker page
 	When I click the Delete button on a tracker in the list
-	Then I should be taken to the delete page for that tracker
+	Then I should be taken to the Delete page for that tracker
 
 @TrackerIndex
 @Sad

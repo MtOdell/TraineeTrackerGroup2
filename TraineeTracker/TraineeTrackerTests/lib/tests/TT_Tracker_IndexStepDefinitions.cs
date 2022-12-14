@@ -4,7 +4,7 @@ using TechTalk.SpecFlow;
 namespace TraineeTrackerTests.lib.tests
 {
     [Binding]
-    public class SL_Tracker_IndexStepDefinitions
+    public class TT_Tracker_IndexStepDefinitions
     {
         [Given(@"I am a valid trainer")]
         public void GivenIAmAValidTrainer()
@@ -72,7 +72,7 @@ namespace TraineeTrackerTests.lib.tests
             throw new PendingStepException();
         }
 
-        [Then(@"I should be taken to the details page for that tracker")]
+        [Then(@"I should be taken to the Details page for that tracker")]
         public void ThenIShouldBeTakenToTheDetailsPageForThatTracker()
         {
             throw new PendingStepException();
@@ -84,7 +84,7 @@ namespace TraineeTrackerTests.lib.tests
             throw new PendingStepException();
         }
 
-        [Then(@"I should be taken to the delete page for that tracker")]
+        [Then(@"I should be taken to the Delete page for that tracker")]
         public void ThenIShouldBeTakenToTheDeletePageForThatTracker()
         {
             throw new PendingStepException();
