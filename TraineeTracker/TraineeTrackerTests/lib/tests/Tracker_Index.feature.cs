@@ -28,7 +28,7 @@ namespace TraineeTrackerTests.Lib.Tests
         
         private static string[] featureTags = ((string[])(null));
         
-#line 1 "SL_Tracker_Index.feature"
+#line 1 "Tracker_Index.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
