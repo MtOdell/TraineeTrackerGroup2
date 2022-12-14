@@ -33,12 +33,8 @@
 		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.4.0" />
 	</ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TestConfig\TestConfig.csproj" />
     <ProjectReference Include="..\TraineeTracker\TraineeTracker.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="lib\TestHost.dll.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
