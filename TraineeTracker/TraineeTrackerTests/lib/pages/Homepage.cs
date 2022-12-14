@@ -8,10 +8,10 @@ using TraineeTrackerTests.lib.driver_config;
 
 namespace TraineeTrackerTests.lib.pages
 {
-    public class SL_Homepage
+    public class Homepage
     {
         private IWebDriver SeleniumDriver { get; }
-        private string _homePageUrl = AppConfigReader.BaseUrl;
+        private string _homePageUrl = "https://localhost:7166/";
 
         private IWebElement _loginButton => SeleniumDriver.FindElement(By.Id("login_button"));
         private IWebElement _navBar => SeleniumDriver.FindElement(By.Id("navbar_button"));
@@ -19,7 +19,7 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement _navBarPrivacy => SeleniumDriver.FindElement(By.Id("navbar_privacy"));
         private IWebElement _navBarRegister => SeleniumDriver.FindElement(By.Id("register_button"));
 
-        public SL_Homepage(IWebDriver seleniumDriver)
+        public Homepage(IWebDriver seleniumDriver)
         {
             SeleniumDriver = seleniumDriver;
         }

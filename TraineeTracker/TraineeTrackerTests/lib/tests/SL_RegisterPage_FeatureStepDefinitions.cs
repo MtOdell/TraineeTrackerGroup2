@@ -10,7 +10,7 @@ namespace TraineeTrackerTests.lib.tests
     [Binding]
     public class SL_RegisterPage_FeatureStepDefinitions
     {
-        public SL_Website<ChromeDriver> SL_Website { get; } = new SL_Website<ChromeDriver>();
+        public Website<ChromeDriver> SL_Website { get; } = new Website<ChromeDriver>();
         protected RegisterInfo _registerInfo;
         [Given(@"I am on the register page")]
         public void GivenIAmOnTheRegisterPage()

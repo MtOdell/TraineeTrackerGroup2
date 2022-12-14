@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace TraineeTrackerTests.lib.pages
 {
-    public class SL_UserDeletePage
+    public class UserDetailsPage
     {
         private IWebDriver SeleniumDriver { get; }
-        private string _userDeletePageUrl = AppConfigReader.UserDeleteUrl;
-        private IWebElement _deleteButton => SeleniumDriver.FindElement(By.Id("delete_button"));
+        private string _userDetailsPageUrl = "https://localhost:7166/UserDatas/Details/";
+        private IWebElement _editButton => SeleniumDriver.FindElement(By.Id("edit_button"));
         private IWebElement _backButton => SeleniumDriver.FindElement(By.Id("back_button"));
 
-        public SL_UserDeletePage(IWebDriver seleniumDriver)
+        public UserDetailsPage(IWebDriver seleniumDriver)
         {
             SeleniumDriver = seleniumDriver;
         }
 
-        public void VisitUserDeletePage() => SeleniumDriver.Navigate().GoToUrl(_userDeletePageUrl);
-        public void ClickDeleteButton() => _deleteButton.Click();
+        public void VisitUserDetailsPage() => SeleniumDriver.Navigate().GoToUrl(_userDetailsPageUrl);
+        public void ClickEditButton() => _editButton.Click();
         public void ClickBackButton() => _backButton.Click();
     }
 }
