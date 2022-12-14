@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace TraineeTrackerTests.lib.pages
 {
-    public class SL_UserCreatePage
+    public class UserCreatePage
     {
         private IWebDriver SeleniumDriver { get; }
-        private string _userCreatePageUrl = AppConfigReader.UserCreateUrl;
+        private string _userCreatePageUrl = "https://localhost:7166/UserDatas/Create/";
         private IWebElement _userIdInput => SeleniumDriver.FindElement(By.Id("user_id_input"));
         private IWebElement _firstNameInput => SeleniumDriver.FindElement(By.Id("first_name_input"));
         private IWebElement _lastNameInput => SeleniumDriver.FindElement(By.Id("last_name_input"));
@@ -21,8 +21,9 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement _biologyInput => SeleniumDriver.FindElement(By.Id("biology_input"));
         private IWebElement _skillsInput => SeleniumDriver.FindElement(By.Id("skills_input"));
         private IWebElement _createButton => SeleniumDriver.FindElement(By.Id("create_button"));
+        private IWebElement _backToListButton => SeleniumDriver.FindElement(By.Id("back_to_list_button"));
 
-        public SL_UserCreatePage(IWebDriver seleniumDriver)
+        public UserCreatePage(IWebDriver seleniumDriver)
         {
             SeleniumDriver = seleniumDriver;
         }
@@ -38,5 +39,6 @@ namespace TraineeTrackerTests.lib.pages
         public void EnterBiology(string biology) => _biologyInput.SendKeys(biology);
         public void EnterSkills(string skills) => _skillsInput.SendKeys(skills);
         public void ClickCreateButton() => _createButton.Click();
+        public void ClickBackToListButton() => _backToListButton.Click();
     }
 }
