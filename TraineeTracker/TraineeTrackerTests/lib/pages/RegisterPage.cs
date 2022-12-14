@@ -10,7 +10,7 @@ namespace TraineeTrackerTests.lib.pages
     public class SL_RegisterPage
     {
         private IWebDriver SeleniumDriver { get; }
-        private string _registerPageUrl = AppConfigReader.RegisterUrl;
+        private string _registerPageUrl = "https://localhost:7166/Identity/Account/Register";
         private IWebElement _passwordField => SeleniumDriver.FindElement(By.Id("password_field"));
         private IWebElement _confirmPasswordField => SeleniumDriver.FindElement(By.Id("confirm_password_field"));
         private IWebElement _emailField => SeleniumDriver.FindElement(By.Id("email_field"));
