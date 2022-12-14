@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace TraineeTrackerTests.Lib.Tests
+namespace TraineeTrackerTestsSelenium.Lib.Tests
 {
     using TechTalk.SpecFlow;
     using System;

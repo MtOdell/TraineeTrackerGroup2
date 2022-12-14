@@ -31,7 +31,7 @@ namespace TraineeTrackerTests.lib.tests
         [Then(@"I am redirected to the login page")]
         public void ThenIAmRedirectedToTheLoginPage()
         {
-            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo(AppConfigReader.LoginUrl));
+            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo("https://localhost:7166/Identity/Account/Login"));
         }
 
         [When(@"I press register button")]
@@ -43,7 +43,7 @@ namespace TraineeTrackerTests.lib.tests
         [Then(@"I am redirected to the register page")]
         public void ThenIAmRedirectedToTheRegisterPage()
         {
-            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo(AppConfigReader.RegisterUrl));
+            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo("https://localhost:7166/Identity/Account/Register"));
         }
 
         [Given(@"I am logged in")]
@@ -70,7 +70,7 @@ namespace TraineeTrackerTests.lib.tests
         [Then(@"I am redirected to the user page")]
         public void ThenIAmRedirectedToTheUserPage()
         {
-            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo(AppConfigReader.UserUrl));
+            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo("https://localhost:7166/Identity/Account/Login"));
         }
 
         [When(@"I press privacy button")]
@@ -82,7 +82,7 @@ namespace TraineeTrackerTests.lib.tests
         [Then(@"I am redirected to the privacy page")]
         public void ThenIAmRedirectedToThePrivacyPage()
         {
-            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo(AppConfigReader.PrivacyUrl));
+            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo("https://localhost:7166/Identity/Account/Login"));
         }
     }
 }

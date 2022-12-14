@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace TraineeTrackerTests.Lib.Tests
+namespace TraineeTrackerTestsSelenium.Lib.Tests
 {
     using TechTalk.SpecFlow;
     using System;
@@ -28,7 +28,7 @@ namespace TraineeTrackerTests.Lib.Tests
         
         private static string[] featureTags = ((string[])(null));
         
-#line 1 "Homepage_Feature.feature"
+#line 1 "Homepage_feature.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]

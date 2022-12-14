@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace TraineeTrackerTests.Lib.Tests
+namespace TraineeTrackerTestsSelenium.Lib.Tests
 {
     using TechTalk.SpecFlow;
     using System;
@@ -20,22 +20,22 @@ namespace TraineeTrackerTests.Lib.Tests
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("SL_RegisterPage_Feature")]
-    public partial class SL_RegisterPage_FeatureFeature
+    [NUnit.Framework.DescriptionAttribute("RegisterPage_Feature")]
+    public partial class RegisterPage_FeatureFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
         
-#line 1 "SL_RegisterPage_Feature.feature"
+#line 1 "RegisterPage_Feature.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "lib/tests", "SL_RegisterPage_Feature", "As  new user I want to be access the register page\r\nSo that I can enter my detail" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "lib/tests", "RegisterPage_Feature", "As  new user I want to be access the register page\r\nSo that I can enter my detail" +
                     "s\r\nAnd register as a new user", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
