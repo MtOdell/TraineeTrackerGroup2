@@ -12,7 +12,7 @@ Scenario: I am a valid user and I log in with my email and password
         | Adam@SpartaGlobal.com  | Password1! |
         | Admin@SpartaGlobal.com | Password1! |
 	When I click the login button
-	Then I am taken to the home page
+	Then I am on the home page
 @Login
 @Sad
 Scenario: I am an invalid user and I try to log in
@@ -25,6 +25,11 @@ Scenario: I am an invalid user and I try to log in
 
 @Login
 @Happy
-Scenario: I click on registe button im taken to register page
-	When I click the register button
-	Then I am taken to the register page
+Scenario: I click on register or forgotten password button im taken to register or forgotten password page
+	When I click the <button> button
+	Then I am taken to the <page> page
+	Examples: 
+	| button          | page                                                   |
+	| register        | https://localhost:7166/Identity/Account/Register       |
+	| forgot password | https://localhost:7166/Identity/Account/ForgotPassword |
+
