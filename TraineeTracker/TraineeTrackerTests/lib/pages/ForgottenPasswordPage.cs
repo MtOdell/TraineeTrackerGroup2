@@ -10,7 +10,7 @@ namespace TraineeTrackerTests.lib.pages
     public class ForgottenPasswordPage
     {
         private IWebDriver SeleniumDriver { get; }
-        private string _forgottenPasswordPageUrl = AppConfigReader.ForgotPasswordUrl;
+        private string _forgottenPasswordPageUrl = "https://localhost:7166/Identity/Account/ForgotPassword";
         private IWebElement _emailField => SeleniumDriver.FindElement(By.Id("email_field"));
         private IWebElement _resetPasswordButton => SeleniumDriver.FindElement(By.Id("submit_button"));
         public ForgottenPasswordPage(IWebDriver seleniumDriver)
