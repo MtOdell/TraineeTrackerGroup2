@@ -1,4 +1,4 @@
-﻿Feature: SL_LoginPage
+﻿Feature: LoginPage
 
 As a user I want to be able to log in to my account
 Background:

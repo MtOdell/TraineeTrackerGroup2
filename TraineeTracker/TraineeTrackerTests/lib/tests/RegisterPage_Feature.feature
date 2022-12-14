@@ -1,4 +1,4 @@
-﻿Feature: SL_RegisterPage_Feature
+﻿Feature: RegisterPage_Feature
 
 As  new user I want to be access the register page
 So that I can enter my details
