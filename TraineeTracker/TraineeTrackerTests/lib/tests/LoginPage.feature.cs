@@ -125,7 +125,7 @@ this.FeatureBackground();
  testRunner.When("I click the login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 15
- testRunner.Then("I am taken to the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I am on the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -178,16 +178,27 @@ this.FeatureBackground();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("I click on registe button im taken to register page")]
+        [NUnit.Framework.DescriptionAttribute("I click on register or forgotten password button im taken to register or forgotte" +
+            "n password page")]
         [NUnit.Framework.CategoryAttribute("Login")]
         [NUnit.Framework.CategoryAttribute("Happy")]
-        public void IClickOnRegisteButtonImTakenToRegisterPage()
+        [NUnit.Framework.TestCaseAttribute("register", "https://localhost:7166/Identity/Account/Register", null)]
+        [NUnit.Framework.TestCaseAttribute("forgot password", "https://localhost:7166/Identity/Account/ForgotPassword", null)]
+        public void IClickOnRegisterOrForgottenPasswordButtonImTakenToRegisterOrForgottenPasswordPage(string button, string page, string[] exampleTags)
         {
-            string[] tagsOfScenario = new string[] {
+            string[] @__tags = new string[] {
                     "Login",
                     "Happy"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I click on registe button im taken to register page", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            argumentsOfScenario.Add("button", button);
+            argumentsOfScenario.Add("page", page);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I click on register or forgotten password button im taken to register or forgotte" +
+                    "n password page", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 28
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -202,10 +213,10 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 29
- testRunner.When("I click the register button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When(string.Format("I click the {0} button", button), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 30
- testRunner.Then("I am taken to the register page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("I am taken to the {0} page", page), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -45,14 +45,18 @@ namespace TraineeTrackerTests.lib.tests
         {
             SL_Website.SL_LoginPage.ClickRegisterButton();
         }
-
-        [Then(@"I am taken to the register page")]
-        public void ThenIAmTakenToTheRegisterPage()
+        [When(@"I click the forgot password button")]
+        public void WhenIClickTheForgotPasswordButton()
         {
-            Assert.That(SL_Website.SeleniumDriver.Url, Is.EqualTo("https://localhost:7166/Identity/Account/Register"));
+            SL_Website.SL_LoginPage.ClickForgotPasswordButton();
+        }
+        [Then(@"I am taken to the (.*) page")]
+        public void ThenIAmTakenToTheRegisterPage(string url)
+        {
+            Assert.That(SL_Website.SeleniumDriver.Url, Is.EqualTo(url));
         }
 
-        [Then(@"I am taken to the home page")]
+        [Then(@"I am on the home page")]
         public void ThenIAmTakenToTheHomePage()
         {
             Assert.That(SL_Website.SeleniumDriver.Url, Is.EqualTo("https://localhost:7166/"));

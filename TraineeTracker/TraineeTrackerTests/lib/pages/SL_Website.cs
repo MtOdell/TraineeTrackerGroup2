@@ -15,6 +15,7 @@ namespace TraineeTrackerTests.lib.pages
         public IWebDriver SeleniumDriver { get; set; }
         public SL_LoginPage SL_LoginPage { get; set; }
         public SL_Homepage SL_HomePage { get; set; }
+        public SL_RegisterPage SL_RegisterPage { get; set; }
         public Tracker_Index SL_Tracker_Index { get; set; }
         public Tracker_Create SL_Tracker_Create { get; set; }
         public Tracker_Details SL_Tracker_Details { get; set; }
@@ -25,6 +26,7 @@ namespace TraineeTrackerTests.lib.pages
             SeleniumDriver = new SeleniumDriverConfig<T>(pageLoadInSecs, implicitWaitInSecs, isHeadless).Driver;
             SL_HomePage = new SL_Homepage(SeleniumDriver);
             SL_LoginPage = new SL_LoginPage(SeleniumDriver);
+            SL_RegisterPage = new SL_RegisterPage(SeleniumDriver);
             SL_Tracker_Index = new Tracker_Index(SeleniumDriver);
             SL_Tracker_Create = new Tracker_Create(SeleniumDriver);
             SL_Tracker_Details = new Tracker_Details(SeleniumDriver);
