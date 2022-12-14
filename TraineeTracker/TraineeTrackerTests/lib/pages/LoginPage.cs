@@ -8,7 +8,7 @@ using TraineeTrackerTests.Utils;
 
 namespace TraineeTrackerTests.lib.pages
 {
-    public class SL_LoginPage
+    public class LoginPage
     {
         private IWebDriver SeleniumDriver { get; }
         private string _loginPageUrl = AppConfigReader.LoginUrl;
@@ -18,7 +18,7 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement _registerButton => SeleniumDriver.FindElement(By.Id("register_button"));
         private IWebElement _forgotPasswordButton => SeleniumDriver.FindElement(By.Id("forgot_password"));
         private IWebElement _errorMessage => SeleniumDriver.FindElement(By.CssSelector("[data-test=\"error\"]"));
-        public SL_LoginPage(IWebDriver seleniumDriver)
+        public LoginPage(IWebDriver seleniumDriver)
         {
             SeleniumDriver = seleniumDriver;
         }
