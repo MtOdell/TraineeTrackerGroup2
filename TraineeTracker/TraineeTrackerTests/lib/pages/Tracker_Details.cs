@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TraineeTrackerTests.lib.pages
 {
-    public class SL_Tracker_Details
+    public class Tracker_Details
     {
         private IWebDriver SeleniumDriver { get; }
         private IWebElement GetStopData => SeleniumDriver.FindElement(By.Id("stop_data"));
@@ -18,9 +18,9 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement GetEditBtn => SeleniumDriver.FindElement(By.Id("edit_btn"));
         private IWebElement GetBackBtn => SeleniumDriver.FindElement(By.Id("back_btn"));
 
-        private string _detailsUrl = AppConfigReader.TrackerDetailsUrl;
+        private string _detailsUrl = "https://localhost:7166/UserDatas/Details/";
 
-        public SL_Tracker_Details(IWebDriver seleniumDriver)
+        public Tracker_Details(IWebDriver seleniumDriver)
         {
             SeleniumDriver = seleniumDriver;
         }

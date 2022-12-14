@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TraineeTrackerTests.lib.pages
 {
-    public class SL_Tracker_Index
+    public class Tracker_Index
     {
         private IWebDriver SeleniumDriver { get; }
         private IWebElement GetCreateBtn => SeleniumDriver.FindElement(By.Id("create_btn"));
@@ -18,9 +18,9 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement GetPieChartElement1 => SeleniumDriver.FindElement(By.Id("piechart"));
         private IWebElement GetPieChartElement2 => SeleniumDriver.FindElement(By.Id("piechart_two"));
 
-        private string _indexUrl = AppConfigReader.TrackerIndexUrl;
+        private string _indexUrl = "https://localhost:7166/Trackers/Index";
 
-        public SL_Tracker_Index(IWebDriver seleniumDriver)
+        public Tracker_Index(IWebDriver seleniumDriver)
         {
             SeleniumDriver = seleniumDriver;
         }

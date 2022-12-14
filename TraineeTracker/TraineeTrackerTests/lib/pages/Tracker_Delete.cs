@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TraineeTrackerTests.lib.pages
 {
-    public class SL_Tracker_Delete
+    public class Tracker_Delete
     {
         private IWebDriver SeleniumDriver { get; }
         private IWebElement GetStopData => SeleniumDriver.FindElement(By.Id("stop_data"));
@@ -18,9 +18,9 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement GetDeleteBtn => SeleniumDriver.FindElement(By.Id("delete_btn"));
         private IWebElement GetBackBtn => SeleniumDriver.FindElement(By.Id("back_btn"));
 
-        private string _deleteUrl = AppConfigReader.TrackerDeleteUrl;
+        private string _deleteUrl = "https://localhost:7166/UserDatas/Delete/";
 
-        public SL_Tracker_Delete(IWebDriver seleniumDriver)
+        public Tracker_Delete(IWebDriver seleniumDriver)
         {
             SeleniumDriver = seleniumDriver;
         }

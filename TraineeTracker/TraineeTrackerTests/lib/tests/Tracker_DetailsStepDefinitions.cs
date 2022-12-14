@@ -4,7 +4,7 @@ using TechTalk.SpecFlow;
 namespace TraineeTrackerTests.lib.tests
 {
     [Binding]
-    public class TT_Tracker_DetailsStepDefinitions
+    public class Tracker_DetailsStepDefinitions
     {
         [Given(@"I am on the Details page for a tracker")]
         public void GivenIAmOnTheDetailsPageForATracker()

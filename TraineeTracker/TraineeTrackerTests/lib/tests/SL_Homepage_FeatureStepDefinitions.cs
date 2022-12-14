@@ -6,7 +6,7 @@ using TraineeTrackerTests.lib.pages;
 namespace TraineeTrackerTests.lib.tests
 {
     [Binding]
-    public class TT_Homepage_FeatureStepDefinitions
+    public class SL_Homepage_FeatureStepDefinitions
     {
         private SL_Website<ChromeDriver> SL_Website;
         [Given(@"I have a browser open")]

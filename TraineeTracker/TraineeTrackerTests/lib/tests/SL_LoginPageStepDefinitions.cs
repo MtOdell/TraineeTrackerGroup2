@@ -9,7 +9,7 @@ namespace TraineeTrackerTests.lib.tests
 {
 
     [Binding]
-    public class TT_LoginPageStepDefinitions
+    public class SL_LoginPageStepDefinitions
     {
         public SL_Website<ChromeDriver> SL_Website { get; } = new SL_Website<ChromeDriver>();
         protected Credentials _credentials;

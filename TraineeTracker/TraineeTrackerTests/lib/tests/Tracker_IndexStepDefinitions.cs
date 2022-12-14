@@ -4,7 +4,7 @@ using TechTalk.SpecFlow;
 namespace TraineeTrackerTests.lib.tests
 {
     [Binding]
-    public class TT_Tracker_IndexStepDefinitions
+    public class Tracker_IndexStepDefinitions
     {
         [Given(@"I am a valid trainer")]
         public void GivenIAmAValidTrainer()
