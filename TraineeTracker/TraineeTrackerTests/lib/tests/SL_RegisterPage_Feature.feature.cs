@@ -127,6 +127,68 @@ this.FeatureBackground();
             }
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("When I input vinalid details then I am registered as a user")]
+        [NUnit.Framework.CategoryAttribute("Register")]
+        [NUnit.Framework.CategoryAttribute("Happy")]
+        [NUnit.Framework.TestCaseAttribute("", null)]
+        [NUnit.Framework.TestCaseAttribute("", null)]
+        [NUnit.Framework.TestCaseAttribute("", null)]
+        public void WhenIInputVinalidDetailsThenIAmRegisteredAsAUser(string error, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "Register",
+                    "Happy"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("error", error);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When I input vinalid details then I am registered as a user", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 19
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 7
+this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Email",
+                            "Password",
+                            "Confirm Password"});
+                table4.AddRow(new string[] {
+                            "InvalidEmail",
+                            "Password1!",
+                            "Password1!"});
+                table4.AddRow(new string[] {
+                            "newuser@SpartaGlobal.com",
+                            "InvalidPassword",
+                            "InvalidPassword"});
+                table4.AddRow(new string[] {
+                            "newuser@SpartaGlobal.com",
+                            "Password1!",
+                            "PasswordNotSame"});
+#line 20
+ testRunner.Given("I input valid info to register", ((string)(null)), table4, "Given ");
+#line hidden
+#line 25
+ testRunner.When("I press the register button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 26
+ testRunner.Then(string.Format("I get an error {0}", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

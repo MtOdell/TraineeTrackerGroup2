@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace TraineeTrackerTests.lib.pages
 {
-    public class SL_ForgottenPasswordPage
+    public class ForgottenPasswordPage
     {
         private IWebDriver SeleniumDriver { get; }
         private string _forgottenPasswordPageUrl = AppConfigReader.ForgotPasswordUrl;
         private IWebElement _emailField => SeleniumDriver.FindElement(By.Id("email_field"));
         private IWebElement _resetPasswordButton => SeleniumDriver.FindElement(By.Id("submit_button"));
-        public SL_ForgottenPasswordPage(IWebDriver seleniumDriver)
+        public ForgottenPasswordPage(IWebDriver seleniumDriver)
         {
             SeleniumDriver = seleniumDriver;
         }
