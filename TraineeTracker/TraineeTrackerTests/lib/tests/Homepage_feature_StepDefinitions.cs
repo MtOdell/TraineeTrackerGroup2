@@ -6,53 +6,53 @@ using TraineeTrackerTests.lib.pages;
 namespace TraineeTrackerTests.lib.tests
 {
     [Binding]
-    public class SL_Homepage_FeatureStepDefinitions
+    public class Homepage_feature_StepDefinitions
     {
-        private SL_Website<ChromeDriver> SL_Website;
+        private Website<ChromeDriver> Website;
         [Given(@"I have a browser open")]
         public void GivenIHaveABrowserOpen()
         {
-            SL_Website = new SL_Website<ChromeDriver>();
-            SL_Website.SeleniumDriver.Manage().Window.Maximize();
+            Website = new Website<ChromeDriver>();
+            Website.SeleniumDriver.Manage().Window.Maximize();
         }
 
         [Given(@"I am on a homepage")]
         public void GivenIAmOnAHomepage()
         {
-            SL_Website.SL_HomePage.VisitHomePage();
+            Website.Homepage.VisitHomePage();
         }
 
         [When(@"I press login button")]
         public void WhenIPressLoginButton()
         {
-            SL_Website.SL_HomePage.ClickLoginButton();
+            Website.Homepage.ClickLoginButton();
         }
 
         [Then(@"I am redirected to the login page")]
         public void ThenIAmRedirectedToTheLoginPage()
         {
-            Assert.That(SL_Website.SeleniumDriver.Url, Is.EqualTo(AppConfigReader.LoginUrl));
+            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo(AppConfigReader.LoginUrl));
         }
 
         [When(@"I press register button")]
         public void WhenIPressRegisterButton()
         {
-            SL_Website.SL_HomePage.ClickRegisterButton();
+            Website.Homepage.ClickRegisterButton();
         }
 
         [Then(@"I am redirected to the register page")]
         public void ThenIAmRedirectedToTheRegisterPage()
         {
-            Assert.That(SL_Website.SeleniumDriver.Url, Is.EqualTo(AppConfigReader.RegisterUrl));
+            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo(AppConfigReader.RegisterUrl));
         }
 
         [Given(@"I am logged in")]
         public void GivenIAmLoggedIn()
         {
-            SL_Website.SL_LoginPage.VisitLoginPage();
-            SL_Website.SL_LoginPage.EnterEmail("Phil@SpartaGlobal.com");
-            SL_Website.SL_LoginPage.EnterPassword("Password1!");
-            SL_Website.SL_LoginPage.ClickLoginButton();
+            Website.SL_LoginPage.VisitLoginPage();
+            Website.SL_LoginPage.EnterEmail("Phil@SpartaGlobal.com");
+            Website.SL_LoginPage.EnterPassword("Password1!");
+            Website.SL_LoginPage.ClickLoginButton();
         }
 
         [Then(@"Nothing happens")]
@@ -64,25 +64,25 @@ namespace TraineeTrackerTests.lib.tests
         [When(@"I press user button")]
         public void WhenIPressUserButton()
         {
-            SL_Website.SL_HomePage.ClickUserButton();
+            Website.Homepage.ClickUserButton();
         }
 
         [Then(@"I am redirected to the user page")]
         public void ThenIAmRedirectedToTheUserPage()
         {
-            Assert.That(SL_Website.SeleniumDriver.Url, Is.EqualTo(AppConfigReader.UserUrl));
+            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo(AppConfigReader.UserUrl));
         }
 
         [When(@"I press privacy button")]
         public void WhenIPressPrivacyButton()
         {
-            SL_Website.SL_HomePage.ClickPrivacyButton();
+            Website.Homepage.ClickPrivacyButton();
         }
 
         [Then(@"I am redirected to the privacy page")]
         public void ThenIAmRedirectedToThePrivacyPage()
         {
-            Assert.That(SL_Website.SeleniumDriver.Url, Is.EqualTo(AppConfigReader.PrivacyUrl));
+            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo(AppConfigReader.PrivacyUrl));
         }
     }
 }

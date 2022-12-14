@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TraineeTrackerTests.lib.pages
 {
-    public class SL_Tracker_Create
+    public class Tracker_Create
     {
         private IWebDriver SeleniumDriver { get; }
         private IWebElement GetStopInput => SeleniumDriver.FindElement(By.Id("stop_input"));
@@ -18,9 +18,9 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement GetCreateBtn => SeleniumDriver.FindElement(By.Id("submit_btn"));
         private IWebElement GetBackBtn => SeleniumDriver.FindElement(By.Id("back_btn"));
 
-        private string _createUrl = AppConfigReader.TrackerCreateUrl;
+        private string _createUrl = "https://localhost:7166/UserDatas/Create/";
 
-        public SL_Tracker_Create(IWebDriver seleniumDriver)
+        public Tracker_Create(IWebDriver seleniumDriver)
         {
             SeleniumDriver = seleniumDriver;
         }

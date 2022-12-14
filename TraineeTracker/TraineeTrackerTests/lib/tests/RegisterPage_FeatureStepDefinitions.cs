@@ -8,14 +8,14 @@ using TraineeTrackerTests.Utils;
 namespace TraineeTrackerTests.lib.tests
 {
     [Binding]
-    public class SL_RegisterPage_FeatureStepDefinitions
+    public class RegisterPage_FeatureStepDefinitions
     {
-        public SL_Website<ChromeDriver> SL_Website { get; } = new SL_Website<ChromeDriver>();
+        public Website<ChromeDriver> Website { get; } = new Website<ChromeDriver>();
         protected RegisterInfo _registerInfo;
         [Given(@"I am on the register page")]
         public void GivenIAmOnTheRegisterPage()
         {
-            SL_Website.SL_RegisterPage.VisitRegisterPage();
+            Website.SL_RegisterPage.VisitRegisterPage();
         }
 
         [Given(@"I input valid info to register")]
@@ -27,7 +27,7 @@ namespace TraineeTrackerTests.lib.tests
         [When(@"I press the register button")]
         public void WhenIPressTheRegisterButton()
         {
-            SL_Website.SL_RegisterPage.ClickRegisterButton();
+            Website.SL_RegisterPage.ClickRegisterButton();
         }
     }
 }
