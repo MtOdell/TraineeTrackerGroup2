@@ -57,10 +57,10 @@ namespace TraineeTrackerTests.lib.tests
         [Given(@"I am logged in")]
         public void GivenIAmLoggedIn()
         {
-            Website.SL_LoginPage.VisitLoginPage();
-            Website.SL_LoginPage.EnterEmail("Phil@SpartaGlobal.com");
-            Website.SL_LoginPage.EnterPassword("Password1!");
-            Website.SL_LoginPage.ClickLoginButton();
+            Website.LoginPage.VisitLoginPage();
+            Website.LoginPage.EnterEmail("Phil@SpartaGlobal.com");
+            Website.LoginPage.EnterPassword("Password1!");
+            Website.LoginPage.ClickLoginButton();
         }
 
         [Then(@"Error is thrown")]
