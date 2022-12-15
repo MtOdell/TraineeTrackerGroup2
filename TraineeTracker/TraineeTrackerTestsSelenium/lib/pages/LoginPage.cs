@@ -15,7 +15,7 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement _passwordField => SeleniumDriver.FindElement(By.Id("Input_Password"));
         private IWebElement _emailField => SeleniumDriver.FindElement(By.Id("Input_Email"));
         private IWebElement _loginButton => SeleniumDriver.FindElement(By.Id("login_submit"));
-        private IWebElement _registerButton => SeleniumDriver.FindElement(By.Id("register_button"));
+        private IWebElement _registerButton => SeleniumDriver.FindElement(By.Id("register_page_button"));
         private IWebElement _forgotPasswordButton => SeleniumDriver.FindElement(By.Id("forgot_password"));
         private IWebElement _errorMessage => SeleniumDriver.FindElement(By.CssSelector("div[class='text-danger validation-summary-errors']"));
         public LoginPage(IWebDriver seleniumDriver)
