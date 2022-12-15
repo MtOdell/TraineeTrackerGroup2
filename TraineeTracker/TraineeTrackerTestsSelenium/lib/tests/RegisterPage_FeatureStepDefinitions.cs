@@ -12,6 +12,11 @@ namespace TraineeTrackerTests.lib.tests
     {
         public Website<ChromeDriver> Website { get; } = new Website<ChromeDriver>();
         protected RegisterInfo _registerInfo;
+        [AfterScenario]
+        public void DisposeWebDriver()
+        {
+            Website.SeleniumDriver.Quit();
+        }
         [Given(@"I am on the register page")]
         public void GivenIAmOnTheRegisterPage()
         {
@@ -34,5 +39,28 @@ namespace TraineeTrackerTests.lib.tests
         {
             Website.RegisterPage.ClickRegisterButton();
         }
+        [Then(@"I am on the edit page")]
+        public void ThenIAmOnTheEditPage()
+        {
+            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo("https://localhost:7166/UserDatas/Edit/25"));
+        }
+
+        [Then(@"I get an error (.*)")]
+        public void ThenIGetAnError(string error)
+        {
+            Assert.That(Website.RegisterPage.CheckEmailErrorMessage(), Does.Contain(error));
+        }
+        [Then(@"I get the passwords dont match error")]
+        public void ThenIGetThePasswordsDontMatchError()
+        {
+            Assert.That(Website.RegisterPage.CheckConfirmPasswordErrorMessage(), Does.Contain("The password and confirmation password do not match"));
+        }
+        [Then(@"I get the password is invalid error")]
+        public void ThenIGetThePasswordIsInvalidError()
+        {
+            Assert.That(Website.RegisterPage.CheckPasswordErrorMessage(), Does.Contain("Must have 6 letters, 1 Capital, 1 Number, 1 Special character.")); ;
+        }
+
+
     }
 }
