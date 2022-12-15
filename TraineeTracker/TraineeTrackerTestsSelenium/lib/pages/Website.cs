@@ -21,6 +21,11 @@ namespace TraineeTrackerTests.lib.pages
         public Tracker_Details SL_Tracker_Details { get; set; }
         public Tracker_Edit SL_Tracker_Edit { get; set; }
         public Tracker_Delete SL_Tracker_Delete { get; set; }
+        public UserCreatePage UserCreatePage { get; set; }
+        public UserDeletePage UserDeletePage { get; set; }
+        public UserDetailsPage UserDetailsPage { get; set; }
+        public UserEditPage UserEditPage { get; set; }
+        public UserIndexPage UserIndexPage { get; set; }
         public Website(int pageLoadInSecs = 10, int implicitWaitInSecs = 10, bool isHeadless = false)
         {
             SeleniumDriver = new SeleniumDriverConfig<T>(pageLoadInSecs, implicitWaitInSecs, isHeadless).Driver;
@@ -32,6 +37,11 @@ namespace TraineeTrackerTests.lib.pages
             SL_Tracker_Details = new Tracker_Details(SeleniumDriver);
             SL_Tracker_Edit = new Tracker_Edit(SeleniumDriver);
             SL_Tracker_Delete = new Tracker_Delete(SeleniumDriver);
+            UserCreatePage = new UserCreatePage(SeleniumDriver);
+            UserDeletePage = new UserDeletePage(SeleniumDriver);
+            UserDetailsPage = new UserDetailsPage(SeleniumDriver);
+            UserEditPage = new UserEditPage(SeleniumDriver);
+            UserIndexPage = new UserIndexPage(SeleniumDriver);
         }
         #endregion
     }

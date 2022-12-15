@@ -1,6 +1,10 @@
-﻿Feature: SL_UserIndexPage
+﻿Feature: UserIndexPage
 
 It is used to view multiple users and select options for them
+
+Background:
+	Given I am on the Login Page
+	And Logged in with the Admin credentials
 
 @HappyPath
 Scenario: I wish to go to the Edit Page
