@@ -13,9 +13,9 @@ namespace TraineeTrackerTests.lib.pages
     {
         #region Accessible Page Objects and Selenium Driver
         public IWebDriver SeleniumDriver { get; set; }
-        public LoginPage SL_LoginPage { get; set; }
+        public LoginPage LoginPage { get; set; }
         public Homepage Homepage { get; set; }
-        public RegisterPage SL_RegisterPage { get; set; }
+        public RegisterPage RegisterPage { get; set; }
         public Tracker_Index SL_Tracker_Index { get; set; }
         public Tracker_Create SL_Tracker_Create { get; set; }
         public Tracker_Details SL_Tracker_Details { get; set; }
