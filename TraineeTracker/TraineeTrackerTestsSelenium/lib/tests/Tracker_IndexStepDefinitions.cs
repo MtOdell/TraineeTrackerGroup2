@@ -1,117 +1,195 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using System;
 using TechTalk.SpecFlow;
+using TraineeTrackerTests.lib.pages;
+using TraineeTrackerTests.Utils;
 
 namespace TraineeTrackerTests.lib.tests
 {
     [Binding]
     public class Tracker_IndexStepDefinitions
     {
+        public Website<ChromeDriver> Website { get; } = new Website<ChromeDriver>();
+        protected Credentials _credentials = new();
+        
+        [BeforeScenario(Order = 0)]
+        public void SetTrainerCredentials()
+        {
+            _credentials.Email = "Phil@SpartaGlobal.com";
+            _credentials.Password = "Password1!";
+        }
+
+        [BeforeScenario("I am logged in as a trainee and I am on the Tracker Index page", Order = 1)]
+        public void SetTraineeCredentials()
+        {
+            _credentials.Email = "Adam@SpartaGlobal.com";
+            _credentials.Password = "Password1!";
+        }
+
+        [BeforeScenario(Order = 2)]
+        public void Login()
+        {
+            Website.SL_LoginPage.VisitLoginPage();
+            Website.SL_LoginPage.EnterCredentials(_credentials);
+            Website.SL_LoginPage.ClickLoginButton();
+        }
+
+        [AfterScenario]
+        public void CleanUp()
+        {
+            Website.SeleniumDriver.Quit();
+        }
+        
         [Given(@"I am a valid trainer")]
         public void GivenIAmAValidTrainer()
         {
-            throw new PendingStepException();
+            if (_credentials.Email != "Phil@SpartaGlobal.com")
+            {
+                Assert.Fail("Not a valid trainer");
+            }
         }
 
         [Given(@"I am a valid trainee")]
         public void GivenIAmAValidTrainee()
         {
-            throw new PendingStepException();
+            _credentials.Email = "Adam@SpartaGlobal.com";
+            _credentials.Password = "Password1!";
+            Website.SL_LoginPage.VisitLoginPage();
+            Website.SL_LoginPage.EnterCredentials(_credentials);
+            Website.SL_LoginPage.ClickLoginButton();
+            if (_credentials.Email != "Adam@SpartaGlobal.com")
+            {
+                Assert.Fail("Not a valid trainee");
+            }
         }
 
         [Given(@"I am on the View Trainees page")]
         public void GivenIAmOnTheViewTraineesPage()
         {
-            throw new PendingStepException();
+            Website.SeleniumDriver.Navigate().GoToUrl("https://localhost:7166/UserDatas");
+            if (Website.SeleniumDriver.Url != "https://localhost:7166/UserDatas")
+            {
+                Assert.Fail("Not on the View Trainees page");
+            }
         }
 
         [When(@"I click the Tracker button for one of the trainees listed")]
         public void WhenIClickTheTrackerButtonForOneOfTheTraineesListed()
         {
-            throw new PendingStepException();
+            var btn = Website.SeleniumDriver.FindElements(By.Id("trackers_button"));
+            Website.SeleniumDriver.Navigate().GoToUrl("https://localhost:7166/Trackers/Index/17");
         }
 
         [Then(@"I am taken to that trainee's Tracker page")]
         public void ThenIAmTakenToThatTraineesTrackerPage()
         {
-            throw new PendingStepException();
+            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo("https://localhost:7166/Trackers/Index/17"));
         }
 
         [Then(@"I can see a list of trackers for that particular trainee")]
         public void ThenICanSeeAListOfTrackersForThatParticularTrainee()
         {
-            throw new PendingStepException();
+            Assert.That(Website.SeleniumDriver.FindElements(By.Id("row_heading")), Is.Not.Null);
         }
 
         [Given(@"I am on the trainee Tracker page")]
         public void GivenIAmOnTheTraineeTrackerPage()
         {
-            throw new PendingStepException();
+            Website.SeleniumDriver.Navigate().GoToUrl("https://localhost:7166/Trackers/Index/17");
         }
 
         [When(@"I click the Back button")]
         public void WhenIClickTheBackButton()
         {
-            throw new PendingStepException();
+            Website.Tracker_Index.ClickBackButton();
         }
 
         [Then(@"I should be taken to the View Trainees page")]
         public void ThenIShouldBeTakenToTheViewTraineesPage()
         {
-            throw new PendingStepException();
+            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo("https://localhost:7166/UserDatas"));
         }
 
         [When(@"I click the Create New button")]
         public void WhenIClickTheCreateNewButton()
         {
-            throw new PendingStepException();
+            Website.Tracker_Index.ClickCreateButton();
         }
 
         [Then(@"I should be taken to the Create page")]
         public void ThenIShouldBeTakenToTheCreatePage()
         {
-            throw new PendingStepException();
+            Assert.That(Website.Tracker_Create.CheckOnCreatePage());
         }
 
         [When(@"I click the Details button on a tracker in the list")]
         public void WhenIClickTheDetailsButtonOnATrackerInTheList()
         {
-            throw new PendingStepException();
+            Website.Tracker_Index.ClickDetailsButton(0);
         }
 
         [Then(@"I should be taken to the Details page for that tracker")]
         public void ThenIShouldBeTakenToTheDetailsPageForThatTracker()
         {
-            throw new PendingStepException();
+            Assert.That(Website.Tracker_Details.CheckOnDetailsPage());
         }
 
         [When(@"I click the Delete button on a tracker in the list")]
         public void WhenIClickTheDeleteButtonOnATrackerInTheList()
         {
-            throw new PendingStepException();
+            Website.Tracker_Index.ClickDeleteButton(0);
         }
 
         [Then(@"I should be taken to the Delete page for that tracker")]
         public void ThenIShouldBeTakenToTheDeletePageForThatTracker()
         {
-            throw new PendingStepException();
+            Assert.That(Website.Tracker_Delete.CheckOnDeletePage());
         }
 
-        [When(@"I go to a URL of a tracker page for a trainee that does not exist")]
-        public void WhenIGoToAURLOfATrackerPageForATraineeThatDoesNotExist()
+        [When(@"I go to the URL of the tracker page for a trainee that does not exist")]
+        public void WhenIGoToTheURLOfTheTrackerPageForATraineeThatDoesNotExist()
         {
-            throw new PendingStepException();
+            Website.Tracker_Index.VisitIndexPage(-1);
         }
 
         [Then(@"no trackers should be displayed")]
         public void ThenNoTrackersShouldBeDisplayed()
         {
-            throw new PendingStepException();
+            try
+            {
+                Website.SeleniumDriver.FindElements(By.Id("row_heading"));
+            }
+            catch (NoSuchElementException e)
+            {
+                Assert.That(e, Is.Not.Null);
+            }
         }
 
         [Then(@"the only button I can see should be the Details buttons for my trackers")]
         public void ThenTheOnlyButtonICanSeeShouldBeTheDetailsButtonsForMyTrackers()
         {
-            throw new PendingStepException();
+            try
+            {
+                Website.SeleniumDriver.FindElement(By.Id("create_btn"));
+            }
+            catch (NoSuchElementException e)
+            {
+                Assert.That(e, Is.Not.Null);
+            }
+
+            try
+            {
+                Website.SeleniumDriver.FindElements(By.Id("delete_btn"));
+            }
+            catch (NoSuchElementException e)
+            {
+                Assert.That(e, Is.Not.Null);
+            }
+
+            Website.Tracker_Index.ClickDetailsButton(0);
+
+            Assert.That(Website.Tracker_Details.CheckOnDetailsPage());
         }
     }
 }

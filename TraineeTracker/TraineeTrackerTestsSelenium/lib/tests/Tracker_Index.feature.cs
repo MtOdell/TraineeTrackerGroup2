@@ -354,7 +354,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I am a valid trainer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 64
- testRunner.When("I go to a URL of a tracker page for a trainee that does not exist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I go to the URL of the tracker page for a trainee that does not exist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 65
  testRunner.Then("no trackers should be displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

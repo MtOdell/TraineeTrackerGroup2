@@ -26,6 +26,7 @@ namespace TraineeTrackerTests.lib.pages
         }
 
         public void VisitCreatePage(int id) => SeleniumDriver.Navigate().GoToUrl($@"{_createUrl}/{id}");
+        public bool CheckOnCreatePage() => SeleniumDriver.Url.Contains("https://localhost:7166/Trackers/Create");
         public void GiveStopInput(string input) => GetStopInput.SendKeys(input);
         public void GiveStartInput(string input) => GetStartInput.SendKeys(input);
         public void GiveContinueInput(string input) => GetContinueInput.SendKeys(input);

@@ -26,6 +26,7 @@ namespace TraineeTrackerTests.lib.pages
         }
 
         public void VisitDetailsPage(int id) => SeleniumDriver.Navigate().GoToUrl($@"{_detailsUrl}/{id}");
+        public bool CheckOnDetailsPage() => SeleniumDriver.Url.Contains("https://localhost:7166/Trackers/Details");
         public string CheckStopData() => GetStopData.Text;
         public string CheckStartData() => GetStartData.Text;
         public string CheckContinueData() => GetContinueData.Text;

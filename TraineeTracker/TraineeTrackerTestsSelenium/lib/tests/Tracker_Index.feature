@@ -61,5 +61,5 @@ Scenario: I am logged in as a trainee and I am on the Tracker Index page
 @Sad
 Scenario: I try to access a trainee Tracker page for a trainee that does not exist
 	Given I am a valid trainer
-	When I go to a URL of a tracker page for a trainee that does not exist
+	When I go to the URL of the tracker page for a trainee that does not exist
 	Then no trackers should be displayed
