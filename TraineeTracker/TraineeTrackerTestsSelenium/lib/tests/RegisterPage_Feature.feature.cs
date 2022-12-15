@@ -107,16 +107,16 @@ this.ScenarioInitialize(scenarioInfo);
 #line 7
 this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                             "Email",
                             "Password",
                             "Confirm Password"});
-                table3.AddRow(new string[] {
+                table5.AddRow(new string[] {
                             "NewUser@SpartaGlobal.com",
                             "Password1!",
                             "Password1!"});
 #line 12
- testRunner.Given("I input valid info to register", ((string)(null)), table3, "Given ");
+ testRunner.Given("I input valid info to register", ((string)(null)), table5, "Given ");
 #line hidden
 #line 15
  testRunner.When("I press the register button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
@@ -161,24 +161,24 @@ this.ScenarioInitialize(scenarioInfo);
 #line 7
 this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                             "Email",
                             "Password",
                             "Confirm Password"});
-                table4.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "InvalidEmail",
                             "Password1!",
                             "Password1!"});
-                table4.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "newuser@SpartaGlobal.com",
                             "InvalidPassword",
                             "InvalidPassword"});
-                table4.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "newuser@SpartaGlobal.com",
                             "Password1!",
                             "PasswordNotSame"});
 #line 20
- testRunner.Given("I input valid info to register", ((string)(null)), table4, "Given ");
+ testRunner.Given("I input valid info to register", ((string)(null)), table6, "Given ");
 #line hidden
 #line 25
  testRunner.When("I press the register button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");

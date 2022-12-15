@@ -25,8 +25,8 @@ namespace TraineeTrackerTests.lib.pages
         {
             SeleniumDriver = new SeleniumDriverConfig<T>(pageLoadInSecs, implicitWaitInSecs, isHeadless).Driver;
             Homepage = new Homepage(SeleniumDriver);
-            SL_LoginPage = new LoginPage(SeleniumDriver);
-            SL_RegisterPage = new RegisterPage(SeleniumDriver);
+            LoginPage = new LoginPage(SeleniumDriver);
+            RegisterPage = new RegisterPage(SeleniumDriver);
             SL_Tracker_Index = new Tracker_Index(SeleniumDriver);
             SL_Tracker_Create = new Tracker_Create(SeleniumDriver);
             SL_Tracker_Details = new Tracker_Details(SeleniumDriver);

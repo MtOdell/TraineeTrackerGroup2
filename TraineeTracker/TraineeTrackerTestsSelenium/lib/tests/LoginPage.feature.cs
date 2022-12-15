@@ -83,16 +83,16 @@ namespace TraineeTrackerTestsSelenium.Lib.Tests
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("I am a valid user and I log in with my email and password")]
+        [NUnit.Framework.DescriptionAttribute("I am a valid trainer and I log in with my email and password")]
         [NUnit.Framework.CategoryAttribute("Login")]
         [NUnit.Framework.CategoryAttribute("Happy")]
-        public void IAmAValidUserAndILogInWithMyEmailAndPassword()
+        public void IAmAValidTrainerAndILogInWithMyEmailAndPassword()
         {
             string[] tagsOfScenario = new string[] {
                     "Login",
                     "Happy"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I am a valid user and I log in with my email and password", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I am a valid trainer and I log in with my email and password", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 8
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -112,19 +112,108 @@ this.FeatureBackground();
                 table1.AddRow(new string[] {
                             "Nish@SpartaGlobal.com",
                             "Password1!"});
-                table1.AddRow(new string[] {
-                            "Adam@SpartaGlobal.com",
-                            "Password1!"});
-                table1.AddRow(new string[] {
-                            "Admin@SpartaGlobal.com",
-                            "Password1!"});
 #line 9
  testRunner.Given("And I have the following credentials:", ((string)(null)), table1, "Given ");
 #line hidden
-#line 14
+#line 12
+ testRunner.And("enter these credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 13
  testRunner.When("I click the login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 15
+#line 14
+ testRunner.Then("I am on the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("I am a valid trainee and I log in with my email and password")]
+        [NUnit.Framework.CategoryAttribute("Login")]
+        [NUnit.Framework.CategoryAttribute("Happy")]
+        public void IAmAValidTraineeAndILogInWithMyEmailAndPassword()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Login",
+                    "Happy"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I am a valid trainee and I log in with my email and password", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 17
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 4
+this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Email",
+                            "Password"});
+                table2.AddRow(new string[] {
+                            "Adam@SpartaGlobal.com",
+                            "Password1!"});
+#line 18
+ testRunner.Given("And I have the following credentials:", ((string)(null)), table2, "Given ");
+#line hidden
+#line 21
+ testRunner.And("enter these credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 22
+ testRunner.When("I click the login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 23
+ testRunner.Then("I am on the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("I am a valid admin and I log in with my email and password")]
+        [NUnit.Framework.CategoryAttribute("Login")]
+        [NUnit.Framework.CategoryAttribute("Happy")]
+        public void IAmAValidAdminAndILogInWithMyEmailAndPassword()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Login",
+                    "Happy"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I am a valid admin and I log in with my email and password", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 26
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 4
+this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Email",
+                            "Password"});
+                table3.AddRow(new string[] {
+                            "Admin@SpartaGlobal.com",
+                            "Password1!"});
+#line 27
+ testRunner.Given("And I have the following credentials:", ((string)(null)), table3, "Given ");
+#line hidden
+#line 30
+ testRunner.And("enter these credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 31
+ testRunner.When("I click the login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 32
  testRunner.Then("I am on the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -142,7 +231,7 @@ this.FeatureBackground();
                     "Sad"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I am an invalid user and I try to log in", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 18
+#line 35
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -155,22 +244,22 @@ this.ScenarioInitialize(scenarioInfo);
 #line 4
 this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "Email",
                             "Password"});
-                table2.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "Nish@SpartaGlobal.com",
                             "InvalidPassword"});
-                table2.AddRow(new string[] {
-                            "InvalidUser@SpartaGlobal.com",
-                            "Password1!"});
-#line 19
- testRunner.Given("And I have the following credentials:", ((string)(null)), table2, "Given ");
+#line 36
+ testRunner.Given("And I have the following credentials:", ((string)(null)), table4, "Given ");
 #line hidden
-#line 23
+#line 39
+ testRunner.And("enter these credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 40
  testRunner.When("I click the login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 24
+#line 41
  testRunner.Then("I am given an error message Invalid login attempt", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -199,7 +288,7 @@ this.FeatureBackground();
             argumentsOfScenario.Add("page", page);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I click on register or forgotten password button im taken to register or forgotte" +
                     "n password page", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 28
+#line 45
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -212,10 +301,10 @@ this.ScenarioInitialize(scenarioInfo);
 #line 4
 this.FeatureBackground();
 #line hidden
-#line 29
+#line 46
  testRunner.When(string.Format("I click the {0} button", button), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 30
+#line 47
  testRunner.Then(string.Format("I am taken to the {0} page", page), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
