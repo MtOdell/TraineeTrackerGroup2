@@ -12,8 +12,8 @@ namespace TraineeTrackerTests.lib.pages
     {
         private IWebDriver SeleniumDriver { get; }
         private string _loginPageUrl = "https://localhost:7166/Identity/Account/Login";
-        private IWebElement _passwordField => SeleniumDriver.FindElement(By.Id("Input_Password"));
-        private IWebElement _emailField => SeleniumDriver.FindElement(By.Id("Input_Email"));
+        private IWebElement _passwordField => SeleniumDriver.FindElement(By.Id("password_field"));
+        private IWebElement _emailField => SeleniumDriver.FindElement(By.Id("email_field"));
         private IWebElement _loginButton => SeleniumDriver.FindElement(By.Id("login_submit"));
         private IWebElement _registerButton => SeleniumDriver.FindElement(By.Id("register_page_button"));
         private IWebElement _forgotPasswordButton => SeleniumDriver.FindElement(By.Id("forgot_password"));

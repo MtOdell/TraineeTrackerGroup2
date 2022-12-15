@@ -112,16 +112,22 @@ this.FeatureBackground();
                 table1.AddRow(new string[] {
                             "Nish@SpartaGlobal.com",
                             "Password1!"});
+                table1.AddRow(new string[] {
+                            "Adam@SpartaGlobal.com",
+                            "Password1!"});
+                table1.AddRow(new string[] {
+                            "Admin@SpartaGlobal.com",
+                            "Password1!"});
 #line 9
  testRunner.Given("And I have the following credentials:", ((string)(null)), table1, "Given ");
 #line hidden
-#line 12
+#line 14
  testRunner.And("enter these credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 13
+#line 15
  testRunner.When("I click the login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 14
+#line 16
  testRunner.Then("I am on the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -139,7 +145,7 @@ this.FeatureBackground();
                     "Happy"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I am a valid trainee and I log in with my email and password", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 17
+#line 19
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -158,16 +164,16 @@ this.FeatureBackground();
                 table2.AddRow(new string[] {
                             "Adam@SpartaGlobal.com",
                             "Password1!"});
-#line 18
+#line 20
  testRunner.Given("And I have the following credentials:", ((string)(null)), table2, "Given ");
 #line hidden
-#line 21
+#line 23
  testRunner.And("enter these credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 22
+#line 24
  testRunner.When("I click the login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 23
+#line 25
  testRunner.Then("I am on the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -185,7 +191,7 @@ this.FeatureBackground();
                     "Happy"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I am a valid admin and I log in with my email and password", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 26
+#line 28
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -204,16 +210,16 @@ this.FeatureBackground();
                 table3.AddRow(new string[] {
                             "Admin@SpartaGlobal.com",
                             "Password1!"});
-#line 27
+#line 29
  testRunner.Given("And I have the following credentials:", ((string)(null)), table3, "Given ");
 #line hidden
-#line 30
+#line 32
  testRunner.And("enter these credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 31
+#line 33
  testRunner.When("I click the login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 32
+#line 34
  testRunner.Then("I am on the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -231,7 +237,7 @@ this.FeatureBackground();
                     "Sad"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I am an invalid user and I try to log in", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 35
+#line 37
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -250,16 +256,16 @@ this.FeatureBackground();
                 table4.AddRow(new string[] {
                             "Nish@SpartaGlobal.com",
                             "InvalidPassword"});
-#line 36
+#line 38
  testRunner.Given("And I have the following credentials:", ((string)(null)), table4, "Given ");
 #line hidden
-#line 39
+#line 41
  testRunner.And("enter these credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 40
+#line 42
  testRunner.When("I click the login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 41
+#line 43
  testRunner.Then("I am given an error message Invalid login attempt", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -288,7 +294,7 @@ this.FeatureBackground();
             argumentsOfScenario.Add("page", page);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I click on register or forgotten password button im taken to register or forgotte" +
                     "n password page", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 45
+#line 47
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -301,10 +307,10 @@ this.ScenarioInitialize(scenarioInfo);
 #line 4
 this.FeatureBackground();
 #line hidden
-#line 46
+#line 48
  testRunner.When(string.Format("I click the {0} button", button), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 47
+#line 49
  testRunner.Then(string.Format("I am taken to the {0} page", page), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
