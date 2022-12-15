@@ -16,7 +16,7 @@ namespace TraineeTrackerTests.lib.tests
         [Given(@"I am on the Loginpage")]
         public void GivenIAmOnTheLoginpage()
         {
-            Website.SL_LoginPage.VisitLoginPage();
+            Website.LoginPage.VisitLoginPage();
         }
         [Given(@"And I have the following credentials:")]
         public void GivenAndIHaveTheFollowingCredentials(Table table)
@@ -26,29 +26,29 @@ namespace TraineeTrackerTests.lib.tests
         [Given(@"enter these credentials")]
         public void GivenEnterTheseCredentials()
         {
-            Website.SL_LoginPage.EnterCredentials(_credentials);
+            Website.LoginPage.EnterCredentials(_credentials);
         }
 
         [Then(@"I am given an error message Invalid login attempt")]
         public void ThenIAmGivenAnErrorMessageInvalidLoginAttempt()
         {
-            Assert.That(Website.SL_LoginPage.CheckErrorMessage(), Does.Contain("Invalid login attempt"));
+            Assert.That(Website.LoginPage.CheckErrorMessage(), Does.Contain("Invalid login attempt"));
         }
 
         [When(@"I click the login button")]
         public void WhenIClickTheLoginButton()
         {
-            Website.SL_LoginPage.ClickLoginButton();
+            Website.LoginPage.ClickLoginButton();
         }
         [When(@"I click the register button")]
         public void WhenIClickTheRegisterButton()
         {
-            Website.SL_LoginPage.ClickRegisterButton();
+            Website.LoginPage.ClickRegisterButton();
         }
         [When(@"I click the forgot password button")]
         public void WhenIClickTheForgotPasswordButton()
         {
-            Website.SL_LoginPage.ClickForgotPasswordButton();
+            Website.LoginPage.ClickForgotPasswordButton();
         }
         [Then(@"I am taken to the (.*) page")]
         public void ThenIAmTakenToTheRegisterPage(string url)

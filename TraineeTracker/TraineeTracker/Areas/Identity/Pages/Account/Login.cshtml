@@ -17,13 +17,13 @@
                     <label asp-for="Input.Email" class="form-label"></label>
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
-                <div  class="form-floating">
+                <div class="form-floating">
                     <input id="password_field" asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
                     <label asp-for="Input.Password" class="form-label"></label>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
                 <div>
-                    <div  class="checkbox" style="float: left;">
+                    <div class="checkbox" style="float: left;">
                         <label asp-for="Input.RememberMe" class="form-label" style="color:white;">
                             <input id="rememberme_checkbox" class="form-check-input" asp-for="Input.RememberMe" />
                             @Html.DisplayNameFor(m => m.Input.RememberMe)

@@ -9,12 +9,11 @@ namespace TraineeTrackerTests.lib.tests
     [Binding]
     public class Homepage_FeatureStepDefinitions
     {
-        private Website<ChromeDriver> Website;
+        private Website<ChromeDriver> Website = new Website<ChromeDriver>();
         private Exception exceptionCatch;
         [Given(@"I have a browser open")]
         public void GivenIHaveABrowserOpen()
         {
-            Website = new Website<ChromeDriver>();
             Website.SeleniumDriver.Manage().Window.Maximize();
         }
 
@@ -112,12 +111,11 @@ namespace TraineeTrackerTests.lib.tests
             Assert.That(Website.SeleniumDriver.Url, Is.EqualTo("https://localhost:7166/"));
         }
 
-
-        [AfterTestRun]
-        public static void AfterTestRun(Website<ChromeDriver> Website)
+        [AfterScenario]
+        public void DisposeWebDriver()
         {
             Website.SeleniumDriver.Quit();
-            Website.SeleniumDriver.Dispose();
         }
+
     }
 }

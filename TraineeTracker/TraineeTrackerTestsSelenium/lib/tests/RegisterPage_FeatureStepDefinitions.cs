@@ -15,7 +15,7 @@ namespace TraineeTrackerTests.lib.tests
         [Given(@"I am on the register page")]
         public void GivenIAmOnTheRegisterPage()
         {
-            Website.SL_RegisterPage.VisitRegisterPage();
+            Website.RegisterPage.VisitRegisterPage();
         }
 
         [Given(@"I input valid info to register")]
@@ -27,7 +27,7 @@ namespace TraineeTrackerTests.lib.tests
         [When(@"I press the register button")]
         public void WhenIPressTheRegisterButton()
         {
-            Website.SL_RegisterPage.ClickRegisterButton();
+            Website.RegisterPage.ClickRegisterButton();
         }
     }
 }
