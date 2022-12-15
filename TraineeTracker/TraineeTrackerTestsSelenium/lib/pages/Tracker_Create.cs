@@ -18,7 +18,7 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement GetCreateBtn => SeleniumDriver.FindElement(By.Id("submit_btn"));
         private IWebElement GetBackBtn => SeleniumDriver.FindElement(By.Id("back_btn"));
 
-        private string _createUrl = "https://localhost:7166/UserDatas/Create/";
+        private string _createUrl = "https://localhost:7166/Trackers/Create";
 
         public Tracker_Create(IWebDriver seleniumDriver)
         {

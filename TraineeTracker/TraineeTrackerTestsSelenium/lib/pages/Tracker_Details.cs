@@ -18,7 +18,7 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement GetEditBtn => SeleniumDriver.FindElement(By.Id("edit_btn"));
         private IWebElement GetBackBtn => SeleniumDriver.FindElement(By.Id("back_btn"));
 
-        private string _detailsUrl = "https://localhost:7166/UserDatas/Details/";
+        private string _detailsUrl = "https://localhost:7166/Trackers/Details";
 
         public Tracker_Details(IWebDriver seleniumDriver)
         {

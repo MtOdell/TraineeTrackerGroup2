@@ -1,11 +1,17 @@
+using OpenQA.Selenium.Chrome;
 using System;
 using TechTalk.SpecFlow;
+using TraineeTrackerTests.lib.pages;
+using TraineeTrackerTests.Utils;
 
 namespace TraineeTrackerTests.lib.tests
 {
     [Binding]
     public class Tracker_DetailsStepDefinitions
     {
+        public Website<ChromeDriver> Website { get; } = new Website<ChromeDriver>();
+        protected Credentials _credentials = new();
+
         [Given(@"I am on the Details page for a tracker")]
         public void GivenIAmOnTheDetailsPageForATracker()
         {
@@ -39,7 +45,7 @@ namespace TraineeTrackerTests.lib.tests
         [Then(@"I should be taken to the Tracker Index page")]
         public void ThenIShouldBeTakenToTheIndexPage()
         {
-            throw new PendingStepException();
+            Assert.That(Website.Tracker_Index.CheckOnIndexPage());
         }
 
         [When(@"I go to the URL of the Details page for a tracker that does not exist")]

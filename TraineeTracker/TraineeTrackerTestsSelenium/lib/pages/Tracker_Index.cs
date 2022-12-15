@@ -26,6 +26,7 @@ namespace TraineeTrackerTests.lib.pages
         }
 
         public void VisitIndexPage(int id) => SeleniumDriver.Navigate().GoToUrl($@"{_indexUrl}/{id}");
+        public bool CheckOnIndexPage() => SeleniumDriver.Url.Contains("https://localhost:7166/Trackers/Index");
         public void ClickCreateButton() => GetCreateBtn.Click();
         public void ClickBackButton() => GetBackBtn.Click();
         public void ClickDetailsButton(int index) => GetDetailsBtns[index].Click();

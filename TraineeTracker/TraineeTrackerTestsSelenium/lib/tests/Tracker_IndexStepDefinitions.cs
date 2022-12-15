@@ -2,17 +2,19 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using TechTalk.SpecFlow;
-using TraineeTrackerTests.lib.pages;
 using TraineeTrackerTests.Utils;
+using TraineeTrackerTestsSelenium.lib.tests;
 
 namespace TraineeTrackerTests.lib.tests
 {
+    //[Scope(Feature = "Tracker_Index")]
     [Binding]
-    public class Tracker_IndexStepDefinitions
+    public class Tracker_IndexStepDefinitions : Tracker_Shared
     {
-        public Website<ChromeDriver> Website { get; } = new Website<ChromeDriver>();
-        protected Credentials _credentials = new();
-        
+        //public Website<ChromeDriver> Website { get; } = new Website<ChromeDriver>();
+        //protected Credentials _credentials = new();
+
+        [Scope(Feature = "Tracker_Index")]
         [BeforeScenario(Order = 0)]
         public void SetTrainerCredentials()
         {
@@ -27,6 +29,7 @@ namespace TraineeTrackerTests.lib.tests
             _credentials.Password = "Password1!";
         }
 
+        [Scope(Feature = "Tracker_Index")]
         [BeforeScenario(Order = 2)]
         public void Login()
         {
@@ -35,19 +38,23 @@ namespace TraineeTrackerTests.lib.tests
             Website.SL_LoginPage.ClickLoginButton();
         }
 
+        [Scope(Feature = "Tracker_Index")]
         [AfterScenario]
         public void CleanUp()
         {
             Website.SeleniumDriver.Quit();
         }
-        
+
+        [Scope(Feature = "Tracker_Index")]
         [Given(@"I am a valid trainer")]
         public void GivenIAmAValidTrainer()
         {
-            if (_credentials.Email != "Phil@SpartaGlobal.com")
+            Website.SeleniumDriver.FindElement(By.CssSelector("span[class=navbar-toggler-icon]")).Click();
+            if (!Website.SeleniumDriver.FindElement(By.LinkText("Hello, Phil@SpartaGlobal.com")).Text.Contains("Phil@SpartaGlobal.com"))
             {
                 Assert.Fail("Not a valid trainer");
             }
+            //Thread.Sleep(5000);
         }
 
         [Given(@"I am a valid trainee")]
@@ -55,9 +62,6 @@ namespace TraineeTrackerTests.lib.tests
         {
             _credentials.Email = "Adam@SpartaGlobal.com";
             _credentials.Password = "Password1!";
-            Website.SL_LoginPage.VisitLoginPage();
-            Website.SL_LoginPage.EnterCredentials(_credentials);
-            Website.SL_LoginPage.ClickLoginButton();
             if (_credentials.Email != "Adam@SpartaGlobal.com")
             {
                 Assert.Fail("Not a valid trainee");
