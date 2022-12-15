@@ -1,4 +1,4 @@
-﻿Feature: SL_Homepage_Feature
+﻿Feature: Homepage_Feature
 
 As a User, I want to be able to navigate Home page
 
@@ -22,7 +22,7 @@ Scenario: Going to register page while logged in
 	And I am logged in
 	And I am on a homepage
 	When I press register button
-	Then Nothing happens
+	Then Error is thrown
 
 @HappyPath
 Scenario: Going to user page while logged in
@@ -45,3 +45,11 @@ Scenario: Going to privacy page
 	And I am on a homepage
 	When I press privacy button
 	Then I am redirected to the privacy page
+
+@HappyPath
+Scenario: Logging out when logged in
+	Given I have a browser open
+	And I am logged in
+	When I press logout
+	Then I am logged out
+	And I am redirected the home page
