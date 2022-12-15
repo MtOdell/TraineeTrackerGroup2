@@ -10,13 +10,14 @@ Background:
 @Happy
 Scenario: When I input valid details then I am registered as a user
 	Given I input valid info to register
-		| Email                    | Password   | Confirm Password |
-		| NewUser@SpartaGlobal.com | Password1! | Password1!       |
+		| Email                    | Password   | ConfirmPassword |
+		| NewUser@SpartaGlobal.com | Password1! | Password1!      |
+	And enter these credentials
 	When I press the register button
 	Then I am on the home page
 @Register
 @Happy
-Scenario: When I input vinalid details then I am registered as a user
+Scenario: When I input invalid details then I am registered as a user
 	Given I input valid info to register
 		| Email                    | Password        | Confirm Password |
 		| InvalidEmail             | Password1!      | Password1!       |

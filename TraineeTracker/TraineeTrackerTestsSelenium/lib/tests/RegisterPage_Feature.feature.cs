@@ -110,7 +110,7 @@ this.FeatureBackground();
                 TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                             "Email",
                             "Password",
-                            "Confirm Password"});
+                            "ConfirmPassword"});
                 table5.AddRow(new string[] {
                             "NewUser@SpartaGlobal.com",
                             "Password1!",
@@ -119,9 +119,12 @@ this.FeatureBackground();
  testRunner.Given("I input valid info to register", ((string)(null)), table5, "Given ");
 #line hidden
 #line 15
- testRunner.When("I press the register button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("enter these credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 16
+ testRunner.When("I press the register button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 17
  testRunner.Then("I am on the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -129,13 +132,13 @@ this.FeatureBackground();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("When I input vinalid details then I am registered as a user")]
+        [NUnit.Framework.DescriptionAttribute("When I input invalid details then I am registered as a user")]
         [NUnit.Framework.CategoryAttribute("Register")]
         [NUnit.Framework.CategoryAttribute("Happy")]
         [NUnit.Framework.TestCaseAttribute("", null)]
         [NUnit.Framework.TestCaseAttribute("", null)]
         [NUnit.Framework.TestCaseAttribute("", null)]
-        public void WhenIInputVinalidDetailsThenIAmRegisteredAsAUser(string error, string[] exampleTags)
+        public void WhenIInputInvalidDetailsThenIAmRegisteredAsAUser(string error, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "Register",
@@ -147,8 +150,8 @@ this.FeatureBackground();
             string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("error", error);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When I input vinalid details then I am registered as a user", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 19
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When I input invalid details then I am registered as a user", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 20
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -177,13 +180,13 @@ this.FeatureBackground();
                             "newuser@SpartaGlobal.com",
                             "Password1!",
                             "PasswordNotSame"});
-#line 20
+#line 21
  testRunner.Given("I input valid info to register", ((string)(null)), table6, "Given ");
 #line hidden
-#line 25
+#line 26
  testRunner.When("I press the register button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 26
+#line 27
  testRunner.Then(string.Format("I get an error {0}", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

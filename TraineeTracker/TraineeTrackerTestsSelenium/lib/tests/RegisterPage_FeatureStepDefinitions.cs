@@ -23,6 +23,11 @@ namespace TraineeTrackerTests.lib.tests
         {
             _registerInfo = table.CreateInstance<RegisterInfo>();
         }
+        [Given(@"enter these registerInfo")]
+        public void GivenEnterTheseRegisterInfo()
+        {
+            Website.RegisterPage.EnterRegisterInfo(_registerInfo);
+        }
 
         [When(@"I press the register button")]
         public void WhenIPressTheRegisterButton()

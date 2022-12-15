@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TraineeTrackerTests.Utils;
 
 namespace TraineeTrackerTests.lib.pages
 {
@@ -11,10 +12,10 @@ namespace TraineeTrackerTests.lib.pages
     {
         private IWebDriver SeleniumDriver { get; }
         private string _registerPageUrl = "https://localhost:7166/Identity/Account/Register";
-        private IWebElement _passwordField => SeleniumDriver.FindElement(By.Id("password_field"));
-        private IWebElement _confirmPasswordField => SeleniumDriver.FindElement(By.Id("confirm_password_field"));
-        private IWebElement _emailField => SeleniumDriver.FindElement(By.Id("email_field"));
-        private IWebElement _registerButton => SeleniumDriver.FindElement(By.Id("registersubmit"));
+        private IWebElement _passwordField => SeleniumDriver.FindElement(By.Id("Input_Password"));
+        private IWebElement _confirmPasswordField => SeleniumDriver.FindElement(By.Id("Input_ConfirmPassword"));
+        private IWebElement _emailField => SeleniumDriver.FindElement(By.Id("Input_Email"));
+        private IWebElement _registerButton => SeleniumDriver.FindElement(By.Id("registerSubmit"));
         private IWebElement _loginPageButton => SeleniumDriver.FindElement(By.Id("login_page_button"));
         public RegisterPage(IWebDriver seleniumDriver)
         {
@@ -26,5 +27,12 @@ namespace TraineeTrackerTests.lib.pages
         public void EnterConfirmPassword(string confirmPassword) => _confirmPasswordField.SendKeys(confirmPassword);
         public void ClickRegisterButton() => _registerButton.Click();
         public void ClickLoginPageButton() => _loginPageButton.Click();
+
+        public void EnterRegisterInfo(RegisterInfo registerInfo)
+        {
+            EnterEmail(registerInfo.Email);
+            EnterPassword(registerInfo.Password);
+            EnterConfirmPassword(registerInfo.ConfirmPassword);
+        }
     }
 }
