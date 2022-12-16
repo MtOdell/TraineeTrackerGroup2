@@ -8,10 +8,11 @@ Scenario: I edit details about a tracker and click Save
 	Given I am logged in
 	And I am on the Edit page for a tracker
 	When I change the data in the input fields:
-		| Field          | Value      |
-		| stop_input     | New data 1 |
-		| start_input    | New data 2 |
-		| continue_input | New data 3 |
+		| Field          | Value            |
+		| stop_input     | Different data 1 |
+		| start_input    | Differenr data 2 |
+		| continue_input | Different data 3 |
+		| comments_input | Different data 4 |
 	And I click the Save button
 	Then my changes should be saved
 
