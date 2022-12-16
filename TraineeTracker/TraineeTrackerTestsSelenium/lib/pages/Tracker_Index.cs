@@ -53,5 +53,6 @@ namespace TraineeTrackerTests.lib.pages
                 throw new ArgumentException("Piechart number must be either 1 or 2");
             }
         }
+        public int CountRows() => SeleniumDriver.FindElements(By.Id("table_row")).Count();
     }
 }

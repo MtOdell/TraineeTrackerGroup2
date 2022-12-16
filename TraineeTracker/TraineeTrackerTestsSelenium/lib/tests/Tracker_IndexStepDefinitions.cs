@@ -2,6 +2,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using TechTalk.SpecFlow;
+using TraineeTrackerTests.lib.pages;
 using TraineeTrackerTests.Utils;
 using TraineeTrackerTestsSelenium.lib.tests;
 
@@ -22,7 +23,7 @@ namespace TraineeTrackerTests.lib.tests
             _credentials.Password = "Password1!";
         }
 
-        [BeforeScenario("I am logged in as a trainee and I am on the Tracker Index page", Order = 1)]
+        [BeforeScenario("Trainee", Order = 1)]
         public void SetTraineeCredentials()
         {
             _credentials.Email = "Adam@SpartaGlobal.com";
@@ -56,15 +57,12 @@ namespace TraineeTrackerTests.lib.tests
             }
         }
 
+        [Scope(Feature = "Tracker_Index")]
         [Given(@"I am a valid trainee")]
         public void GivenIAmAValidTrainee()
         {
             _credentials.Email = "Adam@SpartaGlobal.com";
             _credentials.Password = "Password1!";
-            if (_credentials.Email != "Adam@SpartaGlobal.com")
-            {
-                Assert.Fail("Not a valid trainee");
-            }
         }
 
         [Given(@"I am on the View Trainees page")]
@@ -194,5 +192,18 @@ namespace TraineeTrackerTests.lib.tests
 
             Assert.That(Website.Tracker_Details.CheckOnDetailsPage());
         }
+
+        [When(@"I go to my tracker page")]
+        public void WhenIGoToMyTrackerPage()
+        {
+            Website.Tracker_Index.VisitIndexPage(17);
+        }
+
+        [Then(@"I can see my trackers")]
+        public void ThenICanSeeMyTrackers()
+        {
+            Assert.That(Website.Tracker_Index.CountRows(), Is.Not.Zero);
+        }
+
     }
 }

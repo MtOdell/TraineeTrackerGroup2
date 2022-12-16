@@ -1,51 +1,57 @@
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using System;
 using TechTalk.SpecFlow;
 using TraineeTrackerTests.lib.pages;
+using TraineeTrackerTests.Utils;
 
 namespace TraineeTrackerTestsSelenium.lib.tests
 {
+    [Scope(Feature = "Tracker_Edit")]
     [Binding]
-    public class Tracker_EditStepDefinitions : Tracker_Shared
+    public class Tracker_EditStepDefinitions
     {
+        public Website<ChromeDriver> Website { get; } = new Website<ChromeDriver>();
+        protected Credentials _credentials = new();
         private int _trackerId = 178;
         private string _stopData;
         private string _startData;
         private string _continueData;
         private string _commentsData;
 
-        [Scope(Feature = "Tracker_Edit")]
-        [BeforeScenario(Order = 0)]
-        public void SetTrainerCredentials()
+        [AfterScenario("ChangeTrackerDetails", Order = 1)]
+        public void UndoTrackerChanges()
         {
-            _credentials.Email = "Phil@SpartaGlobal.com";
-            _credentials.Password = "Password1!";
+            Website.Tracker_Edit.VisitEditPage(_trackerId);
+            Website.Tracker_Edit.GetStopInput.Clear();
+            Website.Tracker_Create.GiveStopInput("New data 1");
+            Website.Tracker_Edit.GetStartInput.Clear();
+            Website.Tracker_Create.GiveStartInput("New data 2");
+            Website.Tracker_Edit.GetContinueInput.Clear();
+            Website.Tracker_Create.GiveContinueInput("New data 3");
+            Website.Tracker_Edit.ClickSaveBtn();
         }
 
-        [Scope(Feature = "Tracker_Edit")]
-        [BeforeScenario(Order = 2)]
-        public void Login()
-        {
-            Website.LoginPage.VisitLoginPage();
-            Website.LoginPage.EnterCredentials(_credentials);
-            Website.LoginPage.ClickLoginButton();
-        }
-
-        [Scope(Feature = "Tracker_Edit")]
-        [AfterScenario]
+        [AfterScenario(Order = 2)]
         public void CleanUp()
         {
             Website.SeleniumDriver.Quit();
+        }
+
+        [Given(@"I am a valid trainee")]
+        public void GivenIAmAValidTrainee()
+        {
+            _credentials.Email = "Adam@SpartaGlobal.com";
+            _credentials.Password = "Password1!";
+            Website.LoginPage.VisitLoginPage();
+            Website.LoginPage.EnterCredentials(_credentials);
+            Website.LoginPage.ClickLoginButton();
         }
 
         [Given(@"I am on the Edit page for a tracker")]
         public void GivenIAmOnTheEditPageForATracker()
         {
             Website.Tracker_Edit.VisitEditPage(_trackerId);
-            if (!Website.Tracker_Edit.CheckOnEditPage())
-            {
-                Assert.Fail("Not on Edit page");
-            }
         }
 
         [When(@"I change the data in the input fields:")]
@@ -56,16 +62,15 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             {
                 inputData.Add(row[0], row[1]);
             }
+            Website.Tracker_Edit.GetStopInput.Clear();
             Website.Tracker_Create.GiveStopInput(inputData["stop_input"]);
             _stopData = inputData["stop_input"];
+            Website.Tracker_Edit.GetStartInput.Clear();
             Website.Tracker_Create.GiveStartInput(inputData["start_input"]);
             _startData = inputData["start_input"];
+            Website.Tracker_Edit.GetContinueInput.Clear();
             Website.Tracker_Create.GiveContinueInput(inputData["continue_input"]);
             _continueData = inputData["continue_input"];
-            Website.Tracker_Create.GiveCommentsInput(inputData["comments_input"]);
-            _commentsData = inputData["comments_input"];
-            Website.Tracker_Create.SelectTechnicalDropDownOption("Skilled");
-            Website.Tracker_Create.SelectConsultantDropDownOption("Skilled");
         }
 
         [When(@"I click the Save button")]
@@ -78,13 +83,14 @@ namespace TraineeTrackerTestsSelenium.lib.tests
         public void ThenMyChangesShouldBeSaved()
         {
             Website.Tracker_Details.VisitDetailsPage(_trackerId);
+            Thread.Sleep(2000);
+            var newStopData = Website.Tracker_Details.CheckStopData();
+            var newStartData = Website.Tracker_Details.CheckStartData();
+            var newContinueData = Website.Tracker_Details.CheckContinueData();
 
-            Assert.That(Website.Tracker_Details.CheckStopData(), Is.EqualTo(_stopData));
-            Assert.That(Website.Tracker_Details.CheckStartData(), Is.EqualTo(_startData));
-            Assert.That(Website.Tracker_Details.CheckContinueData(), Is.EqualTo(_continueData));
-            Assert.That(Website.Tracker_Details.CheckCommentsData(), Is.EqualTo(_commentsData));
-            Assert.That(Website.Tracker_Details.CheckTechnicalSkillData(), Is.EqualTo("Skilled"));
-            Assert.That(Website.Tracker_Details.CheckConsultantSkillData(), Is.EqualTo("Skilled"));
+            Assert.That(newStopData, Is.EqualTo(_stopData));
+            Assert.That(newStartData, Is.EqualTo(_startData));
+            Assert.That(newContinueData, Is.EqualTo(_continueData));
         }
 
         [When(@"I click the Back button on the Edit page")]
@@ -99,7 +105,6 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             Website.Tracker_Edit.VisitEditPage(-1);
         }
 
-        [Scope(Feature = "Tracker_Edit")]
         [Then(@"nothing should be displayed")]
         public void ThenNothingShouldBeDisplayed()
         {
