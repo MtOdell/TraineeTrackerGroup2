@@ -20,7 +20,7 @@ Scenario: I edit details about a tracker and click Save
 @TrackerEdit
 @Happy
 Scenario: I click the Back button
-	Given I am valid trainee
+	Given I am a valid trainee
 	And I am on the Edit page for a tracker
 	When I click the Back button on the Edit page
 	Then I should be taken to the Tracker Index page
@@ -28,6 +28,6 @@ Scenario: I click the Back button
 @TrackerEdit
 @Sad
 Scenario: Trying to access the Edit page for a tracker that does not exist
-	Given I am valid trainee
+	Given I am a valid trainee
 	When I go to the URL of the Edit page for a tracker that does not exist
 	Then nothing should be displayed

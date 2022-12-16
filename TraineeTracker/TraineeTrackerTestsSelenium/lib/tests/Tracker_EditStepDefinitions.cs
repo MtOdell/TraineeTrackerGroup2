@@ -123,5 +123,11 @@ namespace TraineeTrackerTestsSelenium.lib.tests
 
             Assert.That(exceptionIsNotNull);
         }
+
+        [Then(@"I should be taken to the Tracker Index page")]
+        public void ThenIShouldBeTakenToTheIndexPage()
+        {
+            Assert.That(Website.Tracker_Index.CheckOnIndexPage());
+        }
     }
 }
