@@ -68,7 +68,7 @@ namespace TraineeTrackerTestsSelenium.lib.tests
         [Then(@"I am on the Index Page")]
         public void ThenIAmOnTheIndexPage()
         {
-            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo("https://localhost:7166/UserDatas/Index/"));
+            Assert.That(Website.SeleniumDriver.Url, Does.Contain("https://localhost:7166/UserDatas/Index/"));
         }
     }
 }

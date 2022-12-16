@@ -17,7 +17,6 @@ namespace TraineeTrackerTests.APITests
 {
     public class UserDataApiController_Tests
     {
-       
         [Test]
         [Category("Constructor")]
         [Category("Happy Path")]

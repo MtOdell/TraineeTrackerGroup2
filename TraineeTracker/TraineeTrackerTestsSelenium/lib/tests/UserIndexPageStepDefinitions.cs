@@ -41,25 +41,25 @@ namespace TraineeTrackerTestsSelenium.lib.tests
         [Then(@"I am on the User Edit Page")]
         public void ThenIAmOnTheUserEditPage()
         {
-            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo("https://localhost:7166/UserDatas/Edit/"));
+            Assert.That(Website.SeleniumDriver.Url, Does.Contain("https://localhost:7166/UserDatas/Edit/"));
         }
 
         [Then(@"I am on the User Details Page")]
         public void ThenIAmOnTheUserDetailsPage()
         {
-            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo("https://localhost:7166/UserDatas/Details/"));
+            Assert.That(Website.SeleniumDriver.Url, Does.Contain("https://localhost:7166/UserDatas/Details/"));
         }
 
         [Then(@"I am on the Trackers Page")]
         public void ThenIAmOnTheTrackersPage()
         {
-            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo("https://localhost:7166/Trackers"));
+            Assert.That(Website.SeleniumDriver.Url, Does.Contain("https://localhost:7166/Trackers"));
         }
 
         [Then(@"I am on the User Delete Page")]
         public void ThenIAmOnTheUserDeletePage()
         {
-            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo("https://localhost:7166/UserDatas/Delete/"));
+            Assert.That(Website.SeleniumDriver.Url, Does.Contain("https://localhost:7166/UserDatas/Delete/"));
         }
     }
 }

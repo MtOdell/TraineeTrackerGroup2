@@ -18,20 +18,20 @@ namespace TraineeTrackerTestsSelenium.lib.tests
         [Given(@"I am on the Login Page")]
         public void GivenIAmOnTheLoginPage()
         {
-            Website.SL_LoginPage.VisitLoginPage();
+            Website.LoginPage.VisitLoginPage();
         }
 
         [Given(@"I use Admin credentials")]
         public void GivenIUseAdminCredentials()
         {
-            Website.SL_LoginPage.EnterEmail("Admin@SpartaGlobal.com");
-            Website.SL_LoginPage.EnterPassword("Password1!");
+            Website.LoginPage.EnterEmail("Admin@SpartaGlobal.com");
+            Website.LoginPage.EnterPassword("Password1!");
         }
 
         [When(@"I press the login button")]
         public void WhenIPressTheLoginButton()
         {
-            Website.SL_LoginPage.ClickLoginButton();
+            Website.LoginPage.ClickLoginButton();
         }
 
         [AfterScenario]

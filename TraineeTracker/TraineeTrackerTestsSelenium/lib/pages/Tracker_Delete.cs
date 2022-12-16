@@ -18,7 +18,7 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement GetDeleteBtn => SeleniumDriver.FindElement(By.Id("delete_btn"));
         private IWebElement GetBackBtn => SeleniumDriver.FindElement(By.Id("back_btn"));
 
-        private string _deleteUrl = "https://localhost:7166/UserDatas/Delete/";
+        private string _deleteUrl = "https://localhost:7166/Trackers/Delete";
 
         public Tracker_Delete(IWebDriver seleniumDriver)
         {
@@ -26,6 +26,7 @@ namespace TraineeTrackerTests.lib.pages
         }
 
         public void VisitDeletePage(int id) => SeleniumDriver.Navigate().GoToUrl($@"{_deleteUrl}/{id}");
+        public bool CheckOnDeletePage() => SeleniumDriver.Url.Contains("https://localhost:7166/Trackers/Delete");
         public string CheckStopData() => GetStopData.Text;
         public string CheckStartData() => GetStartData.Text;
         public string CheckContinueData() => GetContinueData.Text;

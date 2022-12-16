@@ -14,7 +14,6 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement GetCreateBtn => SeleniumDriver.FindElement(By.Id("create_btn"));
         private IWebElement GetBackBtn => SeleniumDriver.FindElement(By.Id("back_btn"));
         private ReadOnlyCollection<IWebElement> GetDetailsBtns => SeleniumDriver.FindElements(By.Id("details_btn"));
-        private ReadOnlyCollection<IWebElement> GetDeleteBtns => SeleniumDriver.FindElements(By.Id("delete_btn"));
         private IWebElement GetPieChartElement1 => SeleniumDriver.FindElement(By.Id("piechart"));
         private IWebElement GetPieChartElement2 => SeleniumDriver.FindElement(By.Id("piechart_two"));
 
@@ -26,10 +25,19 @@ namespace TraineeTrackerTests.lib.pages
         }
 
         public void VisitIndexPage(int id) => SeleniumDriver.Navigate().GoToUrl($@"{_indexUrl}/{id}");
+        public bool CheckOnIndexPage() => SeleniumDriver.Url.Contains("https://localhost:7166/Trackers/Index");
         public void ClickCreateButton() => GetCreateBtn.Click();
         public void ClickBackButton() => GetBackBtn.Click();
         public void ClickDetailsButton(int index) => GetDetailsBtns[index].Click();
-        public void ClickDeleteButton(int index) => GetDeleteBtns[index].Click();
+        public void ClickDeleteButton(int index)
+        {
+            //var deleteBtn = GetDeleteBtns[index];
+            //deleteBtn.Click();
+        }
+        public void ClickTrackerDeleteButton(int week)
+        {
+            SeleniumDriver.FindElement(By.Id($"Delete{week}")).Click();
+        }
         public ReadOnlyCollection<IWebElement> GetAllSectionsOfPieChart(int pieChartNumber)
         {
             if (pieChartNumber == 1)

@@ -25,7 +25,8 @@ namespace TraineeTrackerTests.lib.pages
             SeleniumDriver = seleniumDriver;
         }
 
-        public void VisitEditUrl(int id) => SeleniumDriver.Navigate().GoToUrl($@"{_editUrl}/{id}");
+        public void VisitEditPage(int id) => SeleniumDriver.Navigate().GoToUrl($@"{_editUrl}/{id}");
+        public bool CheckOnEditPage() => SeleniumDriver.Url.Contains("https://localhost:7166/Trackers/Edit");
         public void GiveStopInput(string input) => GetStopInput.SendKeys(input);
         public string CheckStopValue() => GetStopInput.Text;
         public void GiveStartInput(string input) => GetStartInput.SendKeys(input);
