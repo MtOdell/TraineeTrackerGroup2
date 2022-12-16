@@ -13,6 +13,7 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement GetStopData => SeleniumDriver.FindElement(By.Id("stop_data"));
         private IWebElement GetStartData => SeleniumDriver.FindElement(By.Id("start_data"));
         private IWebElement GetContinueData => SeleniumDriver.FindElement(By.Id("continue_data"));
+        private IWebElement GetCommentsData => SeleniumDriver.FindElement(By.Id("comments_data"));
         private IWebElement GetTechnicalSkillData => SeleniumDriver.FindElement(By.Id("technical_data"));
         private IWebElement GetConsultantSkillData => SeleniumDriver.FindElement(By.Id("consultant_data"));
         private IWebElement GetEditBtn => SeleniumDriver.FindElement(By.Id("edit_btn"));
@@ -30,6 +31,7 @@ namespace TraineeTrackerTests.lib.pages
         public string CheckStopData() => GetStopData.Text;
         public string CheckStartData() => GetStartData.Text;
         public string CheckContinueData() => GetContinueData.Text;
+        public string CheckCommentsData() => GetCommentsData.Text;
         public string CheckTechnicalSkillData() => GetTechnicalSkillData.Text;
         public string CheckConsultantSkillData() => GetConsultantSkillData.Text;
         public void ClickEditBtn() => GetEditBtn.Click();

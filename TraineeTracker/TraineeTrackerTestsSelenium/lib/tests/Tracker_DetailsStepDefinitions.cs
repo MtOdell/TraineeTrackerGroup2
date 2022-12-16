@@ -1,45 +1,85 @@
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using TechTalk.SpecFlow;
 using TraineeTrackerTests.lib.pages;
 using TraineeTrackerTests.Utils;
+using TraineeTrackerTestsSelenium.lib.tests;
 
 namespace TraineeTrackerTests.lib.tests
 {
     [Binding]
-    public class Tracker_DetailsStepDefinitions
+    public class Tracker_DetailsStepDefinitions : Tracker_Shared
     {
-        public Website<ChromeDriver> Website { get; } = new Website<ChromeDriver>();
-        protected Credentials _credentials = new();
+        private int _id = 113;
+
+        [Scope(Feature = "Tracker_Details")]
+        [BeforeScenario(Order = 0)]
+        public void SetTrainerCredentials()
+        {
+            _credentials.Email = "Phil@SpartaGlobal.com";
+            _credentials.Password = "Password1!";
+        }
+
+        [Scope(Feature = "Tracker_Details")]
+        [BeforeScenario(Order = 2)]
+        public void Login()
+        {
+            Website.SL_LoginPage.VisitLoginPage();
+            Website.SL_LoginPage.EnterCredentials(_credentials);
+            Website.SL_LoginPage.ClickLoginButton();
+        }
+
+        [Scope(Feature = "Tracker_Details")]
+        [AfterScenario]
+        public void CleanUp()
+        {
+            Website.SeleniumDriver.Quit();
+        }
+
+        [Scope(Feature = "Tracker_Details")]
+        [Given(@"I am a valid user")]
+        public void GivenIAmAValidUser()
+        {
+            Website.SeleniumDriver.FindElement(By.CssSelector("span[class=navbar-toggler-icon]")).Click();
+            if (!Website.SeleniumDriver.FindElement(By.LinkText("Hello, Phil@SpartaGlobal.com")).Displayed)
+            {
+                Assert.Fail("Not a valid user");
+            }
+        }
 
         [Given(@"I am on the Details page for a tracker")]
         public void GivenIAmOnTheDetailsPageForATracker()
         {
-            throw new PendingStepException();
+            Website.Tracker_Details.VisitDetailsPage(_id);
         }
 
-        [Then(@"the correct details for that tracker should be shown")]
+        [Then(@"the details for that tracker should be shown")]
         public void ThenTheDetailsForThatTrackerShouldBeShown()
         {
-            throw new PendingStepException();
+            Assert.That(Website.Tracker_Details.CheckStopData(), Is.Not.Null);
+            Assert.That(Website.Tracker_Details.CheckStartData(), Is.Not.Null);
+            Assert.That(Website.Tracker_Details.CheckContinueData(), Is.Not.Null);
+            Assert.That(Website.Tracker_Details.CheckTechnicalSkillData(), Is.Not.Null);
+            Assert.That(Website.Tracker_Details.CheckContinueData(), Is.Not.Null);
         }
 
         [When(@"I click the Edit button")]
         public void WhenIClickTheEditButton()
         {
-            throw new PendingStepException();
+            Website.Tracker_Details.ClickEditBtn();
         }
 
         [Then(@"I should be taken to the Edit page")]
         public void ThenIShouldBeTakenToTheEditPage()
         {
-            throw new PendingStepException();
+            Assert.That(Website.Tracker_Edit.CheckOnEditPage());
         }
 
         [When(@"I click the Back button on the Details page")]
         public void WhenIClickTheBackButtonOnTheDetailsPage()
         {
-            throw new PendingStepException();
+            Website.Tracker_Details.ClickBackBtn();
         }
 
         [Then(@"I should be taken to the Tracker Index page")]
@@ -51,13 +91,28 @@ namespace TraineeTrackerTests.lib.tests
         [When(@"I go to the URL of the Details page for a tracker that does not exist")]
         public void WhenIGoToAURLOfTheDetailsPageForATrackerThatDoesNotExist()
         {
-            throw new PendingStepException();
+            Website.Tracker_Details.VisitDetailsPage(-1);
         }
 
-        [Then(@"I should get a (.*) status code")]
-        public void ThenIShouldGetAStatusCode(int p0)
+        [Scope(Feature = "Tracker_Details")]
+        [Then(@"nothing should be displayed")]
+        public void ThenNothingShouldBeDisplayed()
         {
-            throw new PendingStepException();
+            bool exceptionIsNotNull = false;
+            try
+            {
+                Website.Tracker_Details.CheckStopData();
+            }
+            catch (NoSuchElementException e)
+            {
+                if (e != null)
+                {
+                    exceptionIsNotNull = true;
+                }
+            }
+
+            Assert.That(exceptionIsNotNull);
         }
+
     }
 }

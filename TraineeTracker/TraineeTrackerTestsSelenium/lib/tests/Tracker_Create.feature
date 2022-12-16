@@ -12,6 +12,7 @@ Scenario: I enter details about a tracker and click Create
 		| stop_input     | New data 1 |
 		| start_input    | New data 2 |
 		| continue_input | New data 3 |
+		| comments_input | New data 4 |
 	And I click the Save button on the Create page
 	Then a new tracker is created with the details I entered
 
@@ -26,9 +27,9 @@ Scenario: I click the Back button
 @TrackerCreate
 @Sad
 Scenario: Trying to access the Create page for a tracker that does not exist
-	Given I am logged in
+	Given I am a valid trainer
 	When I go to the URL of the Create page for a tracker that does not exist
-	Then I should get a 404 status code
+	Then nothing should be displayed
 
 @TrackerCreate
 @Sad

@@ -7,7 +7,11 @@ As a user, I want to be able to edit a tracker
 Scenario: I edit details about a tracker and click Save
 	Given I am logged in
 	And I am on the Edit page for a tracker
-	When I change the data in the input fields
+	When I change the data in the input fields:
+		| Field          | Value      |
+		| stop_input     | New data 1 |
+		| start_input    | New data 2 |
+		| continue_input | New data 3 |
 	And I click the Save button
 	Then my changes should be saved
 
@@ -24,4 +28,4 @@ Scenario: I click the Back button
 Scenario: Trying to access the Edit page for a tracker that does not exist
 	Given I am logged in
 	When I go to the URL of the Edit page for a tracker that does not exist
-	Then I should get a 404 status code
+	Then nothing should be displayed

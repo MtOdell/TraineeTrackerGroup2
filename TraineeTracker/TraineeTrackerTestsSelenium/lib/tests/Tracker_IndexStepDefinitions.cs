@@ -54,7 +54,6 @@ namespace TraineeTrackerTests.lib.tests
             {
                 Assert.Fail("Not a valid trainer");
             }
-            //Thread.Sleep(5000);
         }
 
         [Given(@"I am a valid trainee")]
