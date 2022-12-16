@@ -44,3 +44,9 @@ Scenario: When I input an invalid passwords then I am given the passwords must b
 	And enter these registerInfo
 	When I press the register button
 	Then I get the password is invalid error 
+
+@Register
+@Happy
+Scenario: When I click on the login page button I am taken to the login page
+	When I press the login button
+	Then I am on the login page

@@ -39,6 +39,18 @@ namespace TraineeTrackerTests.lib.tests
         {
             Website.RegisterPage.ClickRegisterButton();
         }
+        [When(@"I press the login button")]
+        public void WhenIPressTheLoginButton()
+        {
+            Website.RegisterPage.ClickLoginPageButton();
+        }
+
+        [Then(@"I am on the login page")]
+        public void ThenIAmOnTheLoginPage()
+        {
+            Assert.That(Website.SeleniumDriver.Url, Is.EqualTo("https://localhost:7166/Identity/Account/Login"));
+        }
+
         [Then(@"I am on the edit page")]
         public void ThenIAmOnTheEditPage()
         {
