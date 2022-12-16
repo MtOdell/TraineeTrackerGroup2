@@ -24,9 +24,9 @@ namespace TraineeTrackerTestsSelenium.lib.tests
         [BeforeScenario(Order = 2)]
         public void Login()
         {
-            Website.SL_LoginPage.VisitLoginPage();
-            Website.SL_LoginPage.EnterCredentials(_credentials);
-            Website.SL_LoginPage.ClickLoginButton();
+            Website.LoginPage.VisitLoginPage();
+            Website.LoginPage.EnterCredentials(_credentials);
+            Website.LoginPage.ClickLoginButton();
         }
 
         [Scope(Feature = "Tracker_Delete")]

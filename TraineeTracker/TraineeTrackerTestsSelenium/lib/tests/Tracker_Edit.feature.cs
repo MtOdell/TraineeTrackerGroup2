@@ -100,20 +100,20 @@ this.ScenarioInitialize(scenarioInfo);
 #line 9
  testRunner.And("I am on the Edit page for a tracker", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "Field",
                             "Value"});
-                table6.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "stop_input",
                             "New data 1"});
-                table6.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "start_input",
                             "New data 2"});
-                table6.AddRow(new string[] {
+                table10.AddRow(new string[] {
                             "continue_input",
                             "New data 3"});
 #line 10
- testRunner.When("I change the data in the input fields:", ((string)(null)), table6, "When ");
+ testRunner.When("I change the data in the input fields:", ((string)(null)), table10, "When ");
 #line hidden
 #line 15
  testRunner.And("I click the Save button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
