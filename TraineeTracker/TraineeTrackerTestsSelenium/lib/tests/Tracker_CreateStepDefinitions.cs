@@ -174,5 +174,28 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             Assert.That(exceptionIsNotNull);
         }
 
+        [Scope(Feature = "Tracker_Create")]
+        [Then(@"I should be blocked from accessing the page")]
+        public void ThenIShouldBeBlockedFromAccessingThePage()
+        {
+            Assert.That(Website.Tracker_Create.CheckOnCreatePage(), Is.False);
+        }
+
+        [Scope(Feature = "Tracker_Create")]
+        [Then(@"an access denied message should appear")]
+        public void ThenAnAccessDeniedMessageShouldAppear()
+        {
+            string accessDeniedMessage = String.Empty;
+            try
+            {
+                accessDeniedMessage = Website.SeleniumDriver.FindElement(By.CssSelector("p[class='text-danger']")).Text;
+            }
+            catch (NoSuchElementException e)
+            {
+                Assert.Fail("Access denied message not found");
+            }
+            Assert.That(accessDeniedMessage.Contains("You do not have access to this resource."));
+        }
+
     }
 }

@@ -52,6 +52,15 @@ Scenario: I click the Delete button on a tracker in the list
 
 @TrackerIndex
 @Happy
+@Trainee
+Scenario: I am logged in as a trainee and I can access my trackers
+	Given I am a valid trainee
+	When I go to my tracker page
+	Then I can see my trackers
+
+@TrackerIndex
+@Happy
+@Trainee
 Scenario: I am logged in as a trainee and I am on the Tracker Index page
 	Given I am a valid trainee
 	And I am on the trainee Tracker page

@@ -21,7 +21,7 @@ Scenario: I press the Back button
 @Happy
 Scenario: The correct details for the tracker are displayed
 	//Given I am a valid trainer
-	And I am on the Delete page for a tracker
+	Given I am on the Delete page for a tracker
 	Then the correct details for that tracker should be shown
 
 @TrackerDelete
