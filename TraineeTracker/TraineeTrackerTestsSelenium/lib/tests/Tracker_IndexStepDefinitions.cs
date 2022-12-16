@@ -12,9 +12,6 @@ namespace TraineeTrackerTests.lib.tests
     [Binding]
     public class Tracker_IndexStepDefinitions : Tracker_Shared
     {
-        //public Website<ChromeDriver> Website { get; } = new Website<ChromeDriver>();
-        //protected Credentials _credentials = new();
-
         [Scope(Feature = "Tracker_Index")]
         [BeforeScenario(Order = 0)]
         public void SetTrainerCredentials()
@@ -50,11 +47,8 @@ namespace TraineeTrackerTests.lib.tests
         [Given(@"I am a valid trainer")]
         public void GivenIAmAValidTrainer()
         {
-            Website.SeleniumDriver.FindElement(By.CssSelector("span[class=navbar-toggler-icon]")).Click();
-            if (!Website.SeleniumDriver.FindElement(By.LinkText("Hello, Phil@SpartaGlobal.com")).Text.Contains("Phil@SpartaGlobal.com"))
-            {
-                Assert.Fail("Not a valid trainer");
-            }
+            _credentials.Email = "Phil@SpartaGlobal.com";
+            _credentials.Password = "Password1!";
         }
 
         [Scope(Feature = "Tracker_Index")]
