@@ -12,16 +12,42 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             Website.UserEditPage.VisitUserEditPage();
         }
 
+        [Given(@"I input valid information")]
+        public void GivenIInputValidInformation()
+        {
+            Website.UserEditPage.EnterFirstName("Walter");
+            Website.UserEditPage.EnterLastName("White");
+            Website.UserEditPage.EnterTitle("Prof.");
+            Website.UserEditPage.EnterEducation("MSc Chemistry");
+            Website.UserEditPage.EnterExperience("20 years");
+            Website.UserEditPage.EnterActivity("Cooking");
+            Website.UserEditPage.EnterBiography("6 Seasons");
+            Website.UserEditPage.EnterSkills("Chemistry");
+        }
+
+        [Given(@"I input valid information")]
+        public void GivenIInputInvalidInformation()
+        {
+            Website.UserEditPage.EnterFirstName("rthbtsbgh");
+            Website.UserEditPage.EnterLastName("gfsbtrhbrst");
+            Website.UserEditPage.EnterTitle("fgshtsrrth");
+            Website.UserEditPage.EnterEducation("tsrghrtg");
+            Website.UserEditPage.EnterExperience("dsthtrsgrt");
+            Website.UserEditPage.EnterActivity("sthrsttfd");
+            Website.UserEditPage.EnterBiography("htrshsfghfg");
+            Website.UserEditPage.EnterSkills("dfhttdtn");
+        }
+
         [When(@"I click on the save button")]
         public void WhenIClickOnTheSaveButton()
         {
-            throw new PendingStepException();
+            Website.UserEditPage.VisitUserEditPage();
         }
 
         [When(@"I click on the Back button")]
         public void WhenIClickOnTheBackButton()
         {
-            throw new PendingStepException();
+            Website.UserEditPage.VisitUserEditPage();
         }
 
         [Then(@"The user is edited")]
