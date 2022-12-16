@@ -4,6 +4,7 @@ using TechTalk.SpecFlow;
 namespace TraineeTrackerTestsSelenium.lib.tests
 {
     [Binding]
+    [Scope(Feature = "UserDetailsPage")]
     public class UserDetailsPageStepDefinitions : UserData_SharedSteps
     {
         [Given(@"I am on the User Details Page")]

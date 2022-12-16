@@ -4,6 +4,7 @@ using TechTalk.SpecFlow;
 namespace TraineeTrackerTestsSelenium.lib.tests
 {
     [Binding]
+    [Scope(Feature = "UserDeletePage")]
     public class UserDeletePageStepDefinitions : UserData_SharedSteps
     {
         [Given(@"I am on the User Delete Page")]

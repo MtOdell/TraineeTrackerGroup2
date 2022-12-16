@@ -4,6 +4,7 @@ using TechTalk.SpecFlow;
 namespace TraineeTrackerTestsSelenium.lib.tests
 {
     [Binding]
+    [Scope(Feature = "UserEditPage")]
     public class UserEditPageStepDefinitions : UserData_SharedSteps
     {
         [Given(@"I am on the User Edit Page")]
@@ -25,7 +26,7 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             Website.UserEditPage.EnterSkills("Chemistry");
         }
 
-        [Given(@"I input valid information")]
+        [Given(@"I input invalid information")]
         public void GivenIInputInvalidInformation()
         {
             Website.UserEditPage.EnterFirstName("rthbtsbgh");

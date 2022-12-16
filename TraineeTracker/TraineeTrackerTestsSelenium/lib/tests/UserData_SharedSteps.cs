@@ -10,6 +10,7 @@ using TraineeTrackerTests.lib.pages;
 
 namespace TraineeTrackerTestsSelenium.lib.tests
 {
+    [Binding]
     public class UserData_SharedSteps
     {
         public Website<FirefoxDriver> Website { get; } = new Website<FirefoxDriver>();

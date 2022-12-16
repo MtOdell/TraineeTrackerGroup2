@@ -4,18 +4,19 @@ using TechTalk.SpecFlow;
 namespace TraineeTrackerTestsSelenium.lib.tests
 {
     [Binding]
+    [Scope(Feature = "UserCreatePage")]
     public class UserCreatePageStepDefinitions : UserData_SharedSteps
-    {
+    {   
         [Given(@"I am on the User Create Page")]
         public void GivenIAmOnTheUserCreatePage()
         {
             Website.UserCreatePage.VisitUserCreatePage();
         }
 
-        [Given(@"I input valid information")]
-        public void GivenIInputValidInformation()
+        [Given(@"I input valid information with an ""([^""]*)""")]
+        public void GivenIInputValidInformationWithAn(string id)
         {
-            Website.UserCreatePage.EnterUserId("420");
+            Website.UserCreatePage.EnterUserId(id);
             Website.UserCreatePage.EnterFirstName("Walter");
             Website.UserCreatePage.EnterLastName("White");
             Website.UserCreatePage.EnterTitle("Prof.");
@@ -26,10 +27,10 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             Website.UserCreatePage.EnterSkills("Chemistry");
         }
 
-        [Given(@"I input invalid information")]
-        public void GivenIInputInvalidInformation()
+        [Given(@"I input invalid information with an ""([^""]*)""")]
+        public void GivenIInputInvalidInformationWithAn(string id)
         {
-            Website.UserCreatePage.EnterUserId("gfsbtf");
+            Website.UserCreatePage.EnterUserId(id);
             Website.UserCreatePage.EnterFirstName("fdsbreasb");
             Website.UserCreatePage.EnterLastName("afdbrtfdab");
             Website.UserCreatePage.EnterTitle("afbrfegbdarf");
@@ -55,7 +56,7 @@ namespace TraineeTrackerTestsSelenium.lib.tests
         [Then(@"The user is created")]
         public void ThenTheUserIsCreated()
         {
-            throw new PendingStepException();
+            Website.UserDetailsPage.VisitUserDetailsPage();
         }
 
         [Then(@"The user is not created")]

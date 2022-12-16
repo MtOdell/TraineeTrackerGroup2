@@ -5,6 +5,7 @@ using TraineeTrackerTests.lib.pages;
 namespace TraineeTrackerTestsSelenium.lib.tests
 {
     [Binding]
+    [Scope(Feature = "UserIndexPage")]
     public class UserIndexPageStepDefinitions : UserData_SharedSteps
     {
         [Given(@"I am on the User Index Page")]
