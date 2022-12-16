@@ -13,6 +13,7 @@ namespace TraineeTrackerTests.lib.pages
     {
         #region Accessible Page Objects and Selenium Driver
         public IWebDriver SeleniumDriver { get; set; }
+        public ForgottenPasswordPage ForgottenPasswordPage { get; set; }
         public LoginPage LoginPage { get; set; }
         public Homepage Homepage { get; set; }
         public RegisterPage RegisterPage { get; set; }
@@ -25,6 +26,7 @@ namespace TraineeTrackerTests.lib.pages
         {
             SeleniumDriver = new SeleniumDriverConfig<T>(pageLoadInSecs, implicitWaitInSecs, isHeadless).Driver;
             Homepage = new Homepage(SeleniumDriver);
+            ForgottenPasswordPage = new ForgottenPasswordPage(SeleniumDriver);
             LoginPage = new LoginPage(SeleniumDriver);
             RegisterPage = new RegisterPage(SeleniumDriver);
             Tracker_Index = new Tracker_Index(SeleniumDriver);

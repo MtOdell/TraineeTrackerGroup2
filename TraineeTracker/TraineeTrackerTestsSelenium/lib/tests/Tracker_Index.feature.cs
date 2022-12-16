@@ -20,8 +20,8 @@ namespace TraineeTrackerTestsSelenium.Lib.Tests
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("SL_Tracker_Index")]
-    public partial class SL_Tracker_IndexFeature
+    [NUnit.Framework.DescriptionAttribute("Tracker_Index")]
+    public partial class Tracker_IndexFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -35,7 +35,7 @@ namespace TraineeTrackerTestsSelenium.Lib.Tests
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "lib/tests", "SL_Tracker_Index", "As a user, I want to be able to see a list of trackers, so I can access them", ProgrammingLanguage.CSharp, featureTags);
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "lib/tests", "Tracker_Index", "As a user, I want to be able to see a list of trackers, so I can access them", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -296,16 +296,16 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("I try to access a trainee Tracker page for a trainee that does not exist")]
+        [NUnit.Framework.DescriptionAttribute("I am logged in as a trainee and I am on the Tracker Index page")]
         [NUnit.Framework.CategoryAttribute("TrackerIndex")]
-        [NUnit.Framework.CategoryAttribute("Sad")]
-        public void ITryToAccessATraineeTrackerPageForATraineeThatDoesNotExist()
+        [NUnit.Framework.CategoryAttribute("Happy")]
+        public void IAmLoggedInAsATraineeAndIAmOnTheTrackerIndexPage()
         {
             string[] tagsOfScenario = new string[] {
                     "TrackerIndex",
-                    "Sad"};
+                    "Happy"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I try to access a trainee Tracker page for a trainee that does not exist", null, tagsOfScenario, argumentsOfScenario, featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I am logged in as a trainee and I am on the Tracker Index page", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 55
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -317,12 +317,46 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 56
- testRunner.Given("I am a valid trainer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I am a valid trainee", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 57
- testRunner.When("I go to a URL of a tracker page for a trainee that does not exist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I am on the trainee Tracker page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 58
+ testRunner.Then("the only button I can see should be the Details buttons for my trackers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("I try to access a trainee Tracker page for a trainee that does not exist")]
+        [NUnit.Framework.CategoryAttribute("TrackerIndex")]
+        [NUnit.Framework.CategoryAttribute("Sad")]
+        public void ITryToAccessATraineeTrackerPageForATraineeThatDoesNotExist()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "TrackerIndex",
+                    "Sad"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I try to access a trainee Tracker page for a trainee that does not exist", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 62
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 63
+ testRunner.Given("I am a valid trainer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 64
+ testRunner.When("I go to the URL of the tracker page for a trainee that does not exist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 65
  testRunner.Then("no trackers should be displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

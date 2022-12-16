@@ -107,48 +107,42 @@ this.ScenarioInitialize(scenarioInfo);
 #line 7
 this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                             "Email",
                             "Password",
-                            "Confirm Password"});
-                table3.AddRow(new string[] {
+                            "ConfirmPassword"});
+                table5.AddRow(new string[] {
                             "NewUser@SpartaGlobal.com",
                             "Password1!",
                             "Password1!"});
 #line 12
- testRunner.Given("I input valid info to register", ((string)(null)), table3, "Given ");
+ testRunner.Given("I input valid info to register", ((string)(null)), table5, "Given ");
 #line hidden
 #line 15
- testRunner.When("I press the register button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("enter these registerInfo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 16
- testRunner.Then("I am on the home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("I press the register button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 17
+ testRunner.Then("I am on the edit page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("When I input vinalid details then I am registered as a user")]
+        [NUnit.Framework.DescriptionAttribute("When I input invalid details then I am registered as a user")]
         [NUnit.Framework.CategoryAttribute("Register")]
-        [NUnit.Framework.CategoryAttribute("Happy")]
-        [NUnit.Framework.TestCaseAttribute("", null)]
-        [NUnit.Framework.TestCaseAttribute("", null)]
-        [NUnit.Framework.TestCaseAttribute("", null)]
-        public void WhenIInputVinalidDetailsThenIAmRegisteredAsAUser(string error, string[] exampleTags)
+        [NUnit.Framework.CategoryAttribute("Sad")]
+        public void WhenIInputInvalidDetailsThenIAmRegisteredAsAUser()
         {
-            string[] @__tags = new string[] {
+            string[] tagsOfScenario = new string[] {
                     "Register",
-                    "Happy"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            string[] tagsOfScenario = @__tags;
+                    "Sad"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("error", error);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When I input vinalid details then I am registered as a user", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 19
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When I input invalid details then I am registered as a user", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 20
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -161,30 +155,159 @@ this.ScenarioInitialize(scenarioInfo);
 #line 7
 this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                             "Email",
                             "Password",
-                            "Confirm Password"});
-                table4.AddRow(new string[] {
+                            "ConfirmPassword"});
+                table6.AddRow(new string[] {
                             "InvalidEmail",
                             "Password1!",
                             "Password1!"});
-                table4.AddRow(new string[] {
-                            "newuser@SpartaGlobal.com",
-                            "InvalidPassword",
-                            "InvalidPassword"});
-                table4.AddRow(new string[] {
-                            "newuser@SpartaGlobal.com",
-                            "Password1!",
-                            "PasswordNotSame"});
-#line 20
- testRunner.Given("I input valid info to register", ((string)(null)), table4, "Given ");
+#line 21
+ testRunner.Given("I input valid info to register", ((string)(null)), table6, "Given ");
+#line hidden
+#line 24
+ testRunner.And("enter these registerInfo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 25
  testRunner.When("I press the register button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 26
- testRunner.Then(string.Format("I get an error {0}", error), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I get an error The Email field is not a valid e-mail address", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("When I input two different passwords then I am given the passwords dont match err" +
+            "or")]
+        [NUnit.Framework.CategoryAttribute("Register")]
+        [NUnit.Framework.CategoryAttribute("Sad")]
+        public void WhenIInputTwoDifferentPasswordsThenIAmGivenThePasswordsDontMatchError()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Register",
+                    "Sad"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When I input two different passwords then I am given the passwords dont match err" +
+                    "or", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 30
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 7
+this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Email",
+                            "Password",
+                            "ConfirmPassword"});
+                table7.AddRow(new string[] {
+                            "NewEmail@SpartaGlobal.com",
+                            "Password1!",
+                            "DifferentPassword"});
+#line 31
+ testRunner.Given("I input valid info to register", ((string)(null)), table7, "Given ");
+#line hidden
+#line 34
+ testRunner.And("enter these registerInfo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 35
+ testRunner.When("I press the register button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 36
+ testRunner.Then("I get the passwords dont match error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("When I input an invalid passwords then I am given the passwords must be 6 letter " +
+            "long and have a number and special charachter error")]
+        [NUnit.Framework.CategoryAttribute("Register")]
+        [NUnit.Framework.CategoryAttribute("Sad")]
+        public void WhenIInputAnInvalidPasswordsThenIAmGivenThePasswordsMustBe6LetterLongAndHaveANumberAndSpecialCharachterError()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Register",
+                    "Sad"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When I input an invalid passwords then I am given the passwords must be 6 letter " +
+                    "long and have a number and special charachter error", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 40
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 7
+this.FeatureBackground();
+#line hidden
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Email",
+                            "Password",
+                            "ConfirmPassword"});
+                table8.AddRow(new string[] {
+                            "NewEmail@SpartaGlobal.com",
+                            "wrong",
+                            "wrong"});
+#line 41
+ testRunner.Given("I input valid info to register", ((string)(null)), table8, "Given ");
+#line hidden
+#line 44
+ testRunner.And("enter these registerInfo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 45
+ testRunner.When("I press the register button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 46
+ testRunner.Then("I get the password is invalid error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("When I click on the login page button I am taken to the login page")]
+        [NUnit.Framework.CategoryAttribute("Register")]
+        [NUnit.Framework.CategoryAttribute("Happy")]
+        public void WhenIClickOnTheLoginPageButtonIAmTakenToTheLoginPage()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Register",
+                    "Happy"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When I click on the login page button I am taken to the login page", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 50
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 7
+this.FeatureBackground();
+#line hidden
+#line 51
+ testRunner.When("I press the login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 52
+ testRunner.Then("I am on the login page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -12,7 +12,12 @@ namespace TraineeTrackerTests.lib.tests
     public class LoginPageStepDefinitions
     {
         public Website<ChromeDriver> Website { get; } = new Website<ChromeDriver>();
-        protected Credentials _credentials;
+        protected IEnumerable<Credentials >_credentials;
+        [AfterScenario]
+        public void DisposeWebDriver()
+        {
+            Website.SeleniumDriver.Quit();
+        }
         [Given(@"I am on the Loginpage")]
         public void GivenIAmOnTheLoginpage()
         {
@@ -21,12 +26,15 @@ namespace TraineeTrackerTests.lib.tests
         [Given(@"And I have the following credentials:")]
         public void GivenAndIHaveTheFollowingCredentials(Table table)
         {
-            _credentials = table.CreateInstance<Credentials>();
+            _credentials = table.CreateSet<Credentials>();
         }
         [Given(@"enter these credentials")]
         public void GivenEnterTheseCredentials()
         {
-            Website.LoginPage.EnterCredentials(_credentials);
+            foreach(var item in _credentials)
+            {
+                Website.LoginPage.EnterCredentials(item);
+            }
         }
 
         [Then(@"I am given an error message Invalid login attempt")]
