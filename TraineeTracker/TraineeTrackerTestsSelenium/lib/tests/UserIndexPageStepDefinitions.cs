@@ -1,9 +1,8 @@
 using System;
 using TechTalk.SpecFlow;
 using TraineeTrackerTests.lib.pages;
-using TraineeTrackerTestsSelenium.lib.tests;
 
-namespace TraineeTrackerTestsSelenium
+namespace TraineeTrackerTestsSelenium.lib.tests
 {
     [Binding]
     public class UserIndexPageStepDefinitions : UserData_SharedSteps
