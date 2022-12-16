@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TraineeTracker.Models;
 
 namespace APITestFramework.HttpManager
 {
@@ -32,6 +33,7 @@ namespace APITestFramework.HttpManager
         public async Task<string?> MakeUserRequestAsync(string? resource, string id, Method method)
         {
             var request = new RestRequest();
+            request.AddHeader("Accept", "application/json");
             request.AddHeader("Content-Type", "application/json");
 
             request.Method = method;
