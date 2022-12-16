@@ -52,21 +52,21 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             Website.SeleniumDriver.Quit();
         }
 
-        [Scope(Feature = "Tracker_Delete")]
-        [Given(@"I am a valid trainer")]
-        public void GivenIAmAValidTrainer()
-        {
-            Website.SeleniumDriver.FindElement(By.CssSelector("span[class=navbar-toggler-icon]")).Click();
-            if (!Website.SeleniumDriver.FindElement(By.LinkText("Hello, Phil@SpartaGlobal.com")).Text.Contains("Phil@SpartaGlobal.com"))
-            {
-                Assert.Fail("Not a valid trainer");
-            }
-        }
+        //[Scope(Feature = "Tracker_Delete")]
+        //[Given(@"I am a valid trainer")]
+        //public void GivenIAmAValidTrainer()
+        //{
+        //    Website.SeleniumDriver.FindElement(By.CssSelector("span[class=navbar-toggler-icon]")).Click();
+        //    if (!Website.SeleniumDriver.FindElement(By.LinkText("Hello, Phil@SpartaGlobal.com")).Text.Contains("Phil@SpartaGlobal.com"))
+        //    {
+        //        Assert.Fail("Not a valid trainer");
+        //    }
+        //}
 
         [Given(@"I am on the Delete page for a tracker")]
         public void GivenIAmOnTheDeletePageForATracker()
         {
-            Website.Tracker_Index.ClickDeleteButton(_trackerCount - 1);
+            Website.Tracker_Index.ClickTrackerDeleteButton(_trackerCount);
         }
 
         [When(@"I click the Delete button")]

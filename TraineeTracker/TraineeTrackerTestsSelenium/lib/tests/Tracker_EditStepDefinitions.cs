@@ -22,7 +22,7 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             _credentials.Password = "Password1!";
         }
 
-        [Scope(Feature = "Tracker_Index")]
+        [Scope(Feature = "Tracker_Edit")]
         [BeforeScenario(Order = 2)]
         public void Login()
         {
@@ -31,7 +31,7 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             Website.LoginPage.ClickLoginButton();
         }
 
-        [Scope(Feature = "Tracker_Index")]
+        [Scope(Feature = "Tracker_Edit")]
         [AfterScenario]
         public void CleanUp()
         {

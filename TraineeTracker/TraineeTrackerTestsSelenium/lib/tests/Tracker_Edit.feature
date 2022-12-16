@@ -5,7 +5,7 @@ As a user, I want to be able to edit a tracker
 @TrackerEdit
 @Happy
 Scenario: I edit details about a tracker and click Save
-	Given I am logged in
+	Given I am a valid user
 	And I am on the Edit page for a tracker
 	When I change the data in the input fields:
 		| Field          | Value            |
@@ -19,7 +19,7 @@ Scenario: I edit details about a tracker and click Save
 @TrackerEdit
 @Happy
 Scenario: I click the Back button
-	Given I am logged in
+	Given I am valid user
 	And I am on the Edit page for a tracker
 	When I click the Back button on the Edit page
 	Then I should be taken to the Tracker Index page
@@ -27,6 +27,6 @@ Scenario: I click the Back button
 @TrackerEdit
 @Sad
 Scenario: Trying to access the Edit page for a tracker that does not exist
-	Given I am logged in
+	Given I am valid user
 	When I go to the URL of the Edit page for a tracker that does not exist
 	Then nothing should be displayed

@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    int counter = 0;
 }
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -79,12 +80,13 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
+                        counter++;
                         <tr id="table_row">
                             <th scope="row" id="row_heading"><h5 style="display:inline;">@Html.DisplayNameFor(modelItem => item.Week) @Html.DisplayFor(modelItem => item.Week)</h5></th>
                             <td id="row_data">
                                 <a asp-action="Details" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light" id="details_btn">Details</button></a>
                                 @if (User.IsInRole("Trainer") || User.IsInRole("Admin")){
-                                    <a asp-action="Delete" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light" id="delete_btn">Delete</button></a>
+                                    <a asp-action="Delete" asp-route-id="@item.ID"><button type="button" class="modify-user-btn btn-light" id=@($"Delete{counter}")>Delete</button></a>
                                 }
                             </td>
                         </tr>
