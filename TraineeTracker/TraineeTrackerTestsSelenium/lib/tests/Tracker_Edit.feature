@@ -31,3 +31,11 @@ Scenario: Trying to access the Edit page for a tracker that does not exist
 	Given I am a valid trainee
 	When I go to the URL of the Edit page for a tracker that does not exist
 	Then nothing should be displayed
+
+@TrackerEdit
+@Sad
+Scenario: I am a Trainee with no trackers and I try to edit a tracker
+	Given I am a valid trainee with no trackers
+	And I am on the Tracker Index page
+	When I try to click the Details button for a tracker
+	Then I shouldn't be able to access a tracker
