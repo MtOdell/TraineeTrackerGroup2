@@ -14,10 +14,10 @@ namespace TraineeTrackerTestsSelenium.lib.tests
         public Website<ChromeDriver> Website { get; } = new Website<ChromeDriver>();
         protected Credentials _credentials = new();
         private int _trackerId = 178;
+        private int _noTrackerTraineeId = 25;
         private string _stopData;
         private string _startData;
         private string _continueData;
-        private string _commentsData;
 
         [AfterScenario("ChangeTrackerDetails", Order = 1)]
         public void UndoTrackerChanges()
@@ -46,6 +46,22 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             Website.LoginPage.VisitLoginPage();
             Website.LoginPage.EnterCredentials(_credentials);
             Website.LoginPage.ClickLoginButton();
+        }
+
+        [Given(@"I am a valid trainee with no trackers")]
+        public void GivenIAmAValidTraineeWithNoTrackers()
+        {
+            _credentials.Email = "AdamR@SpartaGlobal.com";
+            _credentials.Password = "Password1!";
+            Website.LoginPage.VisitLoginPage();
+            Website.LoginPage.EnterCredentials(_credentials);
+            Website.LoginPage.ClickLoginButton();
+        }
+
+        [Given(@"I am on the Tracker Index page")]
+        public void GivenIAmOnTheTrackerIndexPage()
+        {
+            Website.Tracker_Index.VisitIndexPage(_noTrackerTraineeId);
         }
 
         [Given(@"I am on the Edit page for a tracker")]
@@ -103,6 +119,25 @@ namespace TraineeTrackerTestsSelenium.lib.tests
         public void WhenIGoToTheURLOfTheEditPageForATrackerThatDoesNotExist()
         {
             Website.Tracker_Edit.VisitEditPage(-1);
+        }
+
+        [When(@"I try to click the Details button for a tracker")]
+        public void WhenITryToClickTheDetailsButtonForATracker()
+        {
+            try
+            {
+                Website.Tracker_Index.ClickDetailsButton(0);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+
+            }
+        }
+
+        [Then(@"I shouldn't be able to access a tracker")]
+        public void ThenIShouldntBeAbleToAccessATracker()
+        {
+            Assert.That(Website.Tracker_Index.CheckOnIndexPage());
         }
 
         [Then(@"nothing should be displayed")]

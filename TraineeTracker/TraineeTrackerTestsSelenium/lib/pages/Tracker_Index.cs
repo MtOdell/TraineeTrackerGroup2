@@ -54,5 +54,6 @@ namespace TraineeTrackerTests.lib.pages
             }
         }
         public int CountRows() => SeleniumDriver.FindElements(By.Id("table_row")).Count();
+        public IWebElement GetTableOfTrackers() => SeleniumDriver.FindElement(By.Id("table"));
     }
 }

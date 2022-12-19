@@ -67,7 +67,9 @@ namespace TraineeTrackerTestsSelenium.lib.tests
         [Given(@"I am on the Delete page for a tracker")]
         public void GivenIAmOnTheDeletePageForATracker()
         {
-            Website.Tracker_Index.ClickTrackerDeleteButton(_trackerCount);
+            Website.Tracker_Index.VisitIndexPage(_traineeId);
+            Website.Tracker_Index.ClickTrackerDeleteButton(1);
+            Thread.Sleep(2000);
         }
 
         [When(@"I click the Delete button")]
@@ -105,6 +107,13 @@ namespace TraineeTrackerTestsSelenium.lib.tests
         public void ThenAnAccessDeniedMessageShouldAppear()
         {
             Assert.That(Website.Tracker_Delete.GetAccessDeniedParagraphText().Contains("You do not have access to this resource."));
+        }
+
+        [Scope(Feature = "Tracker_Delete")]
+        [Then(@"I should be taken to the Tracker Index page")]
+        public void ThenIShouldBeTakenToTheIndexPage()
+        {
+            Assert.That(Website.Tracker_Index.CheckOnIndexPage());
         }
     }
 }
