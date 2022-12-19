@@ -1,9 +1,11 @@
-﻿Feature: SL_UserDeletePage
+﻿Feature: UserDeletePage
 
 Is used to delete a user
 
 Background:
-	Given A test user is created
+	Given I am on the Login Page
+	And I use Admin credentials
+	When I press the login button
 
 @HappyPath
 Scenario: I wish to delete a user
