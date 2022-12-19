@@ -13,7 +13,7 @@ namespace TraineeTrackerTestsSelenium.lib.tests
     [Binding]
     public class UserData_SharedSteps
     {
-        public Website<FirefoxDriver> Website { get; } = new Website<FirefoxDriver>();
+        public Website<ChromeDriver> Website { get; } = new Website<ChromeDriver>();
 
         [Given(@"I am on the Login Page")]
         public void GivenIAmOnTheLoginPage()

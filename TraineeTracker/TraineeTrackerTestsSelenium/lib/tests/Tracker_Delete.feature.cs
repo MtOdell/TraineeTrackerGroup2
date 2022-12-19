@@ -163,7 +163,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 24
- testRunner.And("I am on the Delete page for a tracker", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I am on the Delete page for a tracker", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 25
  testRunner.Then("the correct details for that tracker should be shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
