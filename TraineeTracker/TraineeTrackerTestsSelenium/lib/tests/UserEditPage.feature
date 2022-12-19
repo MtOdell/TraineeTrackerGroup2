@@ -20,9 +20,3 @@ Scenario: I wish to edit a user with invalid inputs
 	And I input invalid information
 	When I click on the save button
 	Then The error messages are shown
-
-@HappyPath
-Scenario: I wish to go back to the index page
-	Given I am on the User Edit Page
-	When I click on the Back button
-	Then I am on the Index Page
