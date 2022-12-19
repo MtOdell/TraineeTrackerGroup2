@@ -13,10 +13,17 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             Website.UserDeletePage.VisitUserDeletePage();
         }
 
+        [Given(@"I press the login button")]
+        public void GivenIPressTheLoginButton()
+        {
+            Website.LoginPage.ClickLoginButton();
+        }
+
+
         [When(@"I click on the Delete Button")]
         public void WhenIClickOnTheDeleteButton()
         {
-            Website.UserDeletePage.ClickDeleteButton();
+            Website.UserIndexPage.ClickDeleteButton();
         }
 
         [When(@"I click on the Back Button")]
@@ -25,12 +32,17 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             Website.UserDeletePage.ClickBackButton();
         }
 
-        [Then(@"The user is deleted")]
-        public void ThenTheUserIsDeleted()
+        [Given(@"I am on the User Index Page")]
+        public void GivenIAmOnTheUserIndexPage()
         {
-            throw new PendingStepException();
+            Website.Homepage.ClickUserButton();
         }
 
+        [Then(@"I am redirected to the delete user page")]
+        public void ThenIAmRedirectedToTheDeleteUserPage()
+        {
+            Assert.That(Website.SeleniumDriver.Url, Does.Contain("https://localhost:7166/UserDatas/Delete"));
+        }
         [Then(@"I am on the Index Page")]
         public void ThenIAmOnTheIndexPage()
         {

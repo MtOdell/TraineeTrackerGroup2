@@ -7,6 +7,7 @@ using TraineeTrackerTests.Utils;
 
 namespace TraineeTrackerTests.lib.tests
 {
+    [Scope(Feature = "RegisterPage_Feature")]
     [Binding]
     public class RegisterPage_FeatureStepDefinitions
     {

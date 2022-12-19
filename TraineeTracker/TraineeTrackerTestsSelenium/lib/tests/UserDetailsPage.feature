@@ -8,13 +8,14 @@ Background:
 	When I press the login button
 
 @HappyPath
-Scenario: I wish to go to the User Edit Page
-	Given I am on the User Details Page
-	When I press the Edit Button
-	Then I am on the User Edit Page
+Scenario: I wish to go to the User Details Page
+	Given I am on the User Data Page
+	When I press the Details
+	Then I am on the User Details Page
 
 @HappyPath
-Scenario: I wish to go to the Index Page
-	Given I am on the User Details Page
-	When I press the Back Button
-	Then I am on the Index Page
+Scenario: I wish to got o the User Edit Page
+Given I am on the User Data Page
+And I press Details
+When I press the Edit Button
+Then I am on the User Edit Page
