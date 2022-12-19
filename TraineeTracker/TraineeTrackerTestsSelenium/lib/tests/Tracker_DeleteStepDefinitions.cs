@@ -1,18 +1,23 @@
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using System;
 using TechTalk.SpecFlow;
+using TraineeTrackerTests.lib.pages;
+using TraineeTrackerTests.Utils;
 
 namespace TraineeTrackerTestsSelenium.lib.tests
 {
+    [Scope(Feature = "Tracker_Delete")]
     [Binding]
-    public class Tracker_DeleteStepDefinitions: Tracker_Shared
+    public class Tracker_DeleteStepDefinitions
     {
-        //private Tracker_CreateStepDefinitions createDef = new();
+        public Website<ChromeDriver> Website { get; } = new Website<ChromeDriver>();
+        protected Credentials _credentials = new();
         private int _traineeId = 17;
         private int _trackerId = 113;
         private int _trackerCount;
 
-        [Scope(Feature = "Tracker_Delete")]
+        //[Scope(Feature = "Tracker_Delete")]
         [BeforeScenario(Order = 0)]
         public void SetTrainerCredentials()
         {
@@ -20,8 +25,8 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             _credentials.Password = "Password1!";
         }
 
-        [Scope(Feature = "Tracker_Delete")]
-        [BeforeScenario(Order = 2)]
+        //[Scope(Feature = "Tracker_Delete")]
+        [BeforeScenario("Trainer", Order = 2)]
         public void Login()
         {
             Website.LoginPage.VisitLoginPage();
@@ -29,11 +34,25 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             Website.LoginPage.ClickLoginButton();
         }
 
-        [Scope(Feature = "Tracker_Delete")]
-        [BeforeScenario("I press the Delete button", Order = 3)]
-        public void CreateTrackerToDelete()
+        //[Scope(Feature = "Tracker_Delete")]
+        [AfterScenario]
+        public void CleanUp()
         {
-            //Website.Tracker_Index.VisitIndexPage(_traineeId);
+            Website.SeleniumDriver.Quit();
+        }
+
+        //[Scope(Feature = "Tracker_Delete")]
+        [Given(@"I am a valid trainee")]
+        public void GivenIAmAValidTrainee()
+        {
+            _credentials.Email = "Adam@SpartaGlobal.com";
+            _credentials.Password = "Password1!";
+            Login();
+        }
+
+        [Given(@"there is a tracker to delete")]
+        public void GivenThereIsATrackerToDelete()
+        {
             Website.Tracker_Create.VisitCreatePage(_traineeId);
             Website.Tracker_Create.GiveStopInput("New data 1");
             Website.Tracker_Create.GiveStartInput("New data 2");
@@ -42,26 +61,8 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             Website.Tracker_Create.SelectTechnicalDropDownOption("Skilled");
             Website.Tracker_Create.SelectConsultantDropDownOption("Skilled");
             Website.Tracker_Create.ClickCreateBtn();
-            _trackerCount = Website.SeleniumDriver.FindElements(By.Id("table_row")).Count;
+            _trackerCount = Website.Tracker_Index.CountRows();
         }
-
-        [Scope(Feature = "Tracker_Delete")]
-        [AfterScenario]
-        public void CleanUp()
-        {
-            Website.SeleniumDriver.Quit();
-        }
-
-        //[Scope(Feature = "Tracker_Delete")]
-        //[Given(@"I am a valid trainer")]
-        //public void GivenIAmAValidTrainer()
-        //{
-        //    Website.SeleniumDriver.FindElement(By.CssSelector("span[class=navbar-toggler-icon]")).Click();
-        //    if (!Website.SeleniumDriver.FindElement(By.LinkText("Hello, Phil@SpartaGlobal.com")).Text.Contains("Phil@SpartaGlobal.com"))
-        //    {
-        //        Assert.Fail("Not a valid trainer");
-        //    }
-        //}
 
         [Given(@"I am on the Delete page for a tracker")]
         public void GivenIAmOnTheDeletePageForATracker()
@@ -103,8 +104,7 @@ namespace TraineeTrackerTestsSelenium.lib.tests
         [Then(@"an access denied message should appear")]
         public void ThenAnAccessDeniedMessageShouldAppear()
         {
-            var accessDeniedMessage = Website.SeleniumDriver.FindElement(By.CssSelector("p[class='text-danger']")).Text;
-            Assert.That(accessDeniedMessage.Contains("You do not have access to this resource."));
+            Assert.That(Website.Tracker_Delete.GetAccessDeniedParagraphText().Contains("You do not have access to this resource."));
         }
     }
 }
