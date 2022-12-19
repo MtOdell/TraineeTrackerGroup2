@@ -162,14 +162,14 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             string accessDeniedMessage = String.Empty;
             try
             {
-                accessDeniedMessage = Website.SeleniumDriver.FindElement(By.CssSelector("p[class='text-danger']")).Text;
+                accessDeniedMessage = Website.Tracker_Delete.GetAccessDeniedParagraphText();
             }
             catch (NoSuchElementException e)
             {
-                Assert.Fail("Access denied message not found");
+
             }
+
             Assert.That(accessDeniedMessage.Contains("You do not have access to this resource."));
         }
-
     }
 }
