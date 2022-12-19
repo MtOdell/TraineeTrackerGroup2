@@ -14,13 +14,13 @@ namespace APITestFramework.User
         public GetUserDetailsById()
         {
             CallManager = new CallManager();
-            Resource = "/UserDatas/Details/";
+            Resource = "/UserDatas/";
             Method = Method.Get;
         }
         public async Task MakeRequestAsync(string id)
         {
             ServiceResponse = await CallManager.MakeUserRequestAsync(Resource, id,  Method);
-            ResponseJson = JObject.Parse(ServiceResponse);
+            var ResponseJson = JArray.Parse(ServiceResponse);
         }
     }
 }

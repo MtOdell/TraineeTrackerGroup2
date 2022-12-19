@@ -16,7 +16,7 @@ namespace APITestFramework.HttpManager
 
         public CallManager()
         {
-            _client = new RestClient("https://localhost:7166/");
+            _client = new RestClient("https://localhost:7166/api/");
         }
 
         public async Task<string?> MakeUserRequestAsync(string? resource, Method method)
