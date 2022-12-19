@@ -4,6 +4,7 @@ As a trainer or admin, I want to be able to create a tracker
 
 @TrackerCreate
 @Happy
+@CreateNewTracker
 Scenario: I enter details about a tracker and click Create
 	Given I am a valid trainer
 	And I am on the Create page

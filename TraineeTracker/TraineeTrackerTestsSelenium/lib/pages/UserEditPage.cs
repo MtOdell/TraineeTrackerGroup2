@@ -17,7 +17,7 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement _educationInput => SeleniumDriver.FindElement(By.Id("education_input"));
         private IWebElement _experienceInput => SeleniumDriver.FindElement(By.Id("experience_input"));
         private IWebElement _activityInput => SeleniumDriver.FindElement(By.Id("activity_input"));
-        private IWebElement _biologyInput => SeleniumDriver.FindElement(By.Id("biology_input"));
+        private IWebElement _biographyInput => SeleniumDriver.FindElement(By.Id("biography_input"));
         private IWebElement _skillsInput => SeleniumDriver.FindElement(By.Id("skills_input"));
         private IWebElement _roleSelection => SeleniumDriver.FindElement(By.Id("role_selection"));
         private IWebElement _saveButton => SeleniumDriver.FindElement(By.Id("save_button"));
@@ -35,7 +35,7 @@ namespace TraineeTrackerTests.lib.pages
         public void EnterEducation(string education) => _educationInput.SendKeys(education);
         public void EnterExperience(string experience) => _experienceInput.SendKeys(experience);
         public void EnterActivity(string activity) => _activityInput.SendKeys(activity);
-        public void EnterBiology(string biology) => _biologyInput.SendKeys(biology);
+        public void EnterBiography(string biology) => _biographyInput.SendKeys(biology);
         public void EnterSkills(string skills) => _skillsInput.SendKeys(skills);
         //public void SelectRole() => _roleSelection.Selected.
         public void ClickSaveButton() => _saveButton.Click();

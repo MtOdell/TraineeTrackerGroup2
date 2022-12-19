@@ -10,11 +10,11 @@ namespace TraineeTrackerTests.lib.pages
     public class Tracker_Edit
     {
         private IWebDriver SeleniumDriver { get; }
-        private IWebElement GetStopInput => SeleniumDriver.FindElement(By.Id("stop_input"));
-        private IWebElement GetStartInput => SeleniumDriver.FindElement(By.Id("start_input"));
-        private IWebElement GetContinueInput => SeleniumDriver.FindElement(By.Id("continue_input"));
-        private IWebElement GetTechnicalDropDown => SeleniumDriver.FindElement(By.Id("technical_dropdown"));
-        private IWebElement GetConsultantDropDown => SeleniumDriver.FindElement(By.Id("consultant_dropdown"));
+        public IWebElement GetStopInput => SeleniumDriver.FindElement(By.Id("stop_input"));
+        public IWebElement GetStartInput => SeleniumDriver.FindElement(By.Id("start_input"));
+        public IWebElement GetContinueInput => SeleniumDriver.FindElement(By.Id("continue_input"));
+        public IWebElement GetTechnicalDropDown => SeleniumDriver.FindElement(By.Id("technical_dropdown"));
+        public IWebElement GetConsultantDropDown => SeleniumDriver.FindElement(By.Id("consultant_dropdown"));
         private IWebElement GetSaveBtn => SeleniumDriver.FindElement(By.Id("submit_btn"));
         private IWebElement GetBackBtn => SeleniumDriver.FindElement(By.Id("back_btn"));
 

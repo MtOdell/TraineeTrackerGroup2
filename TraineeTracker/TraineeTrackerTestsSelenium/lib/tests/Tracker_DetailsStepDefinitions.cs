@@ -14,23 +14,6 @@ namespace TraineeTrackerTests.lib.tests
         private int _id = 113;
 
         [Scope(Feature = "Tracker_Details")]
-        [BeforeScenario(Order = 0)]
-        public void SetTrainerCredentials()
-        {
-            _credentials.Email = "Phil@SpartaGlobal.com";
-            _credentials.Password = "Password1!";
-        }
-
-        [Scope(Feature = "Tracker_Details")]
-        [BeforeScenario(Order = 2)]
-        public void Login()
-        {
-            Website.LoginPage.VisitLoginPage();
-            Website.LoginPage.EnterCredentials(_credentials);
-            Website.LoginPage.ClickLoginButton();
-        }
-
-        [Scope(Feature = "Tracker_Details")]
         [AfterScenario]
         public void CleanUp()
         {
@@ -41,11 +24,11 @@ namespace TraineeTrackerTests.lib.tests
         [Given(@"I am a valid user")]
         public void GivenIAmAValidUser()
         {
-            Website.SeleniumDriver.FindElement(By.CssSelector("span[class=navbar-toggler-icon]")).Click();
-            if (!Website.SeleniumDriver.FindElement(By.LinkText("Hello, Phil@SpartaGlobal.com")).Displayed)
-            {
-                Assert.Fail("Not a valid user");
-            }
+            _credentials.Email = "Phil@SpartaGlobal.com";
+            _credentials.Password = "Password1!";
+            Website.LoginPage.VisitLoginPage();
+            Website.LoginPage.EnterCredentials(_credentials);
+            Website.LoginPage.ClickLoginButton();
         }
 
         [Given(@"I am on the Details page for a tracker")]

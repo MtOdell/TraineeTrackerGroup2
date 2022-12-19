@@ -17,6 +17,8 @@ namespace TraineeTrackerTests.lib.pages
         private IWebElement GetConsultantSkillData => SeleniumDriver.FindElement(By.Id("consultant_data"));
         private IWebElement GetDeleteBtn => SeleniumDriver.FindElement(By.Id("delete_btn"));
         private IWebElement GetBackBtn => SeleniumDriver.FindElement(By.Id("back_btn"));
+        private IWebElement GetAccessDeniedHeading => SeleniumDriver.FindElement(By.CssSelector("h1[class='text-danger']"));
+        private IWebElement GetAccessDeniedParagraph => SeleniumDriver.FindElement(By.CssSelector("p[class='text-danger']"));
 
         private string _deleteUrl = "https://localhost:7166/Trackers/Delete";
 
@@ -34,5 +36,7 @@ namespace TraineeTrackerTests.lib.pages
         public string CheckConsultantSkillData() => GetConsultantSkillData.Text;
         public void ClickDeleteBtn() => GetDeleteBtn.Click();
         public void ClickBackBtn() => GetBackBtn.Click();
+        public string GetAccessDeniedHeadingText() => GetAccessDeniedHeading.Text;
+        public string GetAccessDeniedParagraphText() => GetAccessDeniedParagraph.Text;
     }
 }

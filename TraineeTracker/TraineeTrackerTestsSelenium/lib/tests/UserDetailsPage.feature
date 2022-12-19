@@ -1,9 +1,11 @@
-﻿Feature: SL_UserDetailsPage
+﻿Feature: UserDetailsPage
 
 It is used to see the details of a user
 
 Background:
-	Given A test user is created
+	Given I am on the Login Page
+	And I use Admin credentials
+	When I press the login button
 
 @HappyPath
 Scenario: I wish to go to the User Edit Page

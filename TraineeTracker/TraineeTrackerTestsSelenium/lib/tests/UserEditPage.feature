@@ -1,9 +1,11 @@
-﻿Feature: SL_UserEditPage
+﻿Feature: UserEditPage
 
 Is used to edit the user detail
 
 Background:
-	Given A test user is created
+	Given I am on the Login Page
+	And I use Admin credentials
+	When I press the login button
 
 @HappyPath
 Scenario: I wish to edit a user with valid inputs
