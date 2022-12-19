@@ -65,6 +65,7 @@ namespace TraineeTrackerTests.lib.tests
             Website.Tracker_Details.ClickBackBtn();
         }
 
+        [Scope(Feature = "Tracker_Details")]
         [Then(@"I should be taken to the Tracker Index page")]
         public void ThenIShouldBeTakenToTheIndexPage()
         {

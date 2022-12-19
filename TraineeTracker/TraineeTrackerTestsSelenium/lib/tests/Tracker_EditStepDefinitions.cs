@@ -126,7 +126,7 @@ namespace TraineeTrackerTestsSelenium.lib.tests
         {
             try
             {
-                Website.Tracker_Index.ClickDetailsButton(0);
+                Website.Tracker_Index.ClickDetailsBtn(0);
             }
             catch (ArgumentOutOfRangeException e)
             {

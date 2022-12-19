@@ -68,7 +68,7 @@ namespace TraineeTrackerTestsSelenium.lib.tests
         public void GivenIAmOnTheDeletePageForATracker()
         {
             Website.Tracker_Index.VisitIndexPage(_traineeId);
-            Website.Tracker_Index.ClickTrackerDeleteButton(1);
+            Website.Tracker_Index.ClickTrackerDeleteBtn(1);
             Thread.Sleep(2000);
         }
 
@@ -112,6 +112,49 @@ namespace TraineeTrackerTestsSelenium.lib.tests
         [Scope(Feature = "Tracker_Delete")]
         [Then(@"I should be taken to the Tracker Index page")]
         public void ThenIShouldBeTakenToTheIndexPage()
+        {
+            Assert.That(Website.Tracker_Index.CheckOnIndexPage());
+        }
+
+        [Given(@"I go to a Trainee's tracker page")]
+        public void GivenIGoToATraineesTrackerPage()
+        {
+            Website.Tracker_Index.VisitIndexPage(25);
+        }
+
+        [Given(@"there are no tracker's to delete")]
+        public void GivenThereAreNoTrackersToDelete()
+        {
+            if (Website.Tracker_Index.CountRows() > 0)
+            {
+                for (int i = 1; i <= Website.Tracker_Index.CountRows(); i++)
+                {
+                    Website.Tracker_Index.ClickTrackerDeleteBtn(i);
+                    Website.Tracker_Delete.ClickDeleteBtn();
+                    Thread.Sleep(1000);
+                }
+            }
+        }
+
+        [When(@"I try and click the Delete button")]
+        public void WhenITryAndClickTheDeleteButton()
+        {
+            try
+            {
+                Website.Tracker_Index.ClickTrackerDeleteBtn(1);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+
+            }
+            catch (NoSuchElementException e)
+            {
+
+            }
+        }
+
+        [Then(@"nothing should happen")]
+        public void ThenNothingShouldHappen()
         {
             Assert.That(Website.Tracker_Index.CheckOnIndexPage());
         }

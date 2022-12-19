@@ -110,7 +110,7 @@ namespace TraineeTrackerTestsSelenium.lib.tests
         public void ThenANewTrackerIsCreatedWithTheDetailsIEntered()
         {
             int newCount = Website.SeleniumDriver.FindElements(By.Id("table_row")).Count;
-            Website.Tracker_Index.ClickDetailsButton(newCount - 1);
+            Website.Tracker_Index.ClickDetailsBtn(newCount - 1);
 
             Assert.That(newCount, Is.EqualTo(_trackerCount + 1));
             Assert.That(Website.Tracker_Details.CheckStopData(), Is.EqualTo(_stopData));
