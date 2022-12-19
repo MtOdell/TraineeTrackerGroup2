@@ -28,3 +28,12 @@ Scenario: I try to access the Delete page as a trainee
 	When I try to go to the Delete page for a tracker
 	Then I should be blocked from accessing the page
 	And an access denied message should appear
+
+@TrackerDelete
+@Sad
+@Trainer
+Scenario: I try to Delete a tracker when there are no trackers
+	Given I go to a Trainee's tracker page
+	And there are no tracker's to delete
+	When I try and click the Delete button
+	Then nothing should happen

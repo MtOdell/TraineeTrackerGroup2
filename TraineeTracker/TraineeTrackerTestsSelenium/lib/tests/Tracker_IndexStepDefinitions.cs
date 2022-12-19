@@ -63,10 +63,6 @@ namespace TraineeTrackerTests.lib.tests
         public void GivenIAmOnTheViewTraineesPage()
         {
             Website.SeleniumDriver.Navigate().GoToUrl("https://localhost:7166/UserDatas");
-            if (Website.SeleniumDriver.Url != "https://localhost:7166/UserDatas")
-            {
-                Assert.Fail("Not on the View Trainees page");
-            }
         }
 
         [When(@"I click the Tracker button for one of the trainees listed")]
@@ -97,7 +93,7 @@ namespace TraineeTrackerTests.lib.tests
         [When(@"I click the Back button")]
         public void WhenIClickTheBackButton()
         {
-            Website.Tracker_Index.ClickBackButton();
+            Website.Tracker_Index.ClickBackBtn();
         }
 
         [Then(@"I should be taken to the View Trainees page")]
@@ -109,7 +105,7 @@ namespace TraineeTrackerTests.lib.tests
         [When(@"I click the Create New button")]
         public void WhenIClickTheCreateNewButton()
         {
-            Website.Tracker_Index.ClickCreateButton();
+            Website.Tracker_Index.ClickCreateBtn();
         }
 
         [Then(@"I should be taken to the Create page")]
@@ -121,7 +117,7 @@ namespace TraineeTrackerTests.lib.tests
         [When(@"I click the Details button on a tracker in the list")]
         public void WhenIClickTheDetailsButtonOnATrackerInTheList()
         {
-            Website.Tracker_Index.ClickDetailsButton(0);
+            Website.Tracker_Index.ClickDetailsBtn(0);
         }
 
         [Then(@"I should be taken to the Details page for that tracker")]
@@ -133,7 +129,7 @@ namespace TraineeTrackerTests.lib.tests
         [When(@"I click the Delete button on a tracker in the list")]
         public void WhenIClickTheDeleteButtonOnATrackerInTheList()
         {
-            Website.Tracker_Index.ClickDeleteButton(0);
+            Website.Tracker_Index.ClickTrackerDeleteBtn(1);
         }
 
         [Then(@"I should be taken to the Delete page for that tracker")]
@@ -182,7 +178,7 @@ namespace TraineeTrackerTests.lib.tests
                 Assert.That(e, Is.Not.Null);
             }
 
-            Website.Tracker_Index.ClickDetailsButton(0);
+            Website.Tracker_Index.ClickDetailsBtn(0);
 
             Assert.That(Website.Tracker_Details.CheckOnDetailsPage());
         }

@@ -26,15 +26,10 @@ namespace TraineeTrackerTests.lib.pages
 
         public void VisitIndexPage(int id) => SeleniumDriver.Navigate().GoToUrl($@"{_indexUrl}/{id}");
         public bool CheckOnIndexPage() => SeleniumDriver.Url.Contains("https://localhost:7166/Trackers/Index");
-        public void ClickCreateButton() => GetCreateBtn.Click();
-        public void ClickBackButton() => GetBackBtn.Click();
-        public void ClickDetailsButton(int index) => GetDetailsBtns[index].Click();
-        public void ClickDeleteButton(int index)
-        {
-            //var deleteBtn = GetDeleteBtns[index];
-            //deleteBtn.Click();
-        }
-        public void ClickTrackerDeleteButton(int week)
+        public void ClickCreateBtn() => GetCreateBtn.Click();
+        public void ClickBackBtn() => GetBackBtn.Click();
+        public void ClickDetailsBtn(int index) => GetDetailsBtns[index].Click();
+        public void ClickTrackerDeleteBtn(int week)
         {
             SeleniumDriver.FindElement(By.Id($"Delete{week}")).Click();
         }
