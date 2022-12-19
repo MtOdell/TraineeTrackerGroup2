@@ -38,13 +38,7 @@ namespace TraineeTrackerTests.lib.tests
         [When(@"I press register button")]
         public void WhenIPressRegisterButton()
         {
-            try
-            {
                 Website.Homepage.ClickRegisterButton();
-            } catch (Exception e)
-            {
-                exceptionCatch = e;
-            }
         }
 
         [Then(@"I am redirected to the register page")]
@@ -61,14 +55,6 @@ namespace TraineeTrackerTests.lib.tests
             Website.LoginPage.EnterPassword("Password1!");
             Website.LoginPage.ClickLoginButton();
         }
-
-        [Then(@"Error is thrown")]
-        public void ThenErrorIsThrown()
-        {
-            Assert.That(exceptionCatch, Is.TypeOf<Exception>());
-        }
-
-
         [When(@"I press user button")]
         public void WhenIPressUserButton()
         {

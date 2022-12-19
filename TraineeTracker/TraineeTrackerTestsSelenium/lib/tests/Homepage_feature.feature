@@ -16,14 +16,6 @@ Scenario: Going to register page
 	When I press register button
 	Then I am redirected to the register page
 
-@SadPath
-Scenario: Going to register page while logged in
-	Given I have a browser open
-	And I am logged in
-	And I am on a homepage
-	When I press register button
-	Then Error is thrown
-
 @HappyPath
 Scenario: Going to user page while logged in
 	Given I have a browser open
