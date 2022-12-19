@@ -9,7 +9,6 @@ using TraineeTrackerTests.Utils;
 
 namespace TraineeTrackerTestsSelenium.lib.tests
 {
-    //[Scope(Feature = "Tracker_Create")]
     [Binding]
     public class Tracker_CreateStepDefinitions : Tracker_Shared
     {
@@ -21,35 +20,11 @@ namespace TraineeTrackerTestsSelenium.lib.tests
         private string _commentsData;
 
         [Scope(Feature = "Tracker_Create")]
-        [BeforeScenario(Order = 0)]
-        public void SetTrainerCredentials()
-        {
-            _credentials.Email = "Phil@SpartaGlobal.com";
-            _credentials.Password = "Password1!";
-        }
-
-        [BeforeScenario("Trying to access the Create page when logged in as a trainee", Order = 1)]
-        public void SetTraineeCredentials()
-        {
-            _credentials.Email = "Adam@SpartaGlobal.com";
-            _credentials.Password = "Password1!";
-        }
-
-        [Scope(Feature = "Tracker_Create")]
-        [BeforeScenario(Order = 2)]
         public void Login()
         {
             Website.LoginPage.VisitLoginPage();
             Website.LoginPage.EnterCredentials(_credentials);
             Website.LoginPage.ClickLoginButton();
-        }
-
-        [Scope(Feature = "Tracker_Create")]
-        [BeforeScenario("a new tracker is created with the details I entered")]
-        public void GetTrackerCount()
-        {
-            Website.Tracker_Index.VisitIndexPage(17);
-            _trackerCount = Website.SeleniumDriver.FindElements(By.Id("table_row")).Count;
         }
 
         [Scope(Feature = "Tracker_Create")]
@@ -59,33 +34,32 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             Website.SeleniumDriver.Quit();
         }
 
-        //[Scope(Feature = "Tracker_Create")]
-        //[AfterScenario("a new tracker is created with the details I entered")]
-        //public void DeleteNewTracker()
-        //{
-        //    Website.Tracker_Index.VisitIndexPage(_traineeId);
-        //    Website.SeleniumDriver.FindElements(By.Id("delete_btn"))[^1].Click();
-        //    Website.Tracker_Delete.ClickDeleteBtn();
-        //}
-
         [Scope(Feature = "Tracker_Create")]
         [Given(@"I am a valid trainer")]
+        
         public void GivenIAmAValidTrainer()
         {
-            Website.SeleniumDriver.FindElement(By.CssSelector("span[class=navbar-toggler-icon]")).Click();
-            if (!Website.SeleniumDriver.FindElement(By.LinkText("Hello, Phil@SpartaGlobal.com")).Text.Contains("Phil@SpartaGlobal.com"))
-            {
-                Assert.Fail("Not a valid trainer");
-            }
-            //Thread.Sleep(5000);
+            _credentials.Email = "Phil@SpartaGlobal.com";
+            _credentials.Password = "Password1!";
+            Login();
         }
+
+        [Scope(Feature = "Tracker_Create")]
+        [Given(@"I am a valid trainee")]
+        public void GivenIAmAValidTrainee()
+        {
+            _credentials.Email = "Adam@SpartaGlobal.com";
+            _credentials.Password = "Password1!";
+            Login();
+        }
+
 
         [Given(@"I am on the Create page")]
         public void GivenIAmOnTheCreatePage()
         {
+            Website.Tracker_Index.VisitIndexPage(17);
+            _trackerCount = Website.Tracker_Index.CountRows();
             Website.Tracker_Create.VisitCreatePage(_traineeId);
-            //Website.Tracker_Index.ClickCreateButton();
-            //Thread.Sleep(5000);
         }
 
         [When(@"I enter data into the input fields:")]
