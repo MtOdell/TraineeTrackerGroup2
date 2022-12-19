@@ -199,5 +199,16 @@ namespace TraineeTrackerTests.lib.tests
             Assert.That(Website.Tracker_Index.CountRows(), Is.Not.Zero);
         }
 
+        [When(@"I try to navigate to another trainee's Tracker Index page")]
+        public void WhenITryToNavigateToAnotherTraineesTrackerIndexPage()
+        {
+            Website.Tracker_Index.VisitIndexPage(25);
+        }
+
+        [Then(@"I should not be allowed to access the page")]
+        public void ThenIShouldNotBeAllowedToAccessThePage()
+        {
+            Assert.That(Website.Tracker_Index.CheckOnIndexPage(), Is.False);
+        }
     }
 }

@@ -72,3 +72,11 @@ Scenario: I try to access a trainee Tracker page for a trainee that does not exi
 	Given I am a valid trainer
 	When I go to the URL of the tracker page for a trainee that does not exist
 	Then no trackers should be displayed
+
+@TrackerIndex
+@Sad
+@Trainee
+Scenario: I try to access a trainee Tracker page for another trainee other than myself
+	Given I am a valid trainee
+	When I try to navigate to another trainee's Tracker Index page
+	Then I should not be allowed to access the page

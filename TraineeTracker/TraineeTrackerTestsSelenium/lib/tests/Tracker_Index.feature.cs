@@ -400,6 +400,42 @@ this.ScenarioInitialize(scenarioInfo);
             }
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("I try to access a trainee Tracker page for another trainee other than myself")]
+        [NUnit.Framework.CategoryAttribute("TrackerIndex")]
+        [NUnit.Framework.CategoryAttribute("Sad")]
+        [NUnit.Framework.CategoryAttribute("Trainee")]
+        public void ITryToAccessATraineeTrackerPageForAnotherTraineeOtherThanMyself()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "TrackerIndex",
+                    "Sad",
+                    "Trainee"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I try to access a trainee Tracker page for another trainee other than myself", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 79
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 80
+ testRunner.Given("I am a valid trainee", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 81
+ testRunner.When("I try to navigate to another trainee\'s Tracker Index page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 82
+ testRunner.Then("I should not be allowed to access the page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

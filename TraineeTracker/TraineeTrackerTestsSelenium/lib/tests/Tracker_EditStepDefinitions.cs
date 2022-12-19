@@ -56,16 +56,6 @@ namespace TraineeTrackerTestsSelenium.lib.tests
             Website.LoginPage.VisitLoginPage();
             Website.LoginPage.EnterCredentials(_credentials);
             Website.LoginPage.ClickLoginButton();
-            
-            //if (Website.Tracker_Index.CountRows() > 0)
-            //{
-            //    var table = Website.Tracker_Index.GetTableOfTrackers();
-            //    for (int i = 0; i < Website.Tracker_Index.CountRows(); i++)
-            //    {
-            //        Website.Tracker_Index.ClickDeleteButton(i);
-            //        Website.Tracker_Delete.ClickDeleteBtn();
-            //    }
-            //}
         }
 
         [Given(@"I am on the Tracker Index page")]
